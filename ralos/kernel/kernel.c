@@ -1,18 +1,18 @@
 #include <kernel/kernel.h>
 #include <cpu/idt.h>
+#include <drivers/keyboard.h>
 #include <drivers/terminal.h>
 
 void k_init()
 {
     install_idt();
-    *(char*)0x12345678910 = 'A';
+    install_keyboard();
 }
 
 void k_main()
 {
-    t_print("hej");
     while(1)
-        __asm("hlt");
+        __asm__("hlt");
 }
 
 void k_panic(const char* msg)
