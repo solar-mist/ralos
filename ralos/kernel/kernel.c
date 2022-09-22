@@ -4,7 +4,7 @@
 void k_init()
 {
     install_idt();
-    __asm__("int $1");
+    *(char*)0x12345678910 = 'A';
 }
 
 void k_main()

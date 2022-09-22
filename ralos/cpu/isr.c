@@ -39,8 +39,6 @@ const char* exception_messages[] =
 
 void isr_exception_handler(registers_t* frame)
 {
-    (void)frame;
-    //t_printf("\nException Recieved: %d - %s\n", frame->vector, exception_messages[frame->vector]);
-    t_print("Recieved exception");
+    t_printf("\nException Recieved: %d - %s\n", frame->vector, exception_messages[frame->vector]);
     __asm__ volatile("cli; hlt");
 }
