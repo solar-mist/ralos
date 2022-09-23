@@ -10,15 +10,6 @@ static volatile struct limine_memmap_request mmap = {
 };
 
 
-#define PAGE_SIZE 4096
-#define NPAGES(num) (((num) + PAGE_SIZE - 1) / PAGE_SIZE)
-
-
-#define MEM_VIRT_OFFSET 0xFFFF800000000000
-#define VIRT_TO_PHYS(addr) (((uint64_t)(addr)) - MEM_VIRT_OFFSET)
-#define PHYS_TO_VIRT(addr) (((uint64_t)(addr)) + MEM_VIRT_OFFSET)
-
-
 static uint8_t* bitmap;
 physaddr_t phys_limit;
 uint32_t total_memory;

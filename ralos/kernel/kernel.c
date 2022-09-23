@@ -2,6 +2,7 @@
 #include <mem/pmm.h>
 #include <cpu/idt.h>
 #include <drivers/keyboard.h>
+#include <mem/kmalloc.h>
 #include <drivers/terminal.h>
 
 void k_init()
@@ -14,9 +15,9 @@ void k_init()
 void k_main()
 {
     pmm_dump_stats();
-    physaddr_t addr = pmm_get_pages(600);
+    int* i = k_malloc(sizeof(int));
     pmm_dump_stats();
-    pmm_free_pages(addr, 600);
+    k_free(i);
     pmm_dump_stats();
 
     while(1)
