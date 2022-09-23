@@ -11,8 +11,8 @@
 #define SHIFT_KEY 0x2A
 
 bool shift_down;
-uint8_t line_pos;
-char current_line[115];
+uint8_t col_num;
+uint8_t row_num;
 
 char scancode_map[][2] =
 {
@@ -49,6 +49,7 @@ void keyboard_handler(registers_t* regs)
         case BACKSPACE:
         {
             t_print("\b \b");
+            --col_num;
             break;
         }
         case ARROW_KEY:
@@ -83,6 +84,8 @@ void keyboard_handler(registers_t* regs)
         case ENTER_KEY:
         { 
             t_putchar('\n');
+            col_num = 0;
+            ++row_num;
             return;
         }
         default:
@@ -90,8 +93,7 @@ void keyboard_handler(registers_t* regs)
             if(scancode_map[scancode] && !(scancode & 0x80))
             {
                 t_putchar(scancode_map[scancode][shift_down]);
-                current_line[line_pos] = scancode_map[scancode][shift_down];
-                line_pos++;
+                ++col_num;
             }
         }
     }
@@ -100,6 +102,7 @@ void keyboard_handler(registers_t* regs)
 void install_keyboard()
 {
     install_irq_handler(1, keyboard_handler);
-    line_pos = 0;
+    col_num = 0;
+    row_num = 0;
     shift_down = false;
 }
