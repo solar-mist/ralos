@@ -10,14 +10,15 @@ typedef struct
 
 void* k_malloc(size_t size)
 {
-    mem_control_block_t* mcb = (mem_control_block_t*)PHYS_TO_VIRT(pmm_get_pages(NPAGES(size) + 1));
+    size += sizeof(mem_control_block_t);
+    mem_control_block_t* mcb = (mem_control_block_t*)PHYS_TO_VIRT(pmm_get_pages(NPAGES(size)));
     mcb->size = size;
     mcb->npages = NPAGES(size);
-    return (void*)mcb + PAGE_SIZE;
+    return (void*)mcb + sizeof(mem_control_block_t);
 }
 
 void k_free(void* addr)
 {
-    mem_control_block_t* mcb = (mem_control_block_t*)(addr - PAGE_SIZE);
-    pmm_free_pages(VIRT_TO_PHYS(mcb), mcb->npages + 1);
+    mem_control_block_t* mcb = (mem_control_block_t*)(addr - sizeof(mem_control_block_t));
+    pmm_free_pages(VIRT_TO_PHYS(mcb), mcb->npages);
 }
