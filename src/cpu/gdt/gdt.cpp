@@ -27,7 +27,8 @@ void InitGDT()
     gdt[1] = GDTDescriptor(0, 0, 0x9A, 0xA0);
     gdt[2] = GDTDescriptor(0, 0, 0x92, 0xC0);
     gdt[3] = GDTDescriptor(0, 0, 0xFA, 0xA0);
-    gdt[5] = GDTDescriptor(0, 0, 0xF2, 0xC0);
+    gdt[4] = GDTDescriptor(0, 0, 0xF2, 0xC0);
+    gdt[5] = GDTDescriptor(0, 0, 0,    0);
     gdt[6] = GDTDescriptor(0, 0, 0,    0);
 
     gdtr.Limit = sizeof(gdt) - 1;

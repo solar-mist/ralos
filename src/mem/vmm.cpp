@@ -21,7 +21,7 @@ namespace VMM
         uint64_t tmp = (uint64_t)pml4;
         tmp &= ~0xFFFF000000000FFF;
         pml4 = (uint64_t*)tmp;
-        MapPages(0, 0, 3, NPAGES(0x400000));
+        MapPages(0, 0, 7, NPAGES(0x400000));
         uint8_t* mmap_start = (uint8_t*)BootInfo->MemoryMap;
         uint8_t* mmap_end = (uint8_t*)mmap_start + BootInfo->MemoryMap->MapSize;
 
@@ -32,9 +32,9 @@ namespace VMM
             if(entry->Base + entry->Size < 0x400000)
                 continue;
 
-            MapPages(entry->Base, entry->Base, 3, entry->Size / 4096);
+            MapPages(entry->Base, entry->Base, 7, entry->Size / 4096);
         }
-        MapPages((uint64_t)BootInfo->Framebuffer.Base, (uint64_t)BootInfo->Framebuffer.Base, 3, NPAGES(BootInfo->Framebuffer.Size));
+        MapPages((uint64_t)BootInfo->Framebuffer.Base, (uint64_t)BootInfo->Framebuffer.Base, 7, NPAGES(BootInfo->Framebuffer.Size));
         asm volatile("mov %0, %%cr3" : : "r"(pml4));
     }
 
@@ -63,7 +63,7 @@ namespace VMM
             {
                 pt[idx] = (uint64_t)PMM::GetPage();
                 memset((uint8_t*)Entry(pt[idx]), PAGE_SIZE, 0);
-                pt[idx] |= 3;
+                pt[idx] |= 7;
                 pt[idx] &= ~0xFFFF000000000000;
             }
             pt = Entry(pt[idx]);

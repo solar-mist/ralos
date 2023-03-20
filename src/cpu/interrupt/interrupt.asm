@@ -12,14 +12,14 @@ ExceptionStub%+%1:
 ExceptionStub%+%1:
     push 0
     push %1
-    jmp [rel ExceptionXFrameAssembler]
+    jmp ExceptionXFrameAssembler
 %endmacro
 
 %macro InterruptRequestStub 1
 IRQStub%+%1:
     push %1
     push %1+32
-    jmp [rel IRQXFrameAssembler]
+    jmp IRQXFrameAssembler
 %endmacro
 
 ExceptionXFrameAssembler:
@@ -234,3 +234,77 @@ IRQStubTable:
     dq IRQStub%+i
 %assign i i+1
 %endrep
+
+[extern SystemCallHandler]
+[global SyscallHandler]
+SyscallHandler:
+    push rbp
+    mov rbp, rsp
+
+    push rax
+    push rbx
+    push rcx
+    push rdx
+    push rsi
+    push rdi
+    push r15
+    push r14
+    push r13
+    push r12
+    push r11
+    push r10
+    push r9
+    push r8
+
+    mov rax, cr0
+    push rax
+    mov rax, cr2
+    push rax
+    mov rax, cr3
+    push rax
+    mov rax, cr4
+    push rax
+
+    mov ax, ds
+    push rax
+    push QWORD 0
+    mov ax, 0x10
+    mov ds, ax
+    mov es, ax
+    mov ss, ax
+
+    lea rdi, [rsp + 0x10]
+    call SystemCallHandler
+
+    pop rax
+    pop rax
+    mov ds, ax
+    mov es, ax
+
+    pop rax
+    mov cr4, rax
+    pop rax
+    mov cr3, rax
+    pop rax
+    mov cr2, rax
+    pop rax
+    mov cr0, rax
+
+    pop r8
+    pop r9
+    pop r10
+    pop r11
+    pop r12
+    pop r13
+    pop r14
+    pop r15
+    pop rdi
+    pop rsi
+    pop rdx
+    pop rcx
+    pop rbx
+    pop rax
+
+    pop rbp
+
+    iretq

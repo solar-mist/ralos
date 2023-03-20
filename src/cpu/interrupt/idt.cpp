@@ -9,6 +9,7 @@ static bool vectors[256];
 
 extern "C" uint64_t ExceptionStubTable[];
 extern "C" uint64_t IRQStubTable[];
+extern "C" uint64_t SyscallHandler;
 
 constexpr int IRQ_OFFSET = 32;
 
@@ -42,6 +43,8 @@ void InitIDT()
         vectors[vector] = true;
     }
 
+    idt[0x69] = IDTEntry((uint64_t)&SyscallHandler, 0xEE, 0);
+    vectors[0x69] = true;
 
     asm volatile("lidt %0" : : "m"(idtr));
     asm volatile("sti");

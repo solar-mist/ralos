@@ -15,7 +15,7 @@ namespace Terminal
     Status Print(char* data, Graphics::Color color = 0xFFFFFF);
     Status Print(const char* data, Graphics::Color color = 0xFFFFFF);
 
-    Status PrintInt(unsigned int value, int radix = 10, Graphics::Color color = 0xFFFFFF);
+    Status PrintInt(unsigned long value, int radix = 10, Graphics::Color color = 0xFFFFFF);
 }
 
 #endif
