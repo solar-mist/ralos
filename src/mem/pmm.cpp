@@ -103,15 +103,15 @@ namespace PMM
 
     void* GetPages(uint32_t npages)
     {
-        static uint32_t last_used_page;
+        static uint64_t LastUsedPage;
 
-        for(uint64_t i = last_used_page; i < PhysLimit; i += PAGE_SIZE)
+        for(uint64_t i = LastUsedPage; i < PhysLimit; i += PAGE_SIZE)
         {
             if(Alloc((void*)i, npages))
                 return (void*)i;
         }
 
-        for(uint64_t i = 0; i < last_used_page; i += PAGE_SIZE)
+        for(uint64_t i = 0; i < LastUsedPage; i += PAGE_SIZE)
         {
             if(Alloc((void*)i, npages))
                 return (void*)i;

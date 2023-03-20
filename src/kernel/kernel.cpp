@@ -22,5 +22,6 @@ extern "C" void KMain(VBInfo* BootInfo)
     //VMM::MapPage(0, 0, 3);
     //VMM::MapPage(0x1000, 0x1000, 3);
     Terminal::Print("Hello World!\n", 0xFFFF00);
+    VMM::Dump(0);
     for(;;);
 }

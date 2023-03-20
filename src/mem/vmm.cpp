@@ -17,9 +17,12 @@ namespace VMM
     void Init()
     {
         pml4 = (uint64_t*)PMM::GetPage();
+        memset((uint8_t*)pml4, PAGE_SIZE, 0);
+        uint64_t tmp = (uint64_t)pml4;
+        tmp &= ~0xFFFF000000000FFF;
+        pml4 = (uint64_t*)tmp;
         MapPages(0, 0, 3, NPAGES(PMM::GetPhysLimit()));
-        asm volatile("mov %0, %%rax; " \
-                    "mov %%rax, %%cr3" : "=g"(pml4) : : "rax");
+        //asm volatile("mov %0, %%cr3" : : "r"(pml4));
     }
 
     static inline uint64_t* Entry(uint64_t pt)
@@ -34,7 +37,7 @@ namespace VMM
         Flags    &=  0xFFF;
 
         uint64_t shift = 48;
-        uint64_t* pt = pml4;
+        uint64_t* pt = Entry((uint64_t)pml4);
         uint64_t idx;
         for(char i = 0; i < 4; i++)
         {
@@ -47,8 +50,8 @@ namespace VMM
             {
                 pt[idx] = (uint64_t)PMM::GetPage();
                 memset((uint8_t*)Entry(pt[idx]), PAGE_SIZE, 0);
-                pt[idx] |= 7;
-                pt[idx] &= ~0xFFFF000000000FFF;
+                pt[idx] |= 3;
+                pt[idx] &= ~0xFFFF000000000000;
             }
             pt = Entry(pt[idx]);
         }
@@ -68,13 +71,26 @@ namespace VMM
             MapPage(PhysAddr + i, VirtAddr + i, Flags);
     }
 
+    void Dump(uint64_t idx)
+    {
+        uint64_t* pml3 = (uint64_t*)pml4[idx], *pml2 = (uint64_t*)pml3[idx], *pml1 = (uint64_t*)pml2[idx], paddr = pml1[idx];
+        Terminal::Print("\nPML3: ");
+        Terminal::PrintInt((uint64_t)pml3);
+        Terminal::Print("\nPML2: ");
+        Terminal::PrintInt((uint64_t)pml2);
+        Terminal::Print("\nPML1: ");
+        Terminal::PrintInt((uint64_t)pml1);
+        Terminal::Print("\nPaddr: ");
+        Terminal::PrintInt(paddr);
+    }
+
 
     uint64_t GetPhysAddr(uint64_t VirtAddr)
     {
         VirtAddr &= ~0xFFF;
 
         uint64_t shift = 48;
-        uint64_t* pt = (uint64_t*)((uint64_t)pml4 >> 12);
+        uint64_t* pt = Entry((uint64_t)pml4);
         uint64_t idx;
         for(char i = 0; i < 4; i++)
         {
@@ -84,13 +100,13 @@ namespace VMM
                 break;
             
             if(!(pt[idx] & 0x1))
-                return -(4 - i);
-
+            {
+                Terminal::PrintInt(pt[idx], 10, 0xFF00FF);
+                return -(3 - i);
+            }
             pt = Entry(pt[idx]);
         }
 
-        Terminal::PrintInt(pt[idx], 16, 0xFF00FF);
-
-        return pt[idx] & ~0xFFF;
+        return pt[idx];
     }
 }
