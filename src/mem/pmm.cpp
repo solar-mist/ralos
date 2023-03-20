@@ -117,7 +117,7 @@ namespace PMM
                 return (void*)i;
         }
 
-        // TODO: Panic - out of physical memory
+        Terminal::Print("Error: Out of physical memory"); // TODO: Panic
         for(;;);
     }
 
@@ -146,5 +146,10 @@ namespace PMM
         Terminal::Print("Used(KiB):  ");
         Terminal::PrintInt(used / 1024, 10, 0x00FFFF);
         Terminal::PutChar('\n', 0);
+    }
+
+    uint64_t GetPhysLimit()
+    {
+        return PhysLimit;
     }
 }

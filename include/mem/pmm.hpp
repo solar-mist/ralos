@@ -19,6 +19,7 @@ namespace PMM
     void FreePages(void* address, uint32_t count);
 
     void DumpStats();
+    uint64_t GetPhysLimit();
 }
 
 #endif

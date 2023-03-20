@@ -5,7 +5,7 @@
 #include <cpu/tss.hpp>
 #include <cpu/interrupt/idt.hpp>
 #include <mem/pmm.hpp>
-#include <mem/kheap.hpp>
+#include <mem/vmm.hpp>
 #include <drivers/pit.hpp>
 #include <drivers/ata.hpp>
 #include <drivers/ps2_keyboard.hpp>
@@ -18,10 +18,9 @@ extern "C" void KMain(VBInfo* BootInfo)
     Graphics::Init(BootInfo);
     Terminal::Init(BootInfo->Framebuffer.Horiz, BootInfo->Framebuffer.Vert);
     PMM::Init(BootInfo->MemoryMap);
+    VMM::Init();
+    //VMM::MapPage(0, 0, 3);
+    //VMM::MapPage(0x1000, 0x1000, 3);
     Terminal::Print("Hello World!\n", 0xFFFF00);
-    PIT::Init(11967);
-    char* buffer = (char*)KMalloc(512);
-    ATA::Read(2, 1, buffer);
-    Terminal::Print(buffer);
     for(;;);
 }

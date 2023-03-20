@@ -121,7 +121,7 @@ namespace Terminal
 
     Status PrintInt(unsigned int value, int radix, Graphics::Color color)
     {
-        char buffer[16] = {0};
+        char buffer[16];
         IToA(value, buffer, radix);
         return Print(buffer, color);
     }
