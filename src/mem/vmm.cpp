@@ -17,7 +17,7 @@ namespace VMM
     void Init()
     {
         pml4 = (uint64_t*)PMM::GetPage();
-        memset((uint8_t*)pml4, PAGE_SIZE, 0);
+        //memset((uint8_t*)pml4, PAGE_SIZE, 0);
         uint64_t tmp = (uint64_t)pml4;
         tmp &= ~0xFFFF000000000FFF;
         pml4 = (uint64_t*)tmp;
@@ -73,7 +73,10 @@ namespace VMM
 
     void Dump(uint64_t idx)
     {
-        uint64_t* pml3 = (uint64_t*)pml4[idx], *pml2 = (uint64_t*)pml3[idx], *pml1 = (uint64_t*)pml2[idx], paddr = pml1[idx];
+        uint64_t* pml3 = (uint64_t*)Entry((uint64_t)(pml4))[idx];
+        uint64_t* pml2 = (uint64_t*)Entry((uint64_t)(pml3))[idx];
+        uint64_t* pml1 = (uint64_t*)Entry((uint64_t)(pml2))[idx];
+        uint64_t  paddr = Entry((uint64_t)(pml1))[idx];
         Terminal::Print("\nPML3: ");
         Terminal::PrintInt((uint64_t)pml3);
         Terminal::Print("\nPML2: ");

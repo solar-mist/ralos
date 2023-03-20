@@ -18,6 +18,7 @@ extern "C" void KMain(VBInfo* BootInfo)
     Graphics::Init(BootInfo);
     Terminal::Init(BootInfo->Framebuffer.Horiz, BootInfo->Framebuffer.Vert);
     PMM::Init(BootInfo->MemoryMap);
+    PMM::DumpStats();
     VMM::Init();
     //VMM::MapPage(0, 0, 3);
     //VMM::MapPage(0x1000, 0x1000, 3);
