@@ -14,15 +14,28 @@ namespace VMM
 
     #define PRESENT_WRITABLE 0x3
 
-    void Init()
+    void Init(VBInfo* BootInfo)
     {
         pml4 = (uint64_t*)PMM::GetPage();
-        //memset((uint8_t*)pml4, PAGE_SIZE, 0);
+        memset((uint8_t*)pml4, PAGE_SIZE, 0);
         uint64_t tmp = (uint64_t)pml4;
         tmp &= ~0xFFFF000000000FFF;
         pml4 = (uint64_t*)tmp;
-        MapPages(0, 0, 3, NPAGES(PMM::GetPhysLimit()));
-        //asm volatile("mov %0, %%cr3" : : "r"(pml4));
+        MapPages(0, 0, 3, NPAGES(0x400000));
+        uint8_t* mmap_start = (uint8_t*)BootInfo->MemoryMap;
+        uint8_t* mmap_end = (uint8_t*)mmap_start + BootInfo->MemoryMap->MapSize;
+
+        for(uint8_t* offset = mmap_start; offset < mmap_end; offset += BootInfo->MemoryMap->EntrySize)
+        {
+            VBMemoryMapEntry* entry = (VBMemoryMapEntry*)offset;
+
+            if(entry->Base + entry->Size < 0x400000)
+                continue;
+
+            MapPages(entry->Base, entry->Base, 3, entry->Size / 4096);
+        }
+        MapPages((uint64_t)BootInfo->Framebuffer.Base, (uint64_t)BootInfo->Framebuffer.Base, 3, NPAGES(BootInfo->Framebuffer.Size));
+        asm volatile("mov %0, %%cr3" : : "r"(pml4));
     }
 
     static inline uint64_t* Entry(uint64_t pt)

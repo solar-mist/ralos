@@ -78,7 +78,7 @@ namespace PMM
             }
         }
 
-        Alloc(Bitmap, BitmapSize);
+        Alloc(Bitmap, NPAGES(BitmapSize));
     }
 
     bool Alloc(void* address, uint32_t npages)

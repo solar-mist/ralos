@@ -1,3 +1,4 @@
+[bits 64]
 [extern ISRExceptionHandler]
 [extern IRQHandler]
 
@@ -11,14 +12,14 @@ ExceptionStub%+%1:
 ExceptionStub%+%1:
     push 0
     push %1
-    jmp ExceptionXFrameAssembler
+    jmp [rel ExceptionXFrameAssembler]
 %endmacro
 
 %macro InterruptRequestStub 1
 IRQStub%+%1:
     push %1
     push %1+32
-    jmp IRQXFrameAssembler
+    jmp [rel IRQXFrameAssembler]
 %endmacro
 
 ExceptionXFrameAssembler:

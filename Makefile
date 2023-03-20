@@ -1,8 +1,8 @@
 CC=x86_64-elf-g++
-CFLAGS=-c -ffreestanding -O2 -std=c++20 -Wall -Wextra -Iinclude -fno-rtti -fno-exceptions
+CFLAGS=-c -ffreestanding -O2 -std=c++20 -Wall -Wextra -Iinclude -fno-rtti -fno-exceptions -mcmodel=kernel
 
 AS=nasm
-ASFLAGS=-felf64
+ASFLAGS=-f elf64
 
 LD=x86_64-elf-ld
 LDFLAGS=-nostdlib -Tlink.ld -static -melf_x86_64 -zmax-page-size=0x1000

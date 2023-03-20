@@ -8,28 +8,29 @@ SECTIONS
 
 	_kernel_start = .;
 
-	/*. += 0xFFFF800000000000;*/
-
-	.text : ALIGN(4K) /* : AT (ADDR (.text) - 0xFFFF800000000000) */
+	.text : ALIGN(4K)
 	{
-		*(.text)
+		*(.text .text.*)
 	}
+
+	. += CONSTANT(MAXPAGESIZE);
 
 	.rodata : ALIGN(4K)
 	{
-		*(.rodata)
+		*(.rodata .rodata.*)
 	}
-	
+
+	. += CONSTANT(MAXPAGESIZE);
 
 	.data : ALIGN(4K)
 	{
-		*(.data)
+		*(.data .data.*)
 	}
 
 	.bss : ALIGN(4K)
 	{
 		*(COMMON)
-		*(.bss)
+		*(.bss .bss.*)
 	}
 
 	_kernel_end = .;
