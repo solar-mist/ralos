@@ -7,19 +7,30 @@
 #include <mem/pmm.hpp>
 #include <mem/vmm.hpp>
 #include <drivers/pit.hpp>
-#include <drivers/ps2_keyboard.hpp>
+#include <kernel/sched/scheduler.hpp>
 
-extern "C" void JumpUsermode(void (*func)(), void* stack);
-
-extern "C" uint64_t SyscallHandler;
 void TestUserFunc()
 {
-    const char* data = "Hello Syscall World!";
+    const char* data = "0";
     asm volatile("mov $0, %rax");
     asm volatile("mov %0, %%rdi" : : "m"(data));
-    asm volatile("mov $20, %rsi");
+    asm volatile("mov $1, %rsi");
+    asm volatile("int $0x69");
+    asm volatile("mov $1, %rax");
     asm volatile("int $0x69");
     for(;;);
+}
+
+void OtherTestUserFunc()
+{
+    for(;;)
+    {
+        const char* data = "X";
+        asm volatile("mov $0, %rax");
+        asm volatile("mov %0, %%rdi" : : "m"(data));
+        asm volatile("mov $1, %rsi");
+        asm volatile("int $0x69");
+    }
 }
 
 extern "C" void KMain(VBInfo* BootInfo)
@@ -29,11 +40,14 @@ extern "C" void KMain(VBInfo* BootInfo)
     Graphics::Init(BootInfo);
     Terminal::Init(BootInfo->Framebuffer.Horiz, BootInfo->Framebuffer.Vert);
     PMM::Init(BootInfo->MemoryMap);
+    PIT::Init(1197);
     InitTSS();
     PMM::DumpStats();
     VMM::Init(BootInfo);
     Terminal::Print("Hello World!\n", 0xFFFF00);
-    //Terminal::PrintInt(SyscallHandler, 16, 0x00FFFF);
-    JumpUsermode(TestUserFunc, PMM::GetPage());
+    Scheduler::AddTask(Scheduler::Task((void*)TestUserFunc));
+    Scheduler::AddTask(Scheduler::Task((void*)OtherTestUserFunc));
+    Terminal::PrintInt((uint64_t)(void*)OtherTestUserFunc, 16);
+    Scheduler::Init();
     for(;;);
 }

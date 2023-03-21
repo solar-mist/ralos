@@ -10,6 +10,9 @@ LDFLAGS=-nostdlib -Tlink.ld -static -melf_x86_64 -zmax-page-size=0x1000
 CXXSRCS=$(shell find src -name '*.cpp')
 ASSRCS=$(shell find src -name '*.asm')
 
+CRTBEGIN_O:=$(shell $(CC) $(CFLAGS) -print-file-name=crtbegin.o)
+CRTEND_O:=$(shell $(CC) $(CFLAGS) -print-file-name=crtend.o)
+
 OBJS=${CXXSRCS:.cpp=.o} ${ASSRCS:.asm=.o}
 
 KERNEL=kernel.elf
@@ -31,7 +34,7 @@ ovmf:
 	mkdir -p ovmf
 	cd ovmf && curl -o OVMF-X64.zip https://efi.akeo.ie/OVMF/OVMF-X64.zip && unzip OVMF-X64.zip
 
-$(KERNEL): $(OBJS)
+$(KERNEL): $(OBJS) $(CRTBEGIN_O) $(CRTEND_O)
 	$(LD) $^ -o $@ $(LDFLAGS)
 
 $(TARGET): viper-boot $(KERNEL)

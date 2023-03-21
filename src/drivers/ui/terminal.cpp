@@ -9,7 +9,7 @@ unsigned int StrLen(char* str)
     return i;
 }
 
-int IToA(long value, char *sp, int radix)
+int IToA(int value, char *sp, int radix)
 {
     char tmp[16];
     char *tp = tmp;
@@ -119,10 +119,10 @@ namespace Terminal
     }
 
 
-    Status PrintInt(unsigned long value, int radix, Graphics::Color color)
+    Status PrintInt(unsigned int value, int radix, Graphics::Color color)
     {
         char buffer[16];
-        IToA(value, buffer, radix);
-        return Print(buffer, color);
+        int n = IToA(value, buffer, radix);
+        return PutString(buffer, n, color);
     }
 }

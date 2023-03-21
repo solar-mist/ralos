@@ -4,18 +4,16 @@
 #include <cpu/interrupt/irq.hpp>
 #include <drivers/pic.hpp>
 
+namespace Scheduler
+{
+    extern void IncrementTimer(ISRXFrame *frame);
+}
+
 constexpr int PIT_IRQ = 0;
 
-static int count = 0;
-
-void PITHandler(ISRXFrame*)
+void PITHandler(ISRXFrame* frame)
 {
-    count++;
-    if(count % 100 == 0)
-    {
-        Terminal::Print("\nTimer");
-        count = 0;
-    }
+    Scheduler::IncrementTimer(frame);
 }
 
 namespace PIT
