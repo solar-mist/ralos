@@ -1,4 +1,4 @@
-#include <drivers/graphics.hpp>
+#include <drivers/ui/graphics.hpp>
 
 namespace Graphics
 {

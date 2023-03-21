@@ -1,5 +1,5 @@
-#include <kernel/syscall.hpp>
-#include <drivers/terminal.hpp>
+#include <kernel/user/syscall.hpp>
+#include <drivers/ui/terminal.hpp>
 
 extern "C" void SystemCallHandler(ISRXFrame* frame)
 {

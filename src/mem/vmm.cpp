@@ -1,6 +1,6 @@
 #include <mem/vmm.hpp>
 #include <mem/pmm.hpp>
-#include <drivers/terminal.hpp>
+#include <drivers/ui/terminal.hpp>
 
 void memset(uint8_t* buffer, uint32_t size, uint8_t n)
 {

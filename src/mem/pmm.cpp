@@ -1,5 +1,5 @@
 #include <mem/pmm.hpp>
-#include <drivers/terminal.hpp>
+#include <drivers/ui/terminal.hpp>
 #include <stddef.h>
 #include <stdint.h>
 

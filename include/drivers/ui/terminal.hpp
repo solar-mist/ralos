@@ -1,7 +1,7 @@
 #ifndef DRIVERS_TERMINAL_HPP
 #define DRIVERS_TERMINAL_HPP
 #include <status.h>
-#include <drivers/graphics.hpp>
+#include <drivers/ui/graphics.hpp>
 
 namespace Terminal
 {

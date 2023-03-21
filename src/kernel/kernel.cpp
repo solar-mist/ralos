@@ -1,13 +1,12 @@
 #include <viperBoot.h>
-#include <drivers/graphics.hpp>
-#include <drivers/terminal.hpp>
+#include <drivers/ui/graphics.hpp>
+#include <drivers/ui/terminal.hpp>
 #include <cpu/gdt/gdt.hpp>
 #include <cpu/tss.hpp>
 #include <cpu/interrupt/idt.hpp>
 #include <mem/pmm.hpp>
 #include <mem/vmm.hpp>
 #include <drivers/pit.hpp>
-#include <drivers/ata.hpp>
 #include <drivers/ps2_keyboard.hpp>
 
 extern "C" void JumpUsermode(void (*func)(), void* stack);

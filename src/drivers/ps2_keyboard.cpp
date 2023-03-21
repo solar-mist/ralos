@@ -1,6 +1,6 @@
 #include <drivers/ps2_keyboard.hpp>
 #include <cpu/interrupt/irq.hpp>
-#include <drivers/terminal.hpp>
+#include <drivers/ui/terminal.hpp>
 #include <drivers/ports.hpp>
 #include <drivers/pic.hpp>
 

@@ -1,5 +1,5 @@
 #include <cpu/interrupt/isr.hpp>
-#include <drivers/terminal.hpp>
+#include <drivers/ui/terminal.hpp>
 
 constexpr const char* Exceptions[] = {
     "Division by Zero #DE",

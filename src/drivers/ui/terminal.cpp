@@ -1,4 +1,4 @@
-#include <drivers/terminal.hpp>
+#include <drivers/ui/terminal.hpp>
 #include <font.h>
 
 unsigned int StrLen(char* str)

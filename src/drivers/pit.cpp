@@ -1,5 +1,5 @@
 #include <drivers/pit.hpp>
-#include <drivers/terminal.hpp>
+#include <drivers/ui/terminal.hpp>
 #include <drivers/ports.hpp>
 #include <cpu/interrupt/irq.hpp>
 #include <drivers/pic.hpp>
