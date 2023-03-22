@@ -33,9 +33,6 @@ namespace Scheduler
 
     void Init();
 
-    void Lock();
-    void Unlock();
-
     void IncrementTimer(ISRXFrame* frame);
 
     void AddTask(Task t);

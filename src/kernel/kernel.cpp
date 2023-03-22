@@ -11,14 +11,14 @@
 
 void TestUserFunc()
 {
+    for(;;)
+    {
     const char* data = "0";
     asm volatile("mov $0, %rax");
     asm volatile("mov %0, %%rdi" : : "m"(data));
     asm volatile("mov $1, %rsi");
     asm volatile("int $0x69");
-    asm volatile("mov $1, %rax");
-    asm volatile("int $0x69");
-    for(;;);
+    }
 }
 
 void OtherTestUserFunc()

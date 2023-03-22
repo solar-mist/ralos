@@ -69,25 +69,13 @@ namespace Scheduler
     void Init()
     {
         void (*start)() = (void(*)())queue.Front()->rip;
-        Unlock();
-        JumpUsermode(start, queue.Front()->rsp);
-    }
-
-    void Lock()
-    {
-        locked = true;
-    }
-
-    void Unlock()
-    {
         locked = false;
+        JumpUsermode(start, queue.Front()->rsp);
     }
 
     void IncrementTimer(ISRXFrame* frame)
     {
-        Lock();
-        if(locked == false)
-            timer++;
+        timer++;
         if(timer == quantum)
         {
             if(queue.Size() != 1)
@@ -104,7 +92,6 @@ namespace Scheduler
             }
             timer = 0;
         }
-        Unlock();
     }
 
     void AddTask(Task t)
@@ -114,7 +101,6 @@ namespace Scheduler
 
     void EndCurrentTask(ISRXFrame* frame)
     {
-        Lock();
         timer = 0;
         Task current = queue.Dequeue();
         PMM::FreePages(current.rsp, current.stackSize / PAGE_SIZE);
@@ -122,7 +108,6 @@ namespace Scheduler
         frame->BaseFrame.rip = (uint64_t)queue.Front()->rip;
         frame->BaseFrame.rsp = (uint64_t)queue.Front()->rsp;
         frame->BaseFrame.rbp = (uint64_t)queue.Front()->rbp;
-        Unlock();
     }
 
     Task* CurrentTask()
