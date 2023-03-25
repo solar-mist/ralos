@@ -132,4 +132,45 @@ namespace Terminal
         int n = IToA(value, buffer, radix);
         PutString(buffer, n, color);
     }
+
+    void Printf(const char* fmt, ...)
+    {
+        va_list arg;
+        va_start(arg, fmt);
+        int i = 0;
+        while(fmt[i])
+        {
+            if (fmt[i] == '%')
+            {
+                if (fmt[++i] == '%')
+                    PutChar(fmt[i++]);
+                else if (fmt[i] == 'd' || fmt[i] == 'i')
+                {
+                    char buf[16];
+                    char* str = buf;
+                    int n = va_arg(arg, int);
+                    int count = IToA(n, buf, 10);
+                    while(count--)
+                        PutChar(*str++);
+                    i++;
+                }
+                else if (fmt[i] == 'c')
+                {
+                    int ch_int = va_arg(arg, int);
+                    char ch = (char)ch_int;
+                    PutChar(ch);
+                    i++;
+                }
+                else if (fmt[i] == 's')
+                {
+                    char* str = va_arg(arg, char*);
+                    Print(str);
+                    i++;
+                }
+            }
+            else
+                PutChar(fmt[i++]);
+        }
+        va_end(arg);
+    }
 }

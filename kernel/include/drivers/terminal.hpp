@@ -1,6 +1,7 @@
 #ifndef DRIVERS_TERMINAL_HPP
 #define DRIVERS_TERMINAL_HPP
 #include <drivers/graphics.hpp>
+#include <stdarg.h>
 
 namespace Terminal
 {
@@ -16,6 +17,8 @@ namespace Terminal
     void Print(const char* data, Graphics::Color color = 0xFFFFFF);
 
     void PrintInt(unsigned int value, int radix = 10, Graphics::Color color = 0xFFFFFF);
+
+    void Printf(const char* fmt, ...);
 }
 
 #endif

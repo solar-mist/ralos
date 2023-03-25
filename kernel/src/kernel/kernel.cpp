@@ -1,6 +1,12 @@
 #include <cpu/gdt/gdt.hpp>
 #include <drivers/graphics.hpp>
 #include <drivers/terminal.hpp>
+#include <limine.h>
+
+static volatile limine_bootloader_info_request LoaderInfoRequest = {
+    .id = LIMINE_BOOTLOADER_INFO_REQUEST,
+    .revision = 0
+};
 
 extern "C" void KMain()
 {
@@ -8,7 +14,6 @@ extern "C" void KMain()
     Graphics::Init();
     Terminal::Init();
     Terminal::Clear(0x018281);
-    for(int i = 0; i < 256; i++)
-        Terminal::Print("Hello world\n", 0x606060);
+    Terminal::Printf("Booting with %s version %s", LoaderInfoRequest.response->name, LoaderInfoRequest.response->version);
     for(;;);
-}  
+}
