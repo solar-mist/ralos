@@ -3,6 +3,7 @@
 #include <drivers/io/graphics.hpp>
 #include <drivers/io/terminal.hpp>
 #include <limine.h>
+#include <stdarg.h>
 
 static volatile limine_bootloader_info_request LoaderInfoRequest = {
     .id = LIMINE_BOOTLOADER_INFO_REQUEST,
@@ -11,13 +12,6 @@ static volatile limine_bootloader_info_request LoaderInfoRequest = {
 
 namespace Kernel
 {
-    [[noreturn]] void Panic(const char *fmt, ...)
-    {
-        Terminal::Printf(fmt);
-        for(;;)
-            asm volatile("cli; hlt");
-    }
-
     extern "C" void KMain()
     {
         Graphics::Init();
@@ -28,7 +22,6 @@ namespace Kernel
 
         InitGDT();
         Terminal::Printf("%#Initialized Global Descriptor Table", 0x2A3F55);
-        Kernel::Panic("%#Test", 0xFF0000);
         for(;;);
     }
 }

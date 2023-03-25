@@ -1,13 +1,6 @@
 #include <drivers/io/terminal.hpp>
 #include <misc/font.h>
-
-unsigned int StrLen(char* str)
-{   
-    unsigned int i = 0;
-    while(str[i])
-        i++;
-    return i;
-}
+#include <libk/memory.hpp>
 
 int IToA(int value, char *sp, int radix)
 {
@@ -117,7 +110,7 @@ namespace Terminal
 
     void Print(char* data, Graphics::Color color)
     {
-        PutString(data, StrLen(data), color);
+        PutString(data, strlen(data), color);
     }
 
     void Print(const char* data, Graphics::Color color)
