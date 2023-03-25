@@ -1,0 +1,7 @@
+*.elf
+*.iso
+*.o
+*.json
+
+limine/
+.cache/*

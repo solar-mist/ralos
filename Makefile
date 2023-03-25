@@ -1,51 +1,35 @@
-CC=x86_64-elf-g++
-CFLAGS=-c -ffreestanding -O2 -std=c++20 -Wall -Wextra -Iinclude -fno-rtti -fno-exceptions -mcmodel=kernel
-
-AS=nasm
-ASFLAGS=-f elf64
-
-LD=x86_64-elf-ld
-LDFLAGS=-nostdlib -Tlink.ld -static -melf_x86_64 -zmax-page-size=0x1000
-
-CXXSRCS=$(shell find src -name '*.cpp')
-ASSRCS=$(shell find src -name '*.asm')
-
-CRTBEGIN_O:=$(shell $(CC) $(CFLAGS) -print-file-name=crtbegin.o)
-CRTEND_O:=$(shell $(CC) $(CFLAGS) -print-file-name=crtend.o)
-
-OBJS=${CXXSRCS:.cpp=.o} ${ASSRCS:.asm=.o}
-
-KERNEL=kernel.elf
-TARGET=viperOS.hdd
+KERNEL=kernel/viperOS.elf
+KERNEL_FILES=$(shell find kernel -type f)
+TARGET=viperOS.iso
 
 all: $(TARGET)
 
-%.o: %.cpp
-	$(CC) $(CFLAGS) $< -o $@
+.PHONY: kernel
+kernel:
+	$(MAKE) -C kernel
 
-%.o: %.asm
-	$(AS) $(ASFLAGS) $< -o $@
+limine:
+	git clone https://github.com/limine-bootloader/limine --branch=v4.x-branch-binary --depth=1
+	$(MAKE) -C limine
 
-viper-boot:
-	git clone https://github.com/viper-org/viper-boot
-	make -C viper-boot/efi
+$(TARGET): kernel limine
+	$(MAKE) -C limine
+	rm -rf isodir
+	mkdir -p isodir
+	cp $(KERNEL) limine.cfg limine/limine.sys limine/limine-cd.bin limine/limine-cd-efi.bin isodir/
+	xorriso -as mkisofs -b limine-cd.bin \
+		-no-emul-boot -boot-load-size 4 -boot-info-table \
+		--efi-boot limine-cd-efi.bin \
+		-efi-boot-part --efi-boot-image --protective-msdos-label \
+		isodir -o $@
+	limine/limine-deploy $@
+	rm -rf isodir
 
-ovmf:
-	mkdir -p ovmf
-	cd ovmf && curl -o OVMF-X64.zip https://efi.akeo.ie/OVMF/OVMF-X64.zip && unzip OVMF-X64.zip
-
-$(KERNEL): $(OBJS) $(CRTBEGIN_O) $(CRTEND_O)
-	$(LD) $^ -o $@ $(LDFLAGS)
-
-$(TARGET): viper-boot $(KERNEL)
-	cp viper-boot/efi/build viper-boot/efi/BOOTX64.EFI . 
-	./build $(KERNEL) $@
-
-run: $(TARGET) ovmf
-	qemu-system-x86_64 -bios ovmf/OVMF.fd -drive file=$<,format=raw,if=ide,index=0,media=disk -M q35 -net none -M smm=off -d int
+run: $(TARGET)
+	qemu-system-x86_64 -M q35 -hda $< -d int -M smm=off
 
 clean:
-	rm $(OBJS) $(KERNEL)
+	$(MAKE) -C kernel clean
 
 distclean:
-	rm -rf viper-boot ovmf
+	rm -rf limine isodir
