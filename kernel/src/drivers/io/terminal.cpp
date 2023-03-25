@@ -161,6 +161,16 @@ namespace Terminal
                     Print(str, color);
                     i++;
                 }
+                else if(fmt[i] == 'x')
+                {
+                    char buf[16];
+                    char* str = buf;
+                    int n = va_arg(arg, int);
+                    int count = IToA(n, buf, 16);
+                    while(count--)
+                        PutChar(*str++, color);
+                    i++;
+                }
                 else if(fmt[i] == '#')
                 {
                     color = va_arg(arg, int);

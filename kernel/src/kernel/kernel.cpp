@@ -2,6 +2,7 @@
 #include <cpu/gdt/gdt.hpp>
 #include <drivers/io/graphics.hpp>
 #include <drivers/io/terminal.hpp>
+#include <mem/pmm.h>
 #include <limine.h>
 #include <stdarg.h>
 
@@ -21,7 +22,7 @@ namespace Kernel
         Terminal::Printf("%#Booting with %s version %#%s\n", 0x2A3F55, LoaderInfoRequest.response->name, 0xE35F5F, LoaderInfoRequest.response->version);
 
         InitGDT();
-        Terminal::Printf("%#Initialized Global Descriptor Table", 0x2A3F55);
+        PMM::Init();
         for(;;);
     }
 }
