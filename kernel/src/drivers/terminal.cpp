@@ -138,12 +138,13 @@ namespace Terminal
         va_list arg;
         va_start(arg, fmt);
         int i = 0;
+        Graphics::Color color = DEFAULT_COLOR;
         while(fmt[i])
         {
             if (fmt[i] == '%')
             {
                 if (fmt[++i] == '%')
-                    PutChar(fmt[i++]);
+                    PutChar(fmt[i++], color);
                 else if (fmt[i] == 'd' || fmt[i] == 'i')
                 {
                     char buf[16];
@@ -151,25 +152,30 @@ namespace Terminal
                     int n = va_arg(arg, int);
                     int count = IToA(n, buf, 10);
                     while(count--)
-                        PutChar(*str++);
+                        PutChar(*str++, color);
                     i++;
                 }
                 else if (fmt[i] == 'c')
                 {
                     int ch_int = va_arg(arg, int);
                     char ch = (char)ch_int;
-                    PutChar(ch);
+                    PutChar(ch, color);
                     i++;
                 }
                 else if (fmt[i] == 's')
                 {
                     char* str = va_arg(arg, char*);
-                    Print(str);
+                    Print(str, color);
+                    i++;
+                }
+                else if(fmt[i] == '#')
+                {
+                    color = va_arg(arg, int);
                     i++;
                 }
             }
             else
-                PutChar(fmt[i++]);
+                PutChar(fmt[i++], color);
         }
         va_end(arg);
     }

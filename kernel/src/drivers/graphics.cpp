@@ -16,7 +16,7 @@ namespace Graphics
 
     Color::operator unsigned int()
     {
-        return (m_R << 16) + (m_G << 8) + m_B;
+        return (m_B << 16) + (m_G << 8) + m_R;
     }
 
     unsigned char Color::r() const
@@ -53,11 +53,7 @@ namespace Graphics
         for(unsigned int i = 0; i < Framebuffer->width; i++)
         {
             for(unsigned int j = 0; j < Framebuffer->height * 2; j++)
-            {
-                screen[j*4] = color.r();
-                screen[j*4+1] = color.g();
-                screen[j*4+2] = color.b();
-            }
+                ((uint32_t*)screen)[j] = color;
             screen += Framebuffer->pitch;
         }
     }
@@ -77,11 +73,7 @@ namespace Graphics
         for(unsigned int i = x1; i < x2; i++)
         {
             for(unsigned int j = y1; j < y2; j++)
-            {
-                screen[j*4] = color.r();
-                screen[j*4+1] = color.g();
-                screen[j*4+2] = color.b();
-            }
+                ((uint32_t*)screen)[j] = color;
             screen += Framebuffer->pitch;
         }
     }

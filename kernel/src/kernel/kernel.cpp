@@ -13,7 +13,7 @@ extern "C" void KMain()
     InitGDT();
     Graphics::Init();
     Terminal::Init();
-    Terminal::Clear(0x018281);
-    Terminal::Printf("Booting with %s version %s", LoaderInfoRequest.response->name, LoaderInfoRequest.response->version);
+    Terminal::Clear(0x008080);
+    Terminal::Printf("%#Booting with %s version %#%s", 0x2A3F55, LoaderInfoRequest.response->name, 0xE35F5F, LoaderInfoRequest.response->version);
     for(;;);
 }
