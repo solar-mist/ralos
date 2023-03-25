@@ -1,5 +1,5 @@
-#ifndef DRIVERS_GRAPHICS_HPP
-#define DRIVERS_GRAPHICS_HPP
+#ifndef DRIVERS_IO_GRAPHICS_HPP
+#define DRIVERS_IO_GRAPHICS_HPP
 #include <limine.h>
 
 namespace Graphics

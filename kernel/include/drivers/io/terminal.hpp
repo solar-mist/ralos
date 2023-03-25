@@ -1,6 +1,6 @@
-#ifndef DRIVERS_TERMINAL_HPP
-#define DRIVERS_TERMINAL_HPP
-#include <drivers/graphics.hpp>
+#ifndef DRIVERS_IO_TERMINAL_HPP
+#define DRIVERS_IO_TERMINAL_HPP
+#include <drivers/io/graphics.hpp>
 #include <stdarg.h>
 
 namespace Terminal

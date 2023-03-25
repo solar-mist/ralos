@@ -1,6 +1,6 @@
 #include <cpu/gdt/gdt.hpp>
-#include <drivers/graphics.hpp>
-#include <drivers/terminal.hpp>
+#include <drivers/io/graphics.hpp>
+#include <drivers/io/terminal.hpp>
 #include <limine.h>
 
 static volatile limine_bootloader_info_request LoaderInfoRequest = {
