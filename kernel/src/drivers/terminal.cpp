@@ -67,7 +67,6 @@ namespace Terminal
 
     void PutChar(char c, int x, int y, Graphics::Color color)
     {
-        //asm volatile("mov %0, %%rax; hlt" : : "m"(GetModule(0)->size));
         unsigned char* font_data = (unsigned char*)GetModule(0)->address;
         for(int i = c * 8, a = 0; i < c * 8 + 8; i++, a++)
         {
