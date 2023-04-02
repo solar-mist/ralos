@@ -12,14 +12,14 @@ override ASSRCS=$(shell find src -name '*.asm')
 
 override OBJS=${CXXSRCS:.cpp=.o} ${ASSRCS:.asm=.o}
 
-TARGET=viperOS.elf
+TARGET=kernel.elf
 
 all: $(TARGET)
 
-include/limine.h:
-	curl https://raw.githubusercontent.com/limine-bootloader/limine/trunk/limine.h -o include/$@
+viper.h:
+	curl -Lo include/$@ https://raw.githubusercontent.com/viper-org/viper-boot/master/include/viper.h
 
-%.o: %.cpp limine.h
+%.o: %.cpp viper.h
 	$(CXX) $(CXXFLAGS) $< -c -o $@
 
 %.o: %.asm

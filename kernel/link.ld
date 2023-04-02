@@ -1,39 +1,33 @@
+/* Tell the linker that we want an x86_64 binary */
 OUTPUT_FORMAT(elf64-x86-64)
 OUTPUT_ARCH(i386:x86-64)
 
-ENTRY(loader)
+/* Set the entry point function to _start */
+ENTRY(_start)
 
-PHDRS
-{
-    text    PT_LOAD    FLAGS((1 << 0) | (1 << 2)) ;
-    rodata  PT_LOAD    FLAGS((1 << 2)) ;
-    data    PT_LOAD    FLAGS((1 << 1) | (1 << 2)) ;
-}
-
+/* Describe the sections in our kernel */
 SECTIONS
 {
+    /* Place the kernel at address 0xffffffff80000000*/
     . = 0xffffffff80000000;
 
     .text : {
         *(.text .text.*)
-    } :text
-
-    . += CONSTANT(MAXPAGESIZE);
+    }
 
     .rodata : {
         *(.rodata .rodata.*)
-    } :rodata
-
-    . += CONSTANT(MAXPAGESIZE);
+    }
 
     .data : {
         *(.data .data.*)
-    } :data
+    }
 
+    /* Ensure the .bss section is the final section in the binary */
     .bss : {
         *(COMMON)
         *(.bss .bss.*)
-    } :data
+    }
 
     /DISCARD/ : {
         *(.eh_frame)

@@ -1,7 +1,12 @@
+viper-boot/
+boot/
+ovmf/
+
 *.elf
-*.iso
+*.hdd
 *.o
+*.EFI
 *.json
 
-limine/
-.cache/*
+build
+viper.h

@@ -1,6 +1,6 @@
-KERNEL=kernel/viperOS.elf
+KERNEL=kernel/kernel.elf
 KERNEL_FILES=$(shell find kernel -type f)
-TARGET=viperOS.iso
+TARGET=viperOS.hdd
 
 all: $(TARGET)
 
@@ -8,28 +8,26 @@ all: $(TARGET)
 kernel:
 	$(MAKE) -C kernel
 
-limine:
-	git clone https://github.com/limine-bootloader/limine --branch=v4.x-branch-binary --depth=1
-	$(MAKE) -C limine
+viper-boot:
+	git clone https://github.com/viper-org/viper-boot
+	$(MAKE) -C viper-boot
 
-$(TARGET): kernel limine
-	$(MAKE) -C limine
-	rm -rf isodir
-	mkdir -p isodir
-	cp $(KERNEL) limine.cfg limine/limine.sys limine/limine-cd.bin limine/limine-cd-efi.bin isodir/
-	xorriso -as mkisofs -b limine-cd.bin \
-		-no-emul-boot -boot-load-size 4 -boot-info-table \
-		--efi-boot limine-cd-efi.bin \
-		-efi-boot-part --efi-boot-image --protective-msdos-label \
-		isodir -o $@
-	limine/limine-deploy $@
-	rm -rf isodir
+ovmf:
+	mkdir -p $@
+	cd ovmf && curl -Lo OVMF-X64.zip https://efi.akeo.ie/OVMF/OVMF-X64.zip && unzip OVMF-X64.zip
 
-run: $(TARGET)
-	qemu-system-x86_64 -M q35 -hda $< -d int -M smm=off
+$(TARGET): kernel viper-boot
+	$(MAKE) -C viper-boot
+	cp viper-boot/BOOTX64.EFI viper-boot/build ./
+	mkdir -p boot
+	cp viper.cfg $(KERNEL) boot/
+	./build boot $@
+
+run: $(TARGET) ovmf
+	qemu-system-x86_64 -bios ovmf/OVMF.fd -net none -M q35 -M smm=off -d int -drive file=$<,format=raw,if=ide,index=0,media=disk
 
 clean:
 	$(MAKE) -C kernel clean
 
-distclean:
-	rm -rf limine isodir
+distclean: clean
+	rm -rf viper-boot boot build BOOTX64.EFI
