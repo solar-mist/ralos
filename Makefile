@@ -1,5 +1,5 @@
 KERNEL=kernel/kernel.elf
-KERNEL_FILES=$(shell find kernel -type f)
+MODULES=$(shell find modules -type f)
 TARGET=viperOS.hdd
 
 all: $(TARGET)
@@ -20,8 +20,9 @@ $(TARGET): kernel viper-boot
 	$(MAKE) -C viper-boot
 	cp viper-boot/BOOTX64.EFI viper-boot/build ./
 	mkdir -p boot
-	cp viper.cfg $(KERNEL) boot/
+	cp viper.cfg $(KERNEL) $(MODULES) boot/
 	./build boot $@
+	rm -rf boot
 
 run: $(TARGET) ovmf
 	qemu-system-x86_64 -bios ovmf/OVMF.fd -net none -M q35 -M smm=off -d int -drive file=$<,format=raw,if=ide,index=0,media=disk
