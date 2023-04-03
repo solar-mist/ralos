@@ -13,6 +13,8 @@ namespace Terminal
 
     void Print(char* data, Graphics::Color color = 0xFFFFFF);
     void Print(const char* data, Graphics::Color color = 0xFFFFFF);
+
+    void Printf(const char* format, ...);
 }
 
 #endif

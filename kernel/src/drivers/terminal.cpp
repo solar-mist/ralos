@@ -1,5 +1,6 @@
 #include <drivers/terminal.hpp>
 #include <kernel/modules.hpp>
+#include <stdarg.h>
 
 unsigned int StrLen(char* str)
 {   
@@ -115,10 +116,57 @@ namespace Terminal
     }
 
 
-    void PrintInt(unsigned int value, int radix, Graphics::Color color)
+    void Printf(const char* format, ...)
     {
-        char buffer[16];
-        int n = IToA(value, buffer, radix);
-        PutString(buffer, n, color);
+        va_list arg;
+        va_start(arg, format);
+        int i = 0;
+        Graphics::Color color = 0xFFFFFF;
+        while(format[i])
+        {
+            if (format[i] == '%')
+            {
+                if (format[++i] == '%')
+                    PutChar(format[i++], color);
+                else if (format[i] == 'd' || format[i] == 'i')
+                {
+                    char buf[32];
+                    int64_t n = va_arg(arg, int64_t);
+                    int count = IToA(n, buf, 10);
+                    PutString(buf, count, color);
+                    i++;
+                }
+                else if(format[i] == 'x')
+                {
+                    char buf[32] = "0x";
+                    int64_t n = va_arg(arg, int64_t);
+                    int count = IToA(n, buf + 2, 16);
+                    PutString(buf, count, color);
+                    i++;
+                }
+                else if (format[i] == 'c')
+                {
+                    int ch_int = va_arg(arg, int);
+                    char ch = (char)ch_int;
+                    PutChar(ch, color);
+                    i++;
+                }
+                else if (format[i] == 's')
+                {
+                    char* str = va_arg(arg, char*);
+                    Print(str, color);
+                    i++;
+                }
+                else if(format[i] == '#')
+                {
+                    unsigned int newColor = va_arg(arg, unsigned int);
+                    color = newColor;
+                    i++;
+                }
+            }
+            else
+                PutChar(format[i++], color);
+        }
+        va_end(arg);
     }
 }
