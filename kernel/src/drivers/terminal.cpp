@@ -9,18 +9,18 @@ unsigned int StrLen(char* str)
     return i;
 }
 
-int IToA(int value, char *sp, int radix)
+int IToA(int64_t value, char *sp, int radix)
 {
-    char tmp[16];
+    char tmp[32];
     char *tp = tmp;
-    int i;
-    unsigned v;
+    int64_t i;
+    int64_t v;
 
-    int sign = (radix == 10 && value < 0);    
+    int64_t sign = (radix == 10 && value < 0);    
     if (sign)
         v = -value;
     else
-        v = (unsigned)value;
+        v = (int64_t)value;
 
     while (v || tp == tmp)
     {
@@ -32,7 +32,7 @@ int IToA(int value, char *sp, int radix)
           *tp++ = i + 'A' - 10;
     }
 
-    int len = tp - tmp;
+    int64_t len = tp - tmp;
 
     if (sign) 
     {

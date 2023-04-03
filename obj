@@ -1,0 +1,1953 @@
+
+kernel/kernel.elf:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+ffffffff80000000 <_ZN8IDTEntryC1Emhh>:
+ffffffff80000000:	55                   	push   %rbp
+ffffffff80000001:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80000004:	48 83 ec 18          	sub    $0x18,%rsp
+ffffffff80000008:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+ffffffff8000000c:	48 89 75 f0          	mov    %rsi,-0x10(%rbp)
+ffffffff80000010:	89 c8                	mov    %ecx,%eax
+ffffffff80000012:	88 55 ec             	mov    %dl,-0x14(%rbp)
+ffffffff80000015:	88 45 e8             	mov    %al,-0x18(%rbp)
+ffffffff80000018:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+ffffffff8000001c:	89 c2                	mov    %eax,%edx
+ffffffff8000001e:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000022:	66 89 10             	mov    %dx,(%rax)
+ffffffff80000025:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000029:	66 c7 40 02 08 00    	movw   $0x8,0x2(%rax)
+ffffffff8000002f:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000033:	0f b6 55 e8          	movzbl -0x18(%rbp),%edx
+ffffffff80000037:	88 50 04             	mov    %dl,0x4(%rax)
+ffffffff8000003a:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff8000003e:	0f b6 55 ec          	movzbl -0x14(%rbp),%edx
+ffffffff80000042:	88 50 05             	mov    %dl,0x5(%rax)
+ffffffff80000045:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+ffffffff80000049:	48 c1 e8 10          	shr    $0x10,%rax
+ffffffff8000004d:	89 c2                	mov    %eax,%edx
+ffffffff8000004f:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000053:	66 89 50 06          	mov    %dx,0x6(%rax)
+ffffffff80000057:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+ffffffff8000005b:	48 c1 e8 20          	shr    $0x20,%rax
+ffffffff8000005f:	89 c2                	mov    %eax,%edx
+ffffffff80000061:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000065:	89 50 08             	mov    %edx,0x8(%rax)
+ffffffff80000068:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff8000006c:	c7 40 0c 00 00 00 00 	movl   $0x0,0xc(%rax)
+ffffffff80000073:	90                   	nop
+ffffffff80000074:	c9                   	leave
+ffffffff80000075:	c3                   	ret
+
+ffffffff80000076 <_ZN8IDTEntryC1Ev>:
+ffffffff80000076:	55                   	push   %rbp
+ffffffff80000077:	48 89 e5             	mov    %rsp,%rbp
+ffffffff8000007a:	48 83 ec 08          	sub    $0x8,%rsp
+ffffffff8000007e:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+ffffffff80000082:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000086:	66 c7 00 00 00       	movw   $0x0,(%rax)
+ffffffff8000008b:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff8000008f:	66 c7 40 02 00 00    	movw   $0x0,0x2(%rax)
+ffffffff80000095:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000099:	c6 40 04 00          	movb   $0x0,0x4(%rax)
+ffffffff8000009d:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff800000a1:	c6 40 05 00          	movb   $0x0,0x5(%rax)
+ffffffff800000a5:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff800000a9:	66 c7 40 06 00 00    	movw   $0x0,0x6(%rax)
+ffffffff800000af:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff800000b3:	c7 40 08 00 00 00 00 	movl   $0x0,0x8(%rax)
+ffffffff800000ba:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff800000be:	c7 40 0c 00 00 00 00 	movl   $0x0,0xc(%rax)
+ffffffff800000c5:	90                   	nop
+ffffffff800000c6:	c9                   	leave
+ffffffff800000c7:	c3                   	ret
+
+ffffffff800000c8 <_Z7InitIDTv>:
+ffffffff800000c8:	55                   	push   %rbp
+ffffffff800000c9:	48 89 e5             	mov    %rsp,%rbp
+ffffffff800000cc:	48 83 ec 20          	sub    $0x20,%rsp
+ffffffff800000d0:	66 c7 05 87 2b 00 00 	movw   $0xfff,0x2b87(%rip)        # ffffffff80002c60 <_ZL4idtr>
+ffffffff800000d7:	ff 0f 
+ffffffff800000d9:	48 c7 05 7e 2b 00 00 	movq   $0xffffffff80001c60,0x2b7e(%rip)        # ffffffff80002c62 <_ZL4idtr+0x2>
+ffffffff800000e0:	60 1c 00 80 
+ffffffff800000e4:	c6 45 ff 00          	movb   $0x0,-0x1(%rbp)
+ffffffff800000e8:	eb 5b                	jmp    ffffffff80000145 <_Z7InitIDTv+0x7d>
+ffffffff800000ea:	0f b6 45 ff          	movzbl -0x1(%rbp),%eax
+ffffffff800000ee:	48 98                	cltq
+ffffffff800000f0:	48 8b 34 c5 53 16 00 	mov    -0x7fffe9ad(,%rax,8),%rsi
+ffffffff800000f7:	80 
+ffffffff800000f8:	48 8d 45 ef          	lea    -0x11(%rbp),%rax
+ffffffff800000fc:	b9 00 00 00 00       	mov    $0x0,%ecx
+ffffffff80000101:	ba 8f 00 00 00       	mov    $0x8f,%edx
+ffffffff80000106:	48 89 c7             	mov    %rax,%rdi
+ffffffff80000109:	e8 f2 fe ff ff       	call   ffffffff80000000 <_ZN8IDTEntryC1Emhh>
+ffffffff8000010e:	0f b6 45 ff          	movzbl -0x1(%rbp),%eax
+ffffffff80000112:	48 98                	cltq
+ffffffff80000114:	48 c1 e0 04          	shl    $0x4,%rax
+ffffffff80000118:	48 8d 88 60 1c 00 80 	lea    -0x7fffe3a0(%rax),%rcx
+ffffffff8000011f:	48 8b 45 ef          	mov    -0x11(%rbp),%rax
+ffffffff80000123:	48 8b 55 f7          	mov    -0x9(%rbp),%rdx
+ffffffff80000127:	48 89 01             	mov    %rax,(%rcx)
+ffffffff8000012a:	48 89 51 08          	mov    %rdx,0x8(%rcx)
+ffffffff8000012e:	0f b6 45 ff          	movzbl -0x1(%rbp),%eax
+ffffffff80000132:	48 98                	cltq
+ffffffff80000134:	c6 80 80 2c 00 80 01 	movb   $0x1,-0x7fffd380(%rax)
+ffffffff8000013b:	0f b6 45 ff          	movzbl -0x1(%rbp),%eax
+ffffffff8000013f:	83 c0 01             	add    $0x1,%eax
+ffffffff80000142:	88 45 ff             	mov    %al,-0x1(%rbp)
+ffffffff80000145:	80 7d ff 1f          	cmpb   $0x1f,-0x1(%rbp)
+ffffffff80000149:	76 9f                	jbe    ffffffff800000ea <_Z7InitIDTv+0x22>
+ffffffff8000014b:	0f 01 1d 0e 2b 00 00 	lidt   0x2b0e(%rip)        # ffffffff80002c60 <_ZL4idtr>
+ffffffff80000152:	fb                   	sti
+ffffffff80000153:	90                   	nop
+ffffffff80000154:	c9                   	leave
+ffffffff80000155:	c3                   	ret
+
+ffffffff80000156 <_Z41__static_initialization_and_destruction_0ii>:
+ffffffff80000156:	55                   	push   %rbp
+ffffffff80000157:	48 89 e5             	mov    %rsp,%rbp
+ffffffff8000015a:	41 54                	push   %r12
+ffffffff8000015c:	53                   	push   %rbx
+ffffffff8000015d:	48 83 ec 08          	sub    $0x8,%rsp
+ffffffff80000161:	89 7d ec             	mov    %edi,-0x14(%rbp)
+ffffffff80000164:	89 75 e8             	mov    %esi,-0x18(%rbp)
+ffffffff80000167:	83 7d ec 01          	cmpl   $0x1,-0x14(%rbp)
+ffffffff8000016b:	75 2f                	jne    ffffffff8000019c <_Z41__static_initialization_and_destruction_0ii+0x46>
+ffffffff8000016d:	81 7d e8 ff ff 00 00 	cmpl   $0xffff,-0x18(%rbp)
+ffffffff80000174:	75 26                	jne    ffffffff8000019c <_Z41__static_initialization_and_destruction_0ii+0x46>
+ffffffff80000176:	48 c7 c0 60 1c 00 80 	mov    $0xffffffff80001c60,%rax
+ffffffff8000017d:	bb ff 00 00 00       	mov    $0xff,%ebx
+ffffffff80000182:	49 89 c4             	mov    %rax,%r12
+ffffffff80000185:	eb 10                	jmp    ffffffff80000197 <_Z41__static_initialization_and_destruction_0ii+0x41>
+ffffffff80000187:	4c 89 e7             	mov    %r12,%rdi
+ffffffff8000018a:	e8 e7 fe ff ff       	call   ffffffff80000076 <_ZN8IDTEntryC1Ev>
+ffffffff8000018f:	49 83 c4 10          	add    $0x10,%r12
+ffffffff80000193:	48 83 eb 01          	sub    $0x1,%rbx
+ffffffff80000197:	48 85 db             	test   %rbx,%rbx
+ffffffff8000019a:	79 eb                	jns    ffffffff80000187 <_Z41__static_initialization_and_destruction_0ii+0x31>
+ffffffff8000019c:	90                   	nop
+ffffffff8000019d:	48 83 c4 08          	add    $0x8,%rsp
+ffffffff800001a1:	5b                   	pop    %rbx
+ffffffff800001a2:	41 5c                	pop    %r12
+ffffffff800001a4:	5d                   	pop    %rbp
+ffffffff800001a5:	c3                   	ret
+
+ffffffff800001a6 <_GLOBAL__sub_I__ZN8IDTEntryC2Emhh>:
+ffffffff800001a6:	55                   	push   %rbp
+ffffffff800001a7:	48 89 e5             	mov    %rsp,%rbp
+ffffffff800001aa:	be ff ff 00 00       	mov    $0xffff,%esi
+ffffffff800001af:	bf 01 00 00 00       	mov    $0x1,%edi
+ffffffff800001b4:	e8 9d ff ff ff       	call   ffffffff80000156 <_Z41__static_initialization_and_destruction_0ii>
+ffffffff800001b9:	5d                   	pop    %rbp
+ffffffff800001ba:	c3                   	ret
+
+ffffffff800001bb <ISRExceptionHandler>:
+ffffffff800001bb:	55                   	push   %rbp
+ffffffff800001bc:	48 89 e5             	mov    %rsp,%rbp
+ffffffff800001bf:	41 54                	push   %r12
+ffffffff800001c1:	53                   	push   %rbx
+ffffffff800001c2:	48 83 ec 20          	sub    $0x20,%rsp
+ffffffff800001c6:	48 89 7d d8          	mov    %rdi,-0x28(%rbp)
+ffffffff800001ca:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+ffffffff800001ce:	48 8b 80 98 00 00 00 	mov    0x98(%rax),%rax
+ffffffff800001d5:	4c 8b 24 c5 00 1a 00 	mov    -0x7fffe600(,%rax,8),%r12
+ffffffff800001dc:	80 
+ffffffff800001dd:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+ffffffff800001e1:	48 8b 98 98 00 00 00 	mov    0x98(%rax),%rbx
+ffffffff800001e8:	48 8d 45 ed          	lea    -0x13(%rbp),%rax
+ffffffff800001ec:	be 00 00 ff 00       	mov    $0xff0000,%esi
+ffffffff800001f1:	48 89 c7             	mov    %rax,%rdi
+ffffffff800001f4:	e8 0f 0b 00 00       	call   ffffffff80000d08 <_ZN8Graphics5ColorC1Ej>
+ffffffff800001f9:	4c 89 e1             	mov    %r12,%rcx
+ffffffff800001fc:	48 89 da             	mov    %rbx,%rdx
+ffffffff800001ff:	48 c7 c6 00 1b 00 80 	mov    $0xffffffff80001b00,%rsi
+ffffffff80000206:	0f b6 7d ed          	movzbl -0x13(%rbp),%edi
+ffffffff8000020a:	0f b6 45 ee          	movzbl -0x12(%rbp),%eax
+ffffffff8000020e:	48 c1 e0 08          	shl    $0x8,%rax
+ffffffff80000212:	48 09 c7             	or     %rax,%rdi
+ffffffff80000215:	0f b6 45 ef          	movzbl -0x11(%rbp),%eax
+ffffffff80000219:	48 c1 e0 10          	shl    $0x10,%rax
+ffffffff8000021d:	48 09 f8             	or     %rdi,%rax
+ffffffff80000220:	48 89 c7             	mov    %rax,%rdi
+ffffffff80000223:	b8 00 00 00 00       	mov    $0x0,%eax
+ffffffff80000228:	e8 37 0a 00 00       	call   ffffffff80000c64 <_ZN8Terminal6PrintfEN8Graphics5ColorEPKcz>
+ffffffff8000022d:	fa                   	cli
+ffffffff8000022e:	f4                   	hlt
+ffffffff8000022f:	eb fc                	jmp    ffffffff8000022d <ISRExceptionHandler+0x72>
+ffffffff80000231:	90                   	nop
+
+ffffffff80000232 <_ZN13GDTDescriptorC1Ejthh>:
+ffffffff80000232:	55                   	push   %rbp
+ffffffff80000233:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80000236:	48 83 ec 18          	sub    $0x18,%rsp
+ffffffff8000023a:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+ffffffff8000023e:	89 75 f4             	mov    %esi,-0xc(%rbp)
+ffffffff80000241:	89 d0                	mov    %edx,%eax
+ffffffff80000243:	89 ca                	mov    %ecx,%edx
+ffffffff80000245:	44 89 c1             	mov    %r8d,%ecx
+ffffffff80000248:	66 89 45 f0          	mov    %ax,-0x10(%rbp)
+ffffffff8000024c:	89 d0                	mov    %edx,%eax
+ffffffff8000024e:	88 45 ec             	mov    %al,-0x14(%rbp)
+ffffffff80000251:	89 c8                	mov    %ecx,%eax
+ffffffff80000253:	88 45 e8             	mov    %al,-0x18(%rbp)
+ffffffff80000256:	8b 45 f4             	mov    -0xc(%rbp),%eax
+ffffffff80000259:	89 c2                	mov    %eax,%edx
+ffffffff8000025b:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff8000025f:	66 89 50 02          	mov    %dx,0x2(%rax)
+ffffffff80000263:	8b 45 f4             	mov    -0xc(%rbp),%eax
+ffffffff80000266:	c1 e8 10             	shr    $0x10,%eax
+ffffffff80000269:	89 c2                	mov    %eax,%edx
+ffffffff8000026b:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff8000026f:	88 50 04             	mov    %dl,0x4(%rax)
+ffffffff80000272:	8b 45 f4             	mov    -0xc(%rbp),%eax
+ffffffff80000275:	c1 e8 18             	shr    $0x18,%eax
+ffffffff80000278:	89 c2                	mov    %eax,%edx
+ffffffff8000027a:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff8000027e:	88 50 07             	mov    %dl,0x7(%rax)
+ffffffff80000281:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000285:	0f b7 55 f0          	movzwl -0x10(%rbp),%edx
+ffffffff80000289:	66 89 10             	mov    %dx,(%rax)
+ffffffff8000028c:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000290:	0f b6 55 ec          	movzbl -0x14(%rbp),%edx
+ffffffff80000294:	88 50 05             	mov    %dl,0x5(%rax)
+ffffffff80000297:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff8000029b:	0f b6 55 e8          	movzbl -0x18(%rbp),%edx
+ffffffff8000029f:	88 50 06             	mov    %dl,0x6(%rax)
+ffffffff800002a2:	90                   	nop
+ffffffff800002a3:	c9                   	leave
+ffffffff800002a4:	c3                   	ret
+ffffffff800002a5:	90                   	nop
+
+ffffffff800002a6 <_ZN13GDTDescriptorC1Ev>:
+ffffffff800002a6:	55                   	push   %rbp
+ffffffff800002a7:	48 89 e5             	mov    %rsp,%rbp
+ffffffff800002aa:	48 83 ec 08          	sub    $0x8,%rsp
+ffffffff800002ae:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+ffffffff800002b2:	90                   	nop
+ffffffff800002b3:	c9                   	leave
+ffffffff800002b4:	c3                   	ret
+
+ffffffff800002b5 <_Z7InitGDTv>:
+ffffffff800002b5:	55                   	push   %rbp
+ffffffff800002b6:	48 89 e5             	mov    %rsp,%rbp
+ffffffff800002b9:	48 83 ec 40          	sub    $0x40,%rsp
+ffffffff800002bd:	48 8d 45 c8          	lea    -0x38(%rbp),%rax
+ffffffff800002c1:	41 b8 00 00 00 00    	mov    $0x0,%r8d
+ffffffff800002c7:	b9 00 00 00 00       	mov    $0x0,%ecx
+ffffffff800002cc:	ba 00 00 00 00       	mov    $0x0,%edx
+ffffffff800002d1:	be 00 00 00 00       	mov    $0x0,%esi
+ffffffff800002d6:	48 89 c7             	mov    %rax,%rdi
+ffffffff800002d9:	e8 54 ff ff ff       	call   ffffffff80000232 <_ZN13GDTDescriptorC1Ejthh>
+ffffffff800002de:	48 8b 45 c8          	mov    -0x38(%rbp),%rax
+ffffffff800002e2:	48 89 05 97 2a 00 00 	mov    %rax,0x2a97(%rip)        # ffffffff80002d80 <gdt>
+ffffffff800002e9:	48 8d 45 d0          	lea    -0x30(%rbp),%rax
+ffffffff800002ed:	41 b8 a0 00 00 00    	mov    $0xa0,%r8d
+ffffffff800002f3:	b9 9a 00 00 00       	mov    $0x9a,%ecx
+ffffffff800002f8:	ba 00 00 00 00       	mov    $0x0,%edx
+ffffffff800002fd:	be 00 00 00 00       	mov    $0x0,%esi
+ffffffff80000302:	48 89 c7             	mov    %rax,%rdi
+ffffffff80000305:	e8 28 ff ff ff       	call   ffffffff80000232 <_ZN13GDTDescriptorC1Ejthh>
+ffffffff8000030a:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+ffffffff8000030e:	48 89 05 73 2a 00 00 	mov    %rax,0x2a73(%rip)        # ffffffff80002d88 <gdt+0x8>
+ffffffff80000315:	48 8d 45 d8          	lea    -0x28(%rbp),%rax
+ffffffff80000319:	41 b8 c0 00 00 00    	mov    $0xc0,%r8d
+ffffffff8000031f:	b9 92 00 00 00       	mov    $0x92,%ecx
+ffffffff80000324:	ba 00 00 00 00       	mov    $0x0,%edx
+ffffffff80000329:	be 00 00 00 00       	mov    $0x0,%esi
+ffffffff8000032e:	48 89 c7             	mov    %rax,%rdi
+ffffffff80000331:	e8 fc fe ff ff       	call   ffffffff80000232 <_ZN13GDTDescriptorC1Ejthh>
+ffffffff80000336:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+ffffffff8000033a:	48 89 05 4f 2a 00 00 	mov    %rax,0x2a4f(%rip)        # ffffffff80002d90 <gdt+0x10>
+ffffffff80000341:	48 8d 45 e0          	lea    -0x20(%rbp),%rax
+ffffffff80000345:	41 b8 a0 00 00 00    	mov    $0xa0,%r8d
+ffffffff8000034b:	b9 fa 00 00 00       	mov    $0xfa,%ecx
+ffffffff80000350:	ba 00 00 00 00       	mov    $0x0,%edx
+ffffffff80000355:	be 00 00 00 00       	mov    $0x0,%esi
+ffffffff8000035a:	48 89 c7             	mov    %rax,%rdi
+ffffffff8000035d:	e8 d0 fe ff ff       	call   ffffffff80000232 <_ZN13GDTDescriptorC1Ejthh>
+ffffffff80000362:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+ffffffff80000366:	48 89 05 2b 2a 00 00 	mov    %rax,0x2a2b(%rip)        # ffffffff80002d98 <gdt+0x18>
+ffffffff8000036d:	48 8d 45 e8          	lea    -0x18(%rbp),%rax
+ffffffff80000371:	41 b8 c0 00 00 00    	mov    $0xc0,%r8d
+ffffffff80000377:	b9 f2 00 00 00       	mov    $0xf2,%ecx
+ffffffff8000037c:	ba 00 00 00 00       	mov    $0x0,%edx
+ffffffff80000381:	be 00 00 00 00       	mov    $0x0,%esi
+ffffffff80000386:	48 89 c7             	mov    %rax,%rdi
+ffffffff80000389:	e8 a4 fe ff ff       	call   ffffffff80000232 <_ZN13GDTDescriptorC1Ejthh>
+ffffffff8000038e:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ffffffff80000392:	48 89 05 07 2a 00 00 	mov    %rax,0x2a07(%rip)        # ffffffff80002da0 <gdt+0x20>
+ffffffff80000399:	48 8d 45 f0          	lea    -0x10(%rbp),%rax
+ffffffff8000039d:	41 b8 00 00 00 00    	mov    $0x0,%r8d
+ffffffff800003a3:	b9 00 00 00 00       	mov    $0x0,%ecx
+ffffffff800003a8:	ba 00 00 00 00       	mov    $0x0,%edx
+ffffffff800003ad:	be 00 00 00 00       	mov    $0x0,%esi
+ffffffff800003b2:	48 89 c7             	mov    %rax,%rdi
+ffffffff800003b5:	e8 78 fe ff ff       	call   ffffffff80000232 <_ZN13GDTDescriptorC1Ejthh>
+ffffffff800003ba:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+ffffffff800003be:	48 89 05 e3 29 00 00 	mov    %rax,0x29e3(%rip)        # ffffffff80002da8 <gdt+0x28>
+ffffffff800003c5:	48 8d 45 f8          	lea    -0x8(%rbp),%rax
+ffffffff800003c9:	41 b8 00 00 00 00    	mov    $0x0,%r8d
+ffffffff800003cf:	b9 00 00 00 00       	mov    $0x0,%ecx
+ffffffff800003d4:	ba 00 00 00 00       	mov    $0x0,%edx
+ffffffff800003d9:	be 00 00 00 00       	mov    $0x0,%esi
+ffffffff800003de:	48 89 c7             	mov    %rax,%rdi
+ffffffff800003e1:	e8 4c fe ff ff       	call   ffffffff80000232 <_ZN13GDTDescriptorC1Ejthh>
+ffffffff800003e6:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff800003ea:	48 89 05 bf 29 00 00 	mov    %rax,0x29bf(%rip)        # ffffffff80002db0 <gdt+0x30>
+ffffffff800003f1:	66 c7 05 be 29 00 00 	movw   $0x37,0x29be(%rip)        # ffffffff80002db8 <_ZL4gdtr>
+ffffffff800003f8:	37 00 
+ffffffff800003fa:	48 c7 05 b5 29 00 00 	movq   $0xffffffff80002d80,0x29b5(%rip)        # ffffffff80002dba <_ZL4gdtr+0x2>
+ffffffff80000401:	80 2d 00 80 
+ffffffff80000405:	48 c7 c7 b8 2d 00 80 	mov    $0xffffffff80002db8,%rdi
+ffffffff8000040c:	e8 4f 13 00 00       	call   ffffffff80001760 <install_gdt>
+ffffffff80000411:	90                   	nop
+ffffffff80000412:	c9                   	leave
+ffffffff80000413:	c3                   	ret
+
+ffffffff80000414 <_Z41__static_initialization_and_destruction_0ii>:
+ffffffff80000414:	55                   	push   %rbp
+ffffffff80000415:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80000418:	41 54                	push   %r12
+ffffffff8000041a:	53                   	push   %rbx
+ffffffff8000041b:	48 83 ec 08          	sub    $0x8,%rsp
+ffffffff8000041f:	89 7d ec             	mov    %edi,-0x14(%rbp)
+ffffffff80000422:	89 75 e8             	mov    %esi,-0x18(%rbp)
+ffffffff80000425:	83 7d ec 01          	cmpl   $0x1,-0x14(%rbp)
+ffffffff80000429:	75 2f                	jne    ffffffff8000045a <_Z41__static_initialization_and_destruction_0ii+0x46>
+ffffffff8000042b:	81 7d e8 ff ff 00 00 	cmpl   $0xffff,-0x18(%rbp)
+ffffffff80000432:	75 26                	jne    ffffffff8000045a <_Z41__static_initialization_and_destruction_0ii+0x46>
+ffffffff80000434:	48 c7 c0 80 2d 00 80 	mov    $0xffffffff80002d80,%rax
+ffffffff8000043b:	bb 06 00 00 00       	mov    $0x6,%ebx
+ffffffff80000440:	49 89 c4             	mov    %rax,%r12
+ffffffff80000443:	eb 10                	jmp    ffffffff80000455 <_Z41__static_initialization_and_destruction_0ii+0x41>
+ffffffff80000445:	4c 89 e7             	mov    %r12,%rdi
+ffffffff80000448:	e8 59 fe ff ff       	call   ffffffff800002a6 <_ZN13GDTDescriptorC1Ev>
+ffffffff8000044d:	49 83 c4 08          	add    $0x8,%r12
+ffffffff80000451:	48 83 eb 01          	sub    $0x1,%rbx
+ffffffff80000455:	48 85 db             	test   %rbx,%rbx
+ffffffff80000458:	79 eb                	jns    ffffffff80000445 <_Z41__static_initialization_and_destruction_0ii+0x31>
+ffffffff8000045a:	90                   	nop
+ffffffff8000045b:	48 83 c4 08          	add    $0x8,%rsp
+ffffffff8000045f:	5b                   	pop    %rbx
+ffffffff80000460:	41 5c                	pop    %r12
+ffffffff80000462:	5d                   	pop    %rbp
+ffffffff80000463:	c3                   	ret
+
+ffffffff80000464 <_GLOBAL__sub_I__ZN13GDTDescriptorC2Ejthh>:
+ffffffff80000464:	55                   	push   %rbp
+ffffffff80000465:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80000468:	be ff ff 00 00       	mov    $0xffff,%esi
+ffffffff8000046d:	bf 01 00 00 00       	mov    $0x1,%edi
+ffffffff80000472:	e8 9d ff ff ff       	call   ffffffff80000414 <_Z41__static_initialization_and_destruction_0ii>
+ffffffff80000477:	5d                   	pop    %rbp
+ffffffff80000478:	c3                   	ret
+
+ffffffff80000479 <_Z6StrLenPc>:
+ffffffff80000479:	55                   	push   %rbp
+ffffffff8000047a:	48 89 e5             	mov    %rsp,%rbp
+ffffffff8000047d:	48 83 ec 18          	sub    $0x18,%rsp
+ffffffff80000481:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
+ffffffff80000485:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%rbp)
+ffffffff8000048c:	eb 04                	jmp    ffffffff80000492 <_Z6StrLenPc+0x19>
+ffffffff8000048e:	83 45 fc 01          	addl   $0x1,-0x4(%rbp)
+ffffffff80000492:	8b 55 fc             	mov    -0x4(%rbp),%edx
+ffffffff80000495:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ffffffff80000499:	48 01 d0             	add    %rdx,%rax
+ffffffff8000049c:	0f b6 00             	movzbl (%rax),%eax
+ffffffff8000049f:	84 c0                	test   %al,%al
+ffffffff800004a1:	75 eb                	jne    ffffffff8000048e <_Z6StrLenPc+0x15>
+ffffffff800004a3:	8b 45 fc             	mov    -0x4(%rbp),%eax
+ffffffff800004a6:	c9                   	leave
+ffffffff800004a7:	c3                   	ret
+
+ffffffff800004a8 <_Z4IToAiPci>:
+ffffffff800004a8:	55                   	push   %rbp
+ffffffff800004a9:	48 89 e5             	mov    %rsp,%rbp
+ffffffff800004ac:	48 83 ec 40          	sub    $0x40,%rsp
+ffffffff800004b0:	89 7d cc             	mov    %edi,-0x34(%rbp)
+ffffffff800004b3:	48 89 75 c0          	mov    %rsi,-0x40(%rbp)
+ffffffff800004b7:	89 55 c8             	mov    %edx,-0x38(%rbp)
+ffffffff800004ba:	48 8d 45 d8          	lea    -0x28(%rbp),%rax
+ffffffff800004be:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+ffffffff800004c2:	83 7d c8 0a          	cmpl   $0xa,-0x38(%rbp)
+ffffffff800004c6:	75 0d                	jne    ffffffff800004d5 <_Z4IToAiPci+0x2d>
+ffffffff800004c8:	83 7d cc 00          	cmpl   $0x0,-0x34(%rbp)
+ffffffff800004cc:	79 07                	jns    ffffffff800004d5 <_Z4IToAiPci+0x2d>
+ffffffff800004ce:	b8 01 00 00 00       	mov    $0x1,%eax
+ffffffff800004d3:	eb 05                	jmp    ffffffff800004da <_Z4IToAiPci+0x32>
+ffffffff800004d5:	b8 00 00 00 00       	mov    $0x0,%eax
+ffffffff800004da:	0f b6 c0             	movzbl %al,%eax
+ffffffff800004dd:	89 45 ec             	mov    %eax,-0x14(%rbp)
+ffffffff800004e0:	83 7d ec 00          	cmpl   $0x0,-0x14(%rbp)
+ffffffff800004e4:	74 0a                	je     ffffffff800004f0 <_Z4IToAiPci+0x48>
+ffffffff800004e6:	8b 45 cc             	mov    -0x34(%rbp),%eax
+ffffffff800004e9:	f7 d8                	neg    %eax
+ffffffff800004eb:	89 45 f4             	mov    %eax,-0xc(%rbp)
+ffffffff800004ee:	eb 5e                	jmp    ffffffff8000054e <_Z4IToAiPci+0xa6>
+ffffffff800004f0:	8b 45 cc             	mov    -0x34(%rbp),%eax
+ffffffff800004f3:	89 45 f4             	mov    %eax,-0xc(%rbp)
+ffffffff800004f6:	eb 56                	jmp    ffffffff8000054e <_Z4IToAiPci+0xa6>
+ffffffff800004f8:	8b 4d c8             	mov    -0x38(%rbp),%ecx
+ffffffff800004fb:	8b 45 f4             	mov    -0xc(%rbp),%eax
+ffffffff800004fe:	ba 00 00 00 00       	mov    $0x0,%edx
+ffffffff80000503:	f7 f1                	div    %ecx
+ffffffff80000505:	89 d0                	mov    %edx,%eax
+ffffffff80000507:	89 45 e8             	mov    %eax,-0x18(%rbp)
+ffffffff8000050a:	8b 75 c8             	mov    -0x38(%rbp),%esi
+ffffffff8000050d:	8b 45 f4             	mov    -0xc(%rbp),%eax
+ffffffff80000510:	ba 00 00 00 00       	mov    $0x0,%edx
+ffffffff80000515:	f7 f6                	div    %esi
+ffffffff80000517:	89 45 f4             	mov    %eax,-0xc(%rbp)
+ffffffff8000051a:	83 7d e8 09          	cmpl   $0x9,-0x18(%rbp)
+ffffffff8000051e:	7f 18                	jg     ffffffff80000538 <_Z4IToAiPci+0x90>
+ffffffff80000520:	8b 45 e8             	mov    -0x18(%rbp),%eax
+ffffffff80000523:	83 c0 30             	add    $0x30,%eax
+ffffffff80000526:	89 c1                	mov    %eax,%ecx
+ffffffff80000528:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff8000052c:	48 8d 50 01          	lea    0x1(%rax),%rdx
+ffffffff80000530:	48 89 55 f8          	mov    %rdx,-0x8(%rbp)
+ffffffff80000534:	88 08                	mov    %cl,(%rax)
+ffffffff80000536:	eb 16                	jmp    ffffffff8000054e <_Z4IToAiPci+0xa6>
+ffffffff80000538:	8b 45 e8             	mov    -0x18(%rbp),%eax
+ffffffff8000053b:	83 c0 37             	add    $0x37,%eax
+ffffffff8000053e:	89 c1                	mov    %eax,%ecx
+ffffffff80000540:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000544:	48 8d 50 01          	lea    0x1(%rax),%rdx
+ffffffff80000548:	48 89 55 f8          	mov    %rdx,-0x8(%rbp)
+ffffffff8000054c:	88 08                	mov    %cl,(%rax)
+ffffffff8000054e:	83 7d f4 00          	cmpl   $0x0,-0xc(%rbp)
+ffffffff80000552:	75 a4                	jne    ffffffff800004f8 <_Z4IToAiPci+0x50>
+ffffffff80000554:	48 8d 45 d8          	lea    -0x28(%rbp),%rax
+ffffffff80000558:	48 39 45 f8          	cmp    %rax,-0x8(%rbp)
+ffffffff8000055c:	74 9a                	je     ffffffff800004f8 <_Z4IToAiPci+0x50>
+ffffffff8000055e:	48 8d 55 d8          	lea    -0x28(%rbp),%rdx
+ffffffff80000562:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000566:	48 29 d0             	sub    %rdx,%rax
+ffffffff80000569:	89 45 f0             	mov    %eax,-0x10(%rbp)
+ffffffff8000056c:	83 7d ec 00          	cmpl   $0x0,-0x14(%rbp)
+ffffffff80000570:	74 2f                	je     ffffffff800005a1 <_Z4IToAiPci+0xf9>
+ffffffff80000572:	48 8b 45 c0          	mov    -0x40(%rbp),%rax
+ffffffff80000576:	48 8d 50 01          	lea    0x1(%rax),%rdx
+ffffffff8000057a:	48 89 55 c0          	mov    %rdx,-0x40(%rbp)
+ffffffff8000057e:	c6 00 2d             	movb   $0x2d,(%rax)
+ffffffff80000581:	83 45 f0 01          	addl   $0x1,-0x10(%rbp)
+ffffffff80000585:	eb 1a                	jmp    ffffffff800005a1 <_Z4IToAiPci+0xf9>
+ffffffff80000587:	48 83 6d f8 01       	subq   $0x1,-0x8(%rbp)
+ffffffff8000058c:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000590:	0f b6 10             	movzbl (%rax),%edx
+ffffffff80000593:	48 8b 45 c0          	mov    -0x40(%rbp),%rax
+ffffffff80000597:	48 8d 48 01          	lea    0x1(%rax),%rcx
+ffffffff8000059b:	48 89 4d c0          	mov    %rcx,-0x40(%rbp)
+ffffffff8000059f:	88 10                	mov    %dl,(%rax)
+ffffffff800005a1:	48 8d 45 d8          	lea    -0x28(%rbp),%rax
+ffffffff800005a5:	48 39 45 f8          	cmp    %rax,-0x8(%rbp)
+ffffffff800005a9:	77 dc                	ja     ffffffff80000587 <_Z4IToAiPci+0xdf>
+ffffffff800005ab:	8b 45 f0             	mov    -0x10(%rbp),%eax
+ffffffff800005ae:	c9                   	leave
+ffffffff800005af:	c3                   	ret
+
+ffffffff800005b0 <_ZN8Terminal4InitEv>:
+ffffffff800005b0:	55                   	push   %rbp
+ffffffff800005b1:	48 89 e5             	mov    %rsp,%rbp
+ffffffff800005b4:	48 8b 05 35 28 00 00 	mov    0x2835(%rip),%rax        # ffffffff80002df0 <_ZN8Graphics11framebufferE+0x10>
+ffffffff800005bb:	89 05 0b 28 00 00    	mov    %eax,0x280b(%rip)        # ffffffff80002dcc <_ZN8TerminalL6maxColE>
+ffffffff800005c1:	48 8b 05 30 28 00 00 	mov    0x2830(%rip),%rax        # ffffffff80002df8 <_ZN8Graphics11framebufferE+0x18>
+ffffffff800005c8:	89 05 02 28 00 00    	mov    %eax,0x2802(%rip)        # ffffffff80002dd0 <_ZN8TerminalL6maxRowE>
+ffffffff800005ce:	90                   	nop
+ffffffff800005cf:	5d                   	pop    %rbp
+ffffffff800005d0:	c3                   	ret
+
+ffffffff800005d1 <_ZN8Terminal7PutCharEciiN8Graphics5ColorE>:
+ffffffff800005d1:	55                   	push   %rbp
+ffffffff800005d2:	48 89 e5             	mov    %rsp,%rbp
+ffffffff800005d5:	48 83 ec 40          	sub    $0x40,%rsp
+ffffffff800005d9:	89 f8                	mov    %edi,%eax
+ffffffff800005db:	89 75 d8             	mov    %esi,-0x28(%rbp)
+ffffffff800005de:	89 55 d4             	mov    %edx,-0x2c(%rbp)
+ffffffff800005e1:	48 89 4d cc          	mov    %rcx,-0x34(%rbp)
+ffffffff800005e5:	88 45 dc             	mov    %al,-0x24(%rbp)
+ffffffff800005e8:	bf 00 00 00 00       	mov    $0x0,%edi
+ffffffff800005ed:	e8 8d 0e 00 00       	call   ffffffff8000147f <_Z9GetModulei>
+ffffffff800005f2:	48 8b 00             	mov    (%rax),%rax
+ffffffff800005f5:	48 89 45 e8          	mov    %rax,-0x18(%rbp)
+ffffffff800005f9:	0f be 45 dc          	movsbl -0x24(%rbp),%eax
+ffffffff800005fd:	c1 e0 03             	shl    $0x3,%eax
+ffffffff80000600:	89 45 fc             	mov    %eax,-0x4(%rbp)
+ffffffff80000603:	c7 45 f8 00 00 00 00 	movl   $0x0,-0x8(%rbp)
+ffffffff8000060a:	eb 7f                	jmp    ffffffff8000068b <_ZN8Terminal7PutCharEciiN8Graphics5ColorE+0xba>
+ffffffff8000060c:	8b 45 fc             	mov    -0x4(%rbp),%eax
+ffffffff8000060f:	48 63 d0             	movslq %eax,%rdx
+ffffffff80000612:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ffffffff80000616:	48 01 d0             	add    %rdx,%rax
+ffffffff80000619:	0f b6 00             	movzbl (%rax),%eax
+ffffffff8000061c:	88 45 e7             	mov    %al,-0x19(%rbp)
+ffffffff8000061f:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%rbp)
+ffffffff80000626:	eb 55                	jmp    ffffffff8000067d <_ZN8Terminal7PutCharEciiN8Graphics5ColorE+0xac>
+ffffffff80000628:	0f b6 55 e7          	movzbl -0x19(%rbp),%edx
+ffffffff8000062c:	b8 08 00 00 00       	mov    $0x8,%eax
+ffffffff80000631:	2b 45 f4             	sub    -0xc(%rbp),%eax
+ffffffff80000634:	89 c1                	mov    %eax,%ecx
+ffffffff80000636:	d3 fa                	sar    %cl,%edx
+ffffffff80000638:	89 d0                	mov    %edx,%eax
+ffffffff8000063a:	83 e0 01             	and    $0x1,%eax
+ffffffff8000063d:	85 c0                	test   %eax,%eax
+ffffffff8000063f:	74 38                	je     ffffffff80000679 <_ZN8Terminal7PutCharEciiN8Graphics5ColorE+0xa8>
+ffffffff80000641:	8b 55 f8             	mov    -0x8(%rbp),%edx
+ffffffff80000644:	8b 45 d4             	mov    -0x2c(%rbp),%eax
+ffffffff80000647:	01 d0                	add    %edx,%eax
+ffffffff80000649:	89 c6                	mov    %eax,%esi
+ffffffff8000064b:	8b 55 f4             	mov    -0xc(%rbp),%edx
+ffffffff8000064e:	8b 45 d8             	mov    -0x28(%rbp),%eax
+ffffffff80000651:	01 d0                	add    %edx,%eax
+ffffffff80000653:	89 c1                	mov    %eax,%ecx
+ffffffff80000655:	0f b6 55 cc          	movzbl -0x34(%rbp),%edx
+ffffffff80000659:	0f b6 45 cd          	movzbl -0x33(%rbp),%eax
+ffffffff8000065d:	48 c1 e0 08          	shl    $0x8,%rax
+ffffffff80000661:	48 09 c2             	or     %rax,%rdx
+ffffffff80000664:	0f b6 45 ce          	movzbl -0x32(%rbp),%eax
+ffffffff80000668:	48 c1 e0 10          	shl    $0x10,%rax
+ffffffff8000066c:	48 09 d0             	or     %rdx,%rax
+ffffffff8000066f:	48 89 c2             	mov    %rax,%rdx
+ffffffff80000672:	89 cf                	mov    %ecx,%edi
+ffffffff80000674:	e8 98 07 00 00       	call   ffffffff80000e11 <_ZN8Graphics8PutPixelEjjNS_5ColorE>
+ffffffff80000679:	83 45 f4 01          	addl   $0x1,-0xc(%rbp)
+ffffffff8000067d:	83 7d f4 07          	cmpl   $0x7,-0xc(%rbp)
+ffffffff80000681:	7e a5                	jle    ffffffff80000628 <_ZN8Terminal7PutCharEciiN8Graphics5ColorE+0x57>
+ffffffff80000683:	83 45 fc 01          	addl   $0x1,-0x4(%rbp)
+ffffffff80000687:	83 45 f8 01          	addl   $0x1,-0x8(%rbp)
+ffffffff8000068b:	0f be 45 dc          	movsbl -0x24(%rbp),%eax
+ffffffff8000068f:	83 c0 01             	add    $0x1,%eax
+ffffffff80000692:	c1 e0 03             	shl    $0x3,%eax
+ffffffff80000695:	39 45 fc             	cmp    %eax,-0x4(%rbp)
+ffffffff80000698:	0f 8c 6e ff ff ff    	jl     ffffffff8000060c <_ZN8Terminal7PutCharEciiN8Graphics5ColorE+0x3b>
+ffffffff8000069e:	90                   	nop
+ffffffff8000069f:	90                   	nop
+ffffffff800006a0:	c9                   	leave
+ffffffff800006a1:	c3                   	ret
+
+ffffffff800006a2 <_ZN8Terminal7PutCharEcN8Graphics5ColorE>:
+ffffffff800006a2:	55                   	push   %rbp
+ffffffff800006a3:	48 89 e5             	mov    %rsp,%rbp
+ffffffff800006a6:	48 83 ec 10          	sub    $0x10,%rsp
+ffffffff800006aa:	89 f8                	mov    %edi,%eax
+ffffffff800006ac:	48 89 75 f4          	mov    %rsi,-0xc(%rbp)
+ffffffff800006b0:	88 45 fc             	mov    %al,-0x4(%rbp)
+ffffffff800006b3:	0f be 45 fc          	movsbl -0x4(%rbp),%eax
+ffffffff800006b7:	83 f8 0a             	cmp    $0xa,%eax
+ffffffff800006ba:	75 1b                	jne    ffffffff800006d7 <_ZN8Terminal7PutCharEcN8Graphics5ColorE+0x35>
+ffffffff800006bc:	c7 05 fe 26 00 00 00 	movl   $0x0,0x26fe(%rip)        # ffffffff80002dc4 <_ZN8TerminalL3colE>
+ffffffff800006c3:	00 00 00 
+ffffffff800006c6:	8b 05 fc 26 00 00    	mov    0x26fc(%rip),%eax        # ffffffff80002dc8 <_ZN8TerminalL3rowE>
+ffffffff800006cc:	83 c0 08             	add    $0x8,%eax
+ffffffff800006cf:	89 05 f3 26 00 00    	mov    %eax,0x26f3(%rip)        # ffffffff80002dc8 <_ZN8TerminalL3rowE>
+ffffffff800006d5:	eb 73                	jmp    ffffffff8000074a <_ZN8Terminal7PutCharEcN8Graphics5ColorE+0xa8>
+ffffffff800006d7:	8b 05 eb 26 00 00    	mov    0x26eb(%rip),%eax        # ffffffff80002dc8 <_ZN8TerminalL3rowE>
+ffffffff800006dd:	89 c7                	mov    %eax,%edi
+ffffffff800006df:	8b 05 df 26 00 00    	mov    0x26df(%rip),%eax        # ffffffff80002dc4 <_ZN8TerminalL3colE>
+ffffffff800006e5:	89 c6                	mov    %eax,%esi
+ffffffff800006e7:	0f be 45 fc          	movsbl -0x4(%rbp),%eax
+ffffffff800006eb:	0f b6 4d f4          	movzbl -0xc(%rbp),%ecx
+ffffffff800006ef:	0f b6 55 f5          	movzbl -0xb(%rbp),%edx
+ffffffff800006f3:	48 c1 e2 08          	shl    $0x8,%rdx
+ffffffff800006f7:	48 09 d1             	or     %rdx,%rcx
+ffffffff800006fa:	0f b6 55 f6          	movzbl -0xa(%rbp),%edx
+ffffffff800006fe:	48 c1 e2 10          	shl    $0x10,%rdx
+ffffffff80000702:	48 09 ca             	or     %rcx,%rdx
+ffffffff80000705:	48 89 d1             	mov    %rdx,%rcx
+ffffffff80000708:	89 fa                	mov    %edi,%edx
+ffffffff8000070a:	89 c7                	mov    %eax,%edi
+ffffffff8000070c:	e8 c0 fe ff ff       	call   ffffffff800005d1 <_ZN8Terminal7PutCharEciiN8Graphics5ColorE>
+ffffffff80000711:	8b 05 ad 26 00 00    	mov    0x26ad(%rip),%eax        # ffffffff80002dc4 <_ZN8TerminalL3colE>
+ffffffff80000717:	83 c0 08             	add    $0x8,%eax
+ffffffff8000071a:	89 05 a4 26 00 00    	mov    %eax,0x26a4(%rip)        # ffffffff80002dc4 <_ZN8TerminalL3colE>
+ffffffff80000720:	8b 15 9e 26 00 00    	mov    0x269e(%rip),%edx        # ffffffff80002dc4 <_ZN8TerminalL3colE>
+ffffffff80000726:	8b 05 a0 26 00 00    	mov    0x26a0(%rip),%eax        # ffffffff80002dcc <_ZN8TerminalL6maxColE>
+ffffffff8000072c:	39 c2                	cmp    %eax,%edx
+ffffffff8000072e:	72 19                	jb     ffffffff80000749 <_ZN8Terminal7PutCharEcN8Graphics5ColorE+0xa7>
+ffffffff80000730:	c7 05 8a 26 00 00 00 	movl   $0x0,0x268a(%rip)        # ffffffff80002dc4 <_ZN8TerminalL3colE>
+ffffffff80000737:	00 00 00 
+ffffffff8000073a:	8b 05 88 26 00 00    	mov    0x2688(%rip),%eax        # ffffffff80002dc8 <_ZN8TerminalL3rowE>
+ffffffff80000740:	83 c0 08             	add    $0x8,%eax
+ffffffff80000743:	89 05 7f 26 00 00    	mov    %eax,0x267f(%rip)        # ffffffff80002dc8 <_ZN8TerminalL3rowE>
+ffffffff80000749:	90                   	nop
+ffffffff8000074a:	90                   	nop
+ffffffff8000074b:	c9                   	leave
+ffffffff8000074c:	c3                   	ret
+
+ffffffff8000074d <_ZN8Terminal9PutStringEPcjN8Graphics5ColorE>:
+ffffffff8000074d:	55                   	push   %rbp
+ffffffff8000074e:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80000751:	48 83 ec 30          	sub    $0x30,%rsp
+ffffffff80000755:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
+ffffffff80000759:	89 75 e4             	mov    %esi,-0x1c(%rbp)
+ffffffff8000075c:	48 89 55 dc          	mov    %rdx,-0x24(%rbp)
+ffffffff80000760:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%rbp)
+ffffffff80000767:	eb 38                	jmp    ffffffff800007a1 <_ZN8Terminal9PutStringEPcjN8Graphics5ColorE+0x54>
+ffffffff80000769:	8b 55 fc             	mov    -0x4(%rbp),%edx
+ffffffff8000076c:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ffffffff80000770:	48 01 d0             	add    %rdx,%rax
+ffffffff80000773:	0f b6 00             	movzbl (%rax),%eax
+ffffffff80000776:	0f be c0             	movsbl %al,%eax
+ffffffff80000779:	0f b6 4d dc          	movzbl -0x24(%rbp),%ecx
+ffffffff8000077d:	0f b6 55 dd          	movzbl -0x23(%rbp),%edx
+ffffffff80000781:	48 c1 e2 08          	shl    $0x8,%rdx
+ffffffff80000785:	48 09 d1             	or     %rdx,%rcx
+ffffffff80000788:	0f b6 55 de          	movzbl -0x22(%rbp),%edx
+ffffffff8000078c:	48 c1 e2 10          	shl    $0x10,%rdx
+ffffffff80000790:	48 09 ca             	or     %rcx,%rdx
+ffffffff80000793:	48 89 d6             	mov    %rdx,%rsi
+ffffffff80000796:	89 c7                	mov    %eax,%edi
+ffffffff80000798:	e8 05 ff ff ff       	call   ffffffff800006a2 <_ZN8Terminal7PutCharEcN8Graphics5ColorE>
+ffffffff8000079d:	83 45 fc 01          	addl   $0x1,-0x4(%rbp)
+ffffffff800007a1:	8b 45 fc             	mov    -0x4(%rbp),%eax
+ffffffff800007a4:	3b 45 e4             	cmp    -0x1c(%rbp),%eax
+ffffffff800007a7:	72 c0                	jb     ffffffff80000769 <_ZN8Terminal9PutStringEPcjN8Graphics5ColorE+0x1c>
+ffffffff800007a9:	90                   	nop
+ffffffff800007aa:	90                   	nop
+ffffffff800007ab:	c9                   	leave
+ffffffff800007ac:	c3                   	ret
+
+ffffffff800007ad <_ZN8Terminal5PrintEPcN8Graphics5ColorE>:
+ffffffff800007ad:	55                   	push   %rbp
+ffffffff800007ae:	48 89 e5             	mov    %rsp,%rbp
+ffffffff800007b1:	48 83 ec 10          	sub    $0x10,%rsp
+ffffffff800007b5:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+ffffffff800007b9:	48 89 75 f0          	mov    %rsi,-0x10(%rbp)
+ffffffff800007bd:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff800007c1:	48 89 c7             	mov    %rax,%rdi
+ffffffff800007c4:	e8 b0 fc ff ff       	call   ffffffff80000479 <_Z6StrLenPc>
+ffffffff800007c9:	89 c1                	mov    %eax,%ecx
+ffffffff800007cb:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff800007cf:	0f b6 75 f0          	movzbl -0x10(%rbp),%esi
+ffffffff800007d3:	0f b6 55 f1          	movzbl -0xf(%rbp),%edx
+ffffffff800007d7:	48 c1 e2 08          	shl    $0x8,%rdx
+ffffffff800007db:	48 09 d6             	or     %rdx,%rsi
+ffffffff800007de:	0f b6 55 f2          	movzbl -0xe(%rbp),%edx
+ffffffff800007e2:	48 c1 e2 10          	shl    $0x10,%rdx
+ffffffff800007e6:	48 09 f2             	or     %rsi,%rdx
+ffffffff800007e9:	89 ce                	mov    %ecx,%esi
+ffffffff800007eb:	48 89 c7             	mov    %rax,%rdi
+ffffffff800007ee:	e8 5a ff ff ff       	call   ffffffff8000074d <_ZN8Terminal9PutStringEPcjN8Graphics5ColorE>
+ffffffff800007f3:	90                   	nop
+ffffffff800007f4:	c9                   	leave
+ffffffff800007f5:	c3                   	ret
+
+ffffffff800007f6 <_ZN8Terminal5PrintEPKcN8Graphics5ColorE>:
+ffffffff800007f6:	55                   	push   %rbp
+ffffffff800007f7:	48 89 e5             	mov    %rsp,%rbp
+ffffffff800007fa:	48 83 ec 10          	sub    $0x10,%rsp
+ffffffff800007fe:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+ffffffff80000802:	48 89 75 f0          	mov    %rsi,-0x10(%rbp)
+ffffffff80000806:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff8000080a:	0f b6 4d f0          	movzbl -0x10(%rbp),%ecx
+ffffffff8000080e:	0f b6 55 f1          	movzbl -0xf(%rbp),%edx
+ffffffff80000812:	48 c1 e2 08          	shl    $0x8,%rdx
+ffffffff80000816:	48 09 d1             	or     %rdx,%rcx
+ffffffff80000819:	0f b6 55 f2          	movzbl -0xe(%rbp),%edx
+ffffffff8000081d:	48 c1 e2 10          	shl    $0x10,%rdx
+ffffffff80000821:	48 09 ca             	or     %rcx,%rdx
+ffffffff80000824:	48 89 d6             	mov    %rdx,%rsi
+ffffffff80000827:	48 89 c7             	mov    %rax,%rdi
+ffffffff8000082a:	e8 7e ff ff ff       	call   ffffffff800007ad <_ZN8Terminal5PrintEPcN8Graphics5ColorE>
+ffffffff8000082f:	90                   	nop
+ffffffff80000830:	c9                   	leave
+ffffffff80000831:	c3                   	ret
+
+ffffffff80000832 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag>:
+ffffffff80000832:	55                   	push   %rbp
+ffffffff80000833:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80000836:	48 83 c4 80          	add    $0xffffffffffffff80,%rsp
+ffffffff8000083a:	48 89 7d 98          	mov    %rdi,-0x68(%rbp)
+ffffffff8000083e:	48 89 75 90          	mov    %rsi,-0x70(%rbp)
+ffffffff80000842:	48 89 55 88          	mov    %rdx,-0x78(%rbp)
+ffffffff80000846:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%rbp)
+ffffffff8000084d:	e9 f6 03 00 00       	jmp    ffffffff80000c48 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x416>
+ffffffff80000852:	8b 45 fc             	mov    -0x4(%rbp),%eax
+ffffffff80000855:	48 63 d0             	movslq %eax,%rdx
+ffffffff80000858:	48 8b 45 90          	mov    -0x70(%rbp),%rax
+ffffffff8000085c:	48 01 d0             	add    %rdx,%rax
+ffffffff8000085f:	0f b6 00             	movzbl (%rax),%eax
+ffffffff80000862:	3c 25                	cmp    $0x25,%al
+ffffffff80000864:	0f 85 a2 03 00 00    	jne    ffffffff80000c0c <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x3da>
+ffffffff8000086a:	48 8b 55 90          	mov    -0x70(%rbp),%rdx
+ffffffff8000086e:	83 45 fc 01          	addl   $0x1,-0x4(%rbp)
+ffffffff80000872:	8b 45 fc             	mov    -0x4(%rbp),%eax
+ffffffff80000875:	48 98                	cltq
+ffffffff80000877:	48 01 d0             	add    %rdx,%rax
+ffffffff8000087a:	0f b6 00             	movzbl (%rax),%eax
+ffffffff8000087d:	3c 25                	cmp    $0x25,%al
+ffffffff8000087f:	0f 94 c0             	sete   %al
+ffffffff80000882:	84 c0                	test   %al,%al
+ffffffff80000884:	74 41                	je     ffffffff800008c7 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x95>
+ffffffff80000886:	48 8b 4d 90          	mov    -0x70(%rbp),%rcx
+ffffffff8000088a:	8b 45 fc             	mov    -0x4(%rbp),%eax
+ffffffff8000088d:	8d 50 01             	lea    0x1(%rax),%edx
+ffffffff80000890:	89 55 fc             	mov    %edx,-0x4(%rbp)
+ffffffff80000893:	48 98                	cltq
+ffffffff80000895:	48 01 c8             	add    %rcx,%rax
+ffffffff80000898:	0f b6 00             	movzbl (%rax),%eax
+ffffffff8000089b:	0f be c0             	movsbl %al,%eax
+ffffffff8000089e:	0f b6 4d 98          	movzbl -0x68(%rbp),%ecx
+ffffffff800008a2:	0f b6 55 99          	movzbl -0x67(%rbp),%edx
+ffffffff800008a6:	48 c1 e2 08          	shl    $0x8,%rdx
+ffffffff800008aa:	48 09 d1             	or     %rdx,%rcx
+ffffffff800008ad:	0f b6 55 9a          	movzbl -0x66(%rbp),%edx
+ffffffff800008b1:	48 c1 e2 10          	shl    $0x10,%rdx
+ffffffff800008b5:	48 09 ca             	or     %rcx,%rdx
+ffffffff800008b8:	48 89 d6             	mov    %rdx,%rsi
+ffffffff800008bb:	89 c7                	mov    %eax,%edi
+ffffffff800008bd:	e8 e0 fd ff ff       	call   ffffffff800006a2 <_ZN8Terminal7PutCharEcN8Graphics5ColorE>
+ffffffff800008c2:	e9 81 03 00 00       	jmp    ffffffff80000c48 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x416>
+ffffffff800008c7:	8b 45 fc             	mov    -0x4(%rbp),%eax
+ffffffff800008ca:	48 63 d0             	movslq %eax,%rdx
+ffffffff800008cd:	48 8b 45 90          	mov    -0x70(%rbp),%rax
+ffffffff800008d1:	48 01 d0             	add    %rdx,%rax
+ffffffff800008d4:	0f b6 00             	movzbl (%rax),%eax
+ffffffff800008d7:	3c 64                	cmp    $0x64,%al
+ffffffff800008d9:	74 18                	je     ffffffff800008f3 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0xc1>
+ffffffff800008db:	8b 45 fc             	mov    -0x4(%rbp),%eax
+ffffffff800008de:	48 63 d0             	movslq %eax,%rdx
+ffffffff800008e1:	48 8b 45 90          	mov    -0x70(%rbp),%rax
+ffffffff800008e5:	48 01 d0             	add    %rdx,%rax
+ffffffff800008e8:	0f b6 00             	movzbl (%rax),%eax
+ffffffff800008eb:	3c 69                	cmp    $0x69,%al
+ffffffff800008ed:	0f 85 9a 00 00 00    	jne    ffffffff8000098d <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x15b>
+ffffffff800008f3:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff800008f7:	8b 00                	mov    (%rax),%eax
+ffffffff800008f9:	83 f8 2f             	cmp    $0x2f,%eax
+ffffffff800008fc:	77 24                	ja     ffffffff80000922 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0xf0>
+ffffffff800008fe:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff80000902:	48 8b 50 10          	mov    0x10(%rax),%rdx
+ffffffff80000906:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff8000090a:	8b 00                	mov    (%rax),%eax
+ffffffff8000090c:	89 c0                	mov    %eax,%eax
+ffffffff8000090e:	48 01 d0             	add    %rdx,%rax
+ffffffff80000911:	48 8b 55 88          	mov    -0x78(%rbp),%rdx
+ffffffff80000915:	8b 12                	mov    (%rdx),%edx
+ffffffff80000917:	8d 4a 08             	lea    0x8(%rdx),%ecx
+ffffffff8000091a:	48 8b 55 88          	mov    -0x78(%rbp),%rdx
+ffffffff8000091e:	89 0a                	mov    %ecx,(%rdx)
+ffffffff80000920:	eb 14                	jmp    ffffffff80000936 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x104>
+ffffffff80000922:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff80000926:	48 8b 40 08          	mov    0x8(%rax),%rax
+ffffffff8000092a:	48 8d 48 08          	lea    0x8(%rax),%rcx
+ffffffff8000092e:	48 8b 55 88          	mov    -0x78(%rbp),%rdx
+ffffffff80000932:	48 89 4a 08          	mov    %rcx,0x8(%rdx)
+ffffffff80000936:	48 8b 00             	mov    (%rax),%rax
+ffffffff80000939:	48 89 45 d0          	mov    %rax,-0x30(%rbp)
+ffffffff8000093d:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+ffffffff80000941:	89 c1                	mov    %eax,%ecx
+ffffffff80000943:	48 8d 45 a9          	lea    -0x57(%rbp),%rax
+ffffffff80000947:	ba 0a 00 00 00       	mov    $0xa,%edx
+ffffffff8000094c:	48 89 c6             	mov    %rax,%rsi
+ffffffff8000094f:	89 cf                	mov    %ecx,%edi
+ffffffff80000951:	e8 52 fb ff ff       	call   ffffffff800004a8 <_Z4IToAiPci>
+ffffffff80000956:	89 45 cc             	mov    %eax,-0x34(%rbp)
+ffffffff80000959:	8b 4d cc             	mov    -0x34(%rbp),%ecx
+ffffffff8000095c:	48 8d 45 a9          	lea    -0x57(%rbp),%rax
+ffffffff80000960:	0f b6 75 98          	movzbl -0x68(%rbp),%esi
+ffffffff80000964:	0f b6 55 99          	movzbl -0x67(%rbp),%edx
+ffffffff80000968:	48 c1 e2 08          	shl    $0x8,%rdx
+ffffffff8000096c:	48 09 d6             	or     %rdx,%rsi
+ffffffff8000096f:	0f b6 55 9a          	movzbl -0x66(%rbp),%edx
+ffffffff80000973:	48 c1 e2 10          	shl    $0x10,%rdx
+ffffffff80000977:	48 09 f2             	or     %rsi,%rdx
+ffffffff8000097a:	89 ce                	mov    %ecx,%esi
+ffffffff8000097c:	48 89 c7             	mov    %rax,%rdi
+ffffffff8000097f:	e8 c9 fd ff ff       	call   ffffffff8000074d <_ZN8Terminal9PutStringEPcjN8Graphics5ColorE>
+ffffffff80000984:	83 45 fc 01          	addl   $0x1,-0x4(%rbp)
+ffffffff80000988:	e9 bb 02 00 00       	jmp    ffffffff80000c48 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x416>
+ffffffff8000098d:	8b 45 fc             	mov    -0x4(%rbp),%eax
+ffffffff80000990:	48 63 d0             	movslq %eax,%rdx
+ffffffff80000993:	48 8b 45 90          	mov    -0x70(%rbp),%rax
+ffffffff80000997:	48 01 d0             	add    %rdx,%rax
+ffffffff8000099a:	0f b6 00             	movzbl (%rax),%eax
+ffffffff8000099d:	3c 78                	cmp    $0x78,%al
+ffffffff8000099f:	0f 85 be 00 00 00    	jne    ffffffff80000a63 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x231>
+ffffffff800009a5:	48 c7 45 a9 30 78 00 	movq   $0x7830,-0x57(%rbp)
+ffffffff800009ac:	00 
+ffffffff800009ad:	48 c7 45 b1 00 00 00 	movq   $0x0,-0x4f(%rbp)
+ffffffff800009b4:	00 
+ffffffff800009b5:	48 c7 45 b9 00 00 00 	movq   $0x0,-0x47(%rbp)
+ffffffff800009bc:	00 
+ffffffff800009bd:	48 c7 45 c1 00 00 00 	movq   $0x0,-0x3f(%rbp)
+ffffffff800009c4:	00 
+ffffffff800009c5:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff800009c9:	8b 00                	mov    (%rax),%eax
+ffffffff800009cb:	83 f8 2f             	cmp    $0x2f,%eax
+ffffffff800009ce:	77 24                	ja     ffffffff800009f4 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x1c2>
+ffffffff800009d0:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff800009d4:	48 8b 50 10          	mov    0x10(%rax),%rdx
+ffffffff800009d8:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff800009dc:	8b 00                	mov    (%rax),%eax
+ffffffff800009de:	89 c0                	mov    %eax,%eax
+ffffffff800009e0:	48 01 d0             	add    %rdx,%rax
+ffffffff800009e3:	48 8b 55 88          	mov    -0x78(%rbp),%rdx
+ffffffff800009e7:	8b 12                	mov    (%rdx),%edx
+ffffffff800009e9:	8d 4a 08             	lea    0x8(%rdx),%ecx
+ffffffff800009ec:	48 8b 55 88          	mov    -0x78(%rbp),%rdx
+ffffffff800009f0:	89 0a                	mov    %ecx,(%rdx)
+ffffffff800009f2:	eb 14                	jmp    ffffffff80000a08 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x1d6>
+ffffffff800009f4:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff800009f8:	48 8b 40 08          	mov    0x8(%rax),%rax
+ffffffff800009fc:	48 8d 48 08          	lea    0x8(%rax),%rcx
+ffffffff80000a00:	48 8b 55 88          	mov    -0x78(%rbp),%rdx
+ffffffff80000a04:	48 89 4a 08          	mov    %rcx,0x8(%rdx)
+ffffffff80000a08:	48 8b 00             	mov    (%rax),%rax
+ffffffff80000a0b:	48 89 45 e0          	mov    %rax,-0x20(%rbp)
+ffffffff80000a0f:	48 8d 45 a9          	lea    -0x57(%rbp),%rax
+ffffffff80000a13:	48 83 c0 02          	add    $0x2,%rax
+ffffffff80000a17:	48 8b 55 e0          	mov    -0x20(%rbp),%rdx
+ffffffff80000a1b:	89 d1                	mov    %edx,%ecx
+ffffffff80000a1d:	ba 10 00 00 00       	mov    $0x10,%edx
+ffffffff80000a22:	48 89 c6             	mov    %rax,%rsi
+ffffffff80000a25:	89 cf                	mov    %ecx,%edi
+ffffffff80000a27:	e8 7c fa ff ff       	call   ffffffff800004a8 <_Z4IToAiPci>
+ffffffff80000a2c:	89 45 dc             	mov    %eax,-0x24(%rbp)
+ffffffff80000a2f:	8b 4d dc             	mov    -0x24(%rbp),%ecx
+ffffffff80000a32:	48 8d 45 a9          	lea    -0x57(%rbp),%rax
+ffffffff80000a36:	0f b6 75 98          	movzbl -0x68(%rbp),%esi
+ffffffff80000a3a:	0f b6 55 99          	movzbl -0x67(%rbp),%edx
+ffffffff80000a3e:	48 c1 e2 08          	shl    $0x8,%rdx
+ffffffff80000a42:	48 09 d6             	or     %rdx,%rsi
+ffffffff80000a45:	0f b6 55 9a          	movzbl -0x66(%rbp),%edx
+ffffffff80000a49:	48 c1 e2 10          	shl    $0x10,%rdx
+ffffffff80000a4d:	48 09 f2             	or     %rsi,%rdx
+ffffffff80000a50:	89 ce                	mov    %ecx,%esi
+ffffffff80000a52:	48 89 c7             	mov    %rax,%rdi
+ffffffff80000a55:	e8 f3 fc ff ff       	call   ffffffff8000074d <_ZN8Terminal9PutStringEPcjN8Graphics5ColorE>
+ffffffff80000a5a:	83 45 fc 01          	addl   $0x1,-0x4(%rbp)
+ffffffff80000a5e:	e9 e5 01 00 00       	jmp    ffffffff80000c48 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x416>
+ffffffff80000a63:	8b 45 fc             	mov    -0x4(%rbp),%eax
+ffffffff80000a66:	48 63 d0             	movslq %eax,%rdx
+ffffffff80000a69:	48 8b 45 90          	mov    -0x70(%rbp),%rax
+ffffffff80000a6d:	48 01 d0             	add    %rdx,%rax
+ffffffff80000a70:	0f b6 00             	movzbl (%rax),%eax
+ffffffff80000a73:	3c 63                	cmp    $0x63,%al
+ffffffff80000a75:	75 7f                	jne    ffffffff80000af6 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x2c4>
+ffffffff80000a77:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff80000a7b:	8b 00                	mov    (%rax),%eax
+ffffffff80000a7d:	83 f8 2f             	cmp    $0x2f,%eax
+ffffffff80000a80:	77 24                	ja     ffffffff80000aa6 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x274>
+ffffffff80000a82:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff80000a86:	48 8b 50 10          	mov    0x10(%rax),%rdx
+ffffffff80000a8a:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff80000a8e:	8b 00                	mov    (%rax),%eax
+ffffffff80000a90:	89 c0                	mov    %eax,%eax
+ffffffff80000a92:	48 01 d0             	add    %rdx,%rax
+ffffffff80000a95:	48 8b 55 88          	mov    -0x78(%rbp),%rdx
+ffffffff80000a99:	8b 12                	mov    (%rdx),%edx
+ffffffff80000a9b:	8d 4a 08             	lea    0x8(%rdx),%ecx
+ffffffff80000a9e:	48 8b 55 88          	mov    -0x78(%rbp),%rdx
+ffffffff80000aa2:	89 0a                	mov    %ecx,(%rdx)
+ffffffff80000aa4:	eb 14                	jmp    ffffffff80000aba <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x288>
+ffffffff80000aa6:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff80000aaa:	48 8b 40 08          	mov    0x8(%rax),%rax
+ffffffff80000aae:	48 8d 48 08          	lea    0x8(%rax),%rcx
+ffffffff80000ab2:	48 8b 55 88          	mov    -0x78(%rbp),%rdx
+ffffffff80000ab6:	48 89 4a 08          	mov    %rcx,0x8(%rdx)
+ffffffff80000aba:	8b 00                	mov    (%rax),%eax
+ffffffff80000abc:	89 45 ec             	mov    %eax,-0x14(%rbp)
+ffffffff80000abf:	8b 45 ec             	mov    -0x14(%rbp),%eax
+ffffffff80000ac2:	88 45 eb             	mov    %al,-0x15(%rbp)
+ffffffff80000ac5:	0f be 45 eb          	movsbl -0x15(%rbp),%eax
+ffffffff80000ac9:	0f b6 4d 98          	movzbl -0x68(%rbp),%ecx
+ffffffff80000acd:	0f b6 55 99          	movzbl -0x67(%rbp),%edx
+ffffffff80000ad1:	48 c1 e2 08          	shl    $0x8,%rdx
+ffffffff80000ad5:	48 09 d1             	or     %rdx,%rcx
+ffffffff80000ad8:	0f b6 55 9a          	movzbl -0x66(%rbp),%edx
+ffffffff80000adc:	48 c1 e2 10          	shl    $0x10,%rdx
+ffffffff80000ae0:	48 09 ca             	or     %rcx,%rdx
+ffffffff80000ae3:	48 89 d6             	mov    %rdx,%rsi
+ffffffff80000ae6:	89 c7                	mov    %eax,%edi
+ffffffff80000ae8:	e8 b5 fb ff ff       	call   ffffffff800006a2 <_ZN8Terminal7PutCharEcN8Graphics5ColorE>
+ffffffff80000aed:	83 45 fc 01          	addl   $0x1,-0x4(%rbp)
+ffffffff80000af1:	e9 52 01 00 00       	jmp    ffffffff80000c48 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x416>
+ffffffff80000af6:	8b 45 fc             	mov    -0x4(%rbp),%eax
+ffffffff80000af9:	48 63 d0             	movslq %eax,%rdx
+ffffffff80000afc:	48 8b 45 90          	mov    -0x70(%rbp),%rax
+ffffffff80000b00:	48 01 d0             	add    %rdx,%rax
+ffffffff80000b03:	0f b6 00             	movzbl (%rax),%eax
+ffffffff80000b06:	3c 73                	cmp    $0x73,%al
+ffffffff80000b08:	75 7c                	jne    ffffffff80000b86 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x354>
+ffffffff80000b0a:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff80000b0e:	8b 00                	mov    (%rax),%eax
+ffffffff80000b10:	83 f8 2f             	cmp    $0x2f,%eax
+ffffffff80000b13:	77 24                	ja     ffffffff80000b39 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x307>
+ffffffff80000b15:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff80000b19:	48 8b 50 10          	mov    0x10(%rax),%rdx
+ffffffff80000b1d:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff80000b21:	8b 00                	mov    (%rax),%eax
+ffffffff80000b23:	89 c0                	mov    %eax,%eax
+ffffffff80000b25:	48 01 d0             	add    %rdx,%rax
+ffffffff80000b28:	48 8b 55 88          	mov    -0x78(%rbp),%rdx
+ffffffff80000b2c:	8b 12                	mov    (%rdx),%edx
+ffffffff80000b2e:	8d 4a 08             	lea    0x8(%rdx),%ecx
+ffffffff80000b31:	48 8b 55 88          	mov    -0x78(%rbp),%rdx
+ffffffff80000b35:	89 0a                	mov    %ecx,(%rdx)
+ffffffff80000b37:	eb 14                	jmp    ffffffff80000b4d <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x31b>
+ffffffff80000b39:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff80000b3d:	48 8b 40 08          	mov    0x8(%rax),%rax
+ffffffff80000b41:	48 8d 48 08          	lea    0x8(%rax),%rcx
+ffffffff80000b45:	48 8b 55 88          	mov    -0x78(%rbp),%rdx
+ffffffff80000b49:	48 89 4a 08          	mov    %rcx,0x8(%rdx)
+ffffffff80000b4d:	48 8b 00             	mov    (%rax),%rax
+ffffffff80000b50:	48 89 45 f0          	mov    %rax,-0x10(%rbp)
+ffffffff80000b54:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+ffffffff80000b58:	0f b6 4d 98          	movzbl -0x68(%rbp),%ecx
+ffffffff80000b5c:	0f b6 55 99          	movzbl -0x67(%rbp),%edx
+ffffffff80000b60:	48 c1 e2 08          	shl    $0x8,%rdx
+ffffffff80000b64:	48 09 d1             	or     %rdx,%rcx
+ffffffff80000b67:	0f b6 55 9a          	movzbl -0x66(%rbp),%edx
+ffffffff80000b6b:	48 c1 e2 10          	shl    $0x10,%rdx
+ffffffff80000b6f:	48 09 ca             	or     %rcx,%rdx
+ffffffff80000b72:	48 89 d6             	mov    %rdx,%rsi
+ffffffff80000b75:	48 89 c7             	mov    %rax,%rdi
+ffffffff80000b78:	e8 30 fc ff ff       	call   ffffffff800007ad <_ZN8Terminal5PrintEPcN8Graphics5ColorE>
+ffffffff80000b7d:	83 45 fc 01          	addl   $0x1,-0x4(%rbp)
+ffffffff80000b81:	e9 c2 00 00 00       	jmp    ffffffff80000c48 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x416>
+ffffffff80000b86:	8b 45 fc             	mov    -0x4(%rbp),%eax
+ffffffff80000b89:	48 63 d0             	movslq %eax,%rdx
+ffffffff80000b8c:	48 8b 45 90          	mov    -0x70(%rbp),%rax
+ffffffff80000b90:	48 01 d0             	add    %rdx,%rax
+ffffffff80000b93:	0f b6 00             	movzbl (%rax),%eax
+ffffffff80000b96:	3c 23                	cmp    $0x23,%al
+ffffffff80000b98:	0f 85 aa 00 00 00    	jne    ffffffff80000c48 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x416>
+ffffffff80000b9e:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff80000ba2:	8b 00                	mov    (%rax),%eax
+ffffffff80000ba4:	83 f8 2f             	cmp    $0x2f,%eax
+ffffffff80000ba7:	77 24                	ja     ffffffff80000bcd <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x39b>
+ffffffff80000ba9:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff80000bad:	48 8b 50 10          	mov    0x10(%rax),%rdx
+ffffffff80000bb1:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff80000bb5:	8b 00                	mov    (%rax),%eax
+ffffffff80000bb7:	89 c0                	mov    %eax,%eax
+ffffffff80000bb9:	48 01 d0             	add    %rdx,%rax
+ffffffff80000bbc:	48 8b 55 88          	mov    -0x78(%rbp),%rdx
+ffffffff80000bc0:	8b 12                	mov    (%rdx),%edx
+ffffffff80000bc2:	8d 4a 08             	lea    0x8(%rdx),%ecx
+ffffffff80000bc5:	48 8b 55 88          	mov    -0x78(%rbp),%rdx
+ffffffff80000bc9:	89 0a                	mov    %ecx,(%rdx)
+ffffffff80000bcb:	eb 14                	jmp    ffffffff80000be1 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x3af>
+ffffffff80000bcd:	48 8b 45 88          	mov    -0x78(%rbp),%rax
+ffffffff80000bd1:	48 8b 40 08          	mov    0x8(%rax),%rax
+ffffffff80000bd5:	48 8d 48 08          	lea    0x8(%rax),%rcx
+ffffffff80000bd9:	48 8b 55 88          	mov    -0x78(%rbp),%rdx
+ffffffff80000bdd:	48 89 4a 08          	mov    %rcx,0x8(%rdx)
+ffffffff80000be1:	8b 00                	mov    (%rax),%eax
+ffffffff80000be3:	89 45 f8             	mov    %eax,-0x8(%rbp)
+ffffffff80000be6:	8b 55 f8             	mov    -0x8(%rbp),%edx
+ffffffff80000be9:	48 8d 45 c9          	lea    -0x37(%rbp),%rax
+ffffffff80000bed:	89 d6                	mov    %edx,%esi
+ffffffff80000bef:	48 89 c7             	mov    %rax,%rdi
+ffffffff80000bf2:	e8 11 01 00 00       	call   ffffffff80000d08 <_ZN8Graphics5ColorC1Ej>
+ffffffff80000bf7:	0f b7 45 c9          	movzwl -0x37(%rbp),%eax
+ffffffff80000bfb:	66 89 45 98          	mov    %ax,-0x68(%rbp)
+ffffffff80000bff:	0f b6 45 cb          	movzbl -0x35(%rbp),%eax
+ffffffff80000c03:	88 45 9a             	mov    %al,-0x66(%rbp)
+ffffffff80000c06:	83 45 fc 01          	addl   $0x1,-0x4(%rbp)
+ffffffff80000c0a:	eb 3c                	jmp    ffffffff80000c48 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x416>
+ffffffff80000c0c:	48 8b 4d 90          	mov    -0x70(%rbp),%rcx
+ffffffff80000c10:	8b 45 fc             	mov    -0x4(%rbp),%eax
+ffffffff80000c13:	8d 50 01             	lea    0x1(%rax),%edx
+ffffffff80000c16:	89 55 fc             	mov    %edx,-0x4(%rbp)
+ffffffff80000c19:	48 98                	cltq
+ffffffff80000c1b:	48 01 c8             	add    %rcx,%rax
+ffffffff80000c1e:	0f b6 00             	movzbl (%rax),%eax
+ffffffff80000c21:	0f be c0             	movsbl %al,%eax
+ffffffff80000c24:	0f b6 4d 98          	movzbl -0x68(%rbp),%ecx
+ffffffff80000c28:	0f b6 55 99          	movzbl -0x67(%rbp),%edx
+ffffffff80000c2c:	48 c1 e2 08          	shl    $0x8,%rdx
+ffffffff80000c30:	48 09 d1             	or     %rdx,%rcx
+ffffffff80000c33:	0f b6 55 9a          	movzbl -0x66(%rbp),%edx
+ffffffff80000c37:	48 c1 e2 10          	shl    $0x10,%rdx
+ffffffff80000c3b:	48 09 ca             	or     %rcx,%rdx
+ffffffff80000c3e:	48 89 d6             	mov    %rdx,%rsi
+ffffffff80000c41:	89 c7                	mov    %eax,%edi
+ffffffff80000c43:	e8 5a fa ff ff       	call   ffffffff800006a2 <_ZN8Terminal7PutCharEcN8Graphics5ColorE>
+ffffffff80000c48:	8b 45 fc             	mov    -0x4(%rbp),%eax
+ffffffff80000c4b:	48 63 d0             	movslq %eax,%rdx
+ffffffff80000c4e:	48 8b 45 90          	mov    -0x70(%rbp),%rax
+ffffffff80000c52:	48 01 d0             	add    %rdx,%rax
+ffffffff80000c55:	0f b6 00             	movzbl (%rax),%eax
+ffffffff80000c58:	84 c0                	test   %al,%al
+ffffffff80000c5a:	0f 85 f2 fb ff ff    	jne    ffffffff80000852 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag+0x20>
+ffffffff80000c60:	90                   	nop
+ffffffff80000c61:	90                   	nop
+ffffffff80000c62:	c9                   	leave
+ffffffff80000c63:	c3                   	ret
+
+ffffffff80000c64 <_ZN8Terminal6PrintfEN8Graphics5ColorEPKcz>:
+ffffffff80000c64:	55                   	push   %rbp
+ffffffff80000c65:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80000c68:	48 83 ec 60          	sub    $0x60,%rsp
+ffffffff80000c6c:	48 89 7d a8          	mov    %rdi,-0x58(%rbp)
+ffffffff80000c70:	48 89 75 a0          	mov    %rsi,-0x60(%rbp)
+ffffffff80000c74:	48 89 55 e0          	mov    %rdx,-0x20(%rbp)
+ffffffff80000c78:	48 89 4d e8          	mov    %rcx,-0x18(%rbp)
+ffffffff80000c7c:	4c 89 45 f0          	mov    %r8,-0x10(%rbp)
+ffffffff80000c80:	4c 89 4d f8          	mov    %r9,-0x8(%rbp)
+ffffffff80000c84:	c7 45 b8 10 00 00 00 	movl   $0x10,-0x48(%rbp)
+ffffffff80000c8b:	48 8d 45 10          	lea    0x10(%rbp),%rax
+ffffffff80000c8f:	48 89 45 c0          	mov    %rax,-0x40(%rbp)
+ffffffff80000c93:	48 8d 45 d0          	lea    -0x30(%rbp),%rax
+ffffffff80000c97:	48 89 45 c8          	mov    %rax,-0x38(%rbp)
+ffffffff80000c9b:	48 8d 55 b8          	lea    -0x48(%rbp),%rdx
+ffffffff80000c9f:	48 8b 45 a0          	mov    -0x60(%rbp),%rax
+ffffffff80000ca3:	48 89 c6             	mov    %rax,%rsi
+ffffffff80000ca6:	0f b6 4d a8          	movzbl -0x58(%rbp),%ecx
+ffffffff80000caa:	0f b6 45 a9          	movzbl -0x57(%rbp),%eax
+ffffffff80000cae:	48 c1 e0 08          	shl    $0x8,%rax
+ffffffff80000cb2:	48 09 c1             	or     %rax,%rcx
+ffffffff80000cb5:	0f b6 45 aa          	movzbl -0x56(%rbp),%eax
+ffffffff80000cb9:	48 c1 e0 10          	shl    $0x10,%rax
+ffffffff80000cbd:	48 09 c8             	or     %rcx,%rax
+ffffffff80000cc0:	48 89 c7             	mov    %rax,%rdi
+ffffffff80000cc3:	e8 6a fb ff ff       	call   ffffffff80000832 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag>
+ffffffff80000cc8:	90                   	nop
+ffffffff80000cc9:	c9                   	leave
+ffffffff80000cca:	c3                   	ret
+ffffffff80000ccb:	90                   	nop
+
+ffffffff80000ccc <_ZN8Graphics5ColorC1Ehhh>:
+ffffffff80000ccc:	55                   	push   %rbp
+ffffffff80000ccd:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80000cd0:	48 83 ec 18          	sub    $0x18,%rsp
+ffffffff80000cd4:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+ffffffff80000cd8:	89 c8                	mov    %ecx,%eax
+ffffffff80000cda:	89 f1                	mov    %esi,%ecx
+ffffffff80000cdc:	88 4d f4             	mov    %cl,-0xc(%rbp)
+ffffffff80000cdf:	88 55 f0             	mov    %dl,-0x10(%rbp)
+ffffffff80000ce2:	88 45 ec             	mov    %al,-0x14(%rbp)
+ffffffff80000ce5:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000ce9:	0f b6 55 f4          	movzbl -0xc(%rbp),%edx
+ffffffff80000ced:	88 10                	mov    %dl,(%rax)
+ffffffff80000cef:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000cf3:	0f b6 55 f0          	movzbl -0x10(%rbp),%edx
+ffffffff80000cf7:	88 50 01             	mov    %dl,0x1(%rax)
+ffffffff80000cfa:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000cfe:	0f b6 55 ec          	movzbl -0x14(%rbp),%edx
+ffffffff80000d02:	88 50 02             	mov    %dl,0x2(%rax)
+ffffffff80000d05:	90                   	nop
+ffffffff80000d06:	c9                   	leave
+ffffffff80000d07:	c3                   	ret
+
+ffffffff80000d08 <_ZN8Graphics5ColorC1Ej>:
+ffffffff80000d08:	55                   	push   %rbp
+ffffffff80000d09:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80000d0c:	48 83 ec 10          	sub    $0x10,%rsp
+ffffffff80000d10:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+ffffffff80000d14:	89 75 f4             	mov    %esi,-0xc(%rbp)
+ffffffff80000d17:	8b 45 f4             	mov    -0xc(%rbp),%eax
+ffffffff80000d1a:	c1 e8 10             	shr    $0x10,%eax
+ffffffff80000d1d:	89 c2                	mov    %eax,%edx
+ffffffff80000d1f:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000d23:	88 50 02             	mov    %dl,0x2(%rax)
+ffffffff80000d26:	8b 45 f4             	mov    -0xc(%rbp),%eax
+ffffffff80000d29:	c1 e8 08             	shr    $0x8,%eax
+ffffffff80000d2c:	89 c2                	mov    %eax,%edx
+ffffffff80000d2e:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000d32:	88 50 01             	mov    %dl,0x1(%rax)
+ffffffff80000d35:	8b 45 f4             	mov    -0xc(%rbp),%eax
+ffffffff80000d38:	89 c2                	mov    %eax,%edx
+ffffffff80000d3a:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000d3e:	88 10                	mov    %dl,(%rax)
+ffffffff80000d40:	90                   	nop
+ffffffff80000d41:	c9                   	leave
+ffffffff80000d42:	c3                   	ret
+ffffffff80000d43:	90                   	nop
+
+ffffffff80000d44 <_ZN8Graphics5ColorcvjEv>:
+ffffffff80000d44:	55                   	push   %rbp
+ffffffff80000d45:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80000d48:	48 83 ec 08          	sub    $0x8,%rsp
+ffffffff80000d4c:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+ffffffff80000d50:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000d54:	0f b6 00             	movzbl (%rax),%eax
+ffffffff80000d57:	0f b6 c0             	movzbl %al,%eax
+ffffffff80000d5a:	c1 e0 10             	shl    $0x10,%eax
+ffffffff80000d5d:	89 c2                	mov    %eax,%edx
+ffffffff80000d5f:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000d63:	0f b6 40 01          	movzbl 0x1(%rax),%eax
+ffffffff80000d67:	0f b6 c0             	movzbl %al,%eax
+ffffffff80000d6a:	c1 e0 08             	shl    $0x8,%eax
+ffffffff80000d6d:	01 c2                	add    %eax,%edx
+ffffffff80000d6f:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000d73:	0f b6 40 02          	movzbl 0x2(%rax),%eax
+ffffffff80000d77:	0f b6 c0             	movzbl %al,%eax
+ffffffff80000d7a:	01 d0                	add    %edx,%eax
+ffffffff80000d7c:	c9                   	leave
+ffffffff80000d7d:	c3                   	ret
+
+ffffffff80000d7e <_ZNK8Graphics5Color1rEv>:
+ffffffff80000d7e:	55                   	push   %rbp
+ffffffff80000d7f:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80000d82:	48 83 ec 08          	sub    $0x8,%rsp
+ffffffff80000d86:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+ffffffff80000d8a:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000d8e:	0f b6 00             	movzbl (%rax),%eax
+ffffffff80000d91:	c9                   	leave
+ffffffff80000d92:	c3                   	ret
+ffffffff80000d93:	90                   	nop
+
+ffffffff80000d94 <_ZNK8Graphics5Color1gEv>:
+ffffffff80000d94:	55                   	push   %rbp
+ffffffff80000d95:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80000d98:	48 83 ec 08          	sub    $0x8,%rsp
+ffffffff80000d9c:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+ffffffff80000da0:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000da4:	0f b6 40 01          	movzbl 0x1(%rax),%eax
+ffffffff80000da8:	c9                   	leave
+ffffffff80000da9:	c3                   	ret
+
+ffffffff80000daa <_ZNK8Graphics5Color1bEv>:
+ffffffff80000daa:	55                   	push   %rbp
+ffffffff80000dab:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80000dae:	48 83 ec 08          	sub    $0x8,%rsp
+ffffffff80000db2:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+ffffffff80000db6:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000dba:	0f b6 40 02          	movzbl 0x2(%rax),%eax
+ffffffff80000dbe:	c9                   	leave
+ffffffff80000dbf:	c3                   	ret
+
+ffffffff80000dc0 <_ZN8Graphics4InitEv>:
+ffffffff80000dc0:	55                   	push   %rbp
+ffffffff80000dc1:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80000dc4:	48 8b 05 2d 0e 00 00 	mov    0xe2d(%rip),%rax        # ffffffff80001bf8 <_ZN8GraphicsL5fbReqE+0x18>
+ffffffff80000dcb:	48 8b 30             	mov    (%rax),%rsi
+ffffffff80000dce:	48 8b 05 23 0e 00 00 	mov    0xe23(%rip),%rax        # ffffffff80001bf8 <_ZN8GraphicsL5fbReqE+0x18>
+ffffffff80000dd5:	0f b7 40 20          	movzwl 0x20(%rax),%eax
+ffffffff80000dd9:	0f b7 c8             	movzwl %ax,%ecx
+ffffffff80000ddc:	48 8b 05 15 0e 00 00 	mov    0xe15(%rip),%rax        # ffffffff80001bf8 <_ZN8GraphicsL5fbReqE+0x18>
+ffffffff80000de3:	48 8b 50 10          	mov    0x10(%rax),%rdx
+ffffffff80000de7:	48 8b 05 0a 0e 00 00 	mov    0xe0a(%rip),%rax        # ffffffff80001bf8 <_ZN8GraphicsL5fbReqE+0x18>
+ffffffff80000dee:	48 8b 40 18          	mov    0x18(%rax),%rax
+ffffffff80000df2:	48 89 35 e7 1f 00 00 	mov    %rsi,0x1fe7(%rip)        # ffffffff80002de0 <_ZN8Graphics11framebufferE>
+ffffffff80000df9:	48 89 0d e8 1f 00 00 	mov    %rcx,0x1fe8(%rip)        # ffffffff80002de8 <_ZN8Graphics11framebufferE+0x8>
+ffffffff80000e00:	48 89 15 e9 1f 00 00 	mov    %rdx,0x1fe9(%rip)        # ffffffff80002df0 <_ZN8Graphics11framebufferE+0x10>
+ffffffff80000e07:	48 89 05 ea 1f 00 00 	mov    %rax,0x1fea(%rip)        # ffffffff80002df8 <_ZN8Graphics11framebufferE+0x18>
+ffffffff80000e0e:	90                   	nop
+ffffffff80000e0f:	5d                   	pop    %rbp
+ffffffff80000e10:	c3                   	ret
+
+ffffffff80000e11 <_ZN8Graphics8PutPixelEjjNS_5ColorE>:
+ffffffff80000e11:	55                   	push   %rbp
+ffffffff80000e12:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80000e15:	53                   	push   %rbx
+ffffffff80000e16:	48 83 ec 20          	sub    $0x20,%rsp
+ffffffff80000e1a:	89 7d e4             	mov    %edi,-0x1c(%rbp)
+ffffffff80000e1d:	89 75 e0             	mov    %esi,-0x20(%rbp)
+ffffffff80000e20:	48 89 55 d8          	mov    %rdx,-0x28(%rbp)
+ffffffff80000e24:	48 8b 05 b5 1f 00 00 	mov    0x1fb5(%rip),%rax        # ffffffff80002de0 <_ZN8Graphics11framebufferE>
+ffffffff80000e2b:	48 89 45 f0          	mov    %rax,-0x10(%rbp)
+ffffffff80000e2f:	8b 45 e4             	mov    -0x1c(%rbp),%eax
+ffffffff80000e32:	8d 14 85 00 00 00 00 	lea    0x0(,%rax,4),%edx
+ffffffff80000e39:	48 8b 05 a8 1f 00 00 	mov    0x1fa8(%rip),%rax        # ffffffff80002de8 <_ZN8Graphics11framebufferE+0x8>
+ffffffff80000e40:	0f af 45 e0          	imul   -0x20(%rbp),%eax
+ffffffff80000e44:	01 d0                	add    %edx,%eax
+ffffffff80000e46:	89 45 ec             	mov    %eax,-0x14(%rbp)
+ffffffff80000e49:	8b 55 ec             	mov    -0x14(%rbp),%edx
+ffffffff80000e4c:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+ffffffff80000e50:	48 8d 1c 02          	lea    (%rdx,%rax,1),%rbx
+ffffffff80000e54:	48 8d 45 d8          	lea    -0x28(%rbp),%rax
+ffffffff80000e58:	48 89 c7             	mov    %rax,%rdi
+ffffffff80000e5b:	e8 1e ff ff ff       	call   ffffffff80000d7e <_ZNK8Graphics5Color1rEv>
+ffffffff80000e60:	88 03                	mov    %al,(%rbx)
+ffffffff80000e62:	8b 45 ec             	mov    -0x14(%rbp),%eax
+ffffffff80000e65:	83 c0 01             	add    $0x1,%eax
+ffffffff80000e68:	89 c2                	mov    %eax,%edx
+ffffffff80000e6a:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+ffffffff80000e6e:	48 8d 1c 02          	lea    (%rdx,%rax,1),%rbx
+ffffffff80000e72:	48 8d 45 d8          	lea    -0x28(%rbp),%rax
+ffffffff80000e76:	48 89 c7             	mov    %rax,%rdi
+ffffffff80000e79:	e8 16 ff ff ff       	call   ffffffff80000d94 <_ZNK8Graphics5Color1gEv>
+ffffffff80000e7e:	88 03                	mov    %al,(%rbx)
+ffffffff80000e80:	8b 45 ec             	mov    -0x14(%rbp),%eax
+ffffffff80000e83:	83 c0 02             	add    $0x2,%eax
+ffffffff80000e86:	89 c2                	mov    %eax,%edx
+ffffffff80000e88:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+ffffffff80000e8c:	48 8d 1c 02          	lea    (%rdx,%rax,1),%rbx
+ffffffff80000e90:	48 8d 45 d8          	lea    -0x28(%rbp),%rax
+ffffffff80000e94:	48 89 c7             	mov    %rax,%rdi
+ffffffff80000e97:	e8 0e ff ff ff       	call   ffffffff80000daa <_ZNK8Graphics5Color1bEv>
+ffffffff80000e9c:	88 03                	mov    %al,(%rbx)
+ffffffff80000e9e:	90                   	nop
+ffffffff80000e9f:	48 8b 5d f8          	mov    -0x8(%rbp),%rbx
+ffffffff80000ea3:	c9                   	leave
+ffffffff80000ea4:	c3                   	ret
+
+ffffffff80000ea5 <_ZN3PMM4InitEv>:
+ffffffff80000ea5:	55                   	push   %rbp
+ffffffff80000ea6:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80000ea9:	48 83 ec 30          	sub    $0x30,%rsp
+ffffffff80000ead:	48 c7 05 48 1f 00 00 	movq   $0x0,0x1f48(%rip)        # ffffffff80002e00 <_ZN3PMM13FreeListBeginE>
+ffffffff80000eb4:	00 00 00 00 
+ffffffff80000eb8:	48 c7 45 f8 00 00 00 	movq   $0x0,-0x8(%rbp)
+ffffffff80000ebf:	00 
+ffffffff80000ec0:	e9 92 00 00 00       	jmp    ffffffff80000f57 <_ZN3PMM4InitEv+0xb2>
+ffffffff80000ec5:	48 8b 05 4c 0d 00 00 	mov    0xd4c(%rip),%rax        # ffffffff80001c18 <_ZN3PMML13MemmapRequestE+0x18>
+ffffffff80000ecc:	48 8b 50 08          	mov    0x8(%rax),%rdx
+ffffffff80000ed0:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80000ed4:	48 c1 e0 03          	shl    $0x3,%rax
+ffffffff80000ed8:	48 01 d0             	add    %rdx,%rax
+ffffffff80000edb:	48 8b 00             	mov    (%rax),%rax
+ffffffff80000ede:	48 89 45 d8          	mov    %rax,-0x28(%rbp)
+ffffffff80000ee2:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+ffffffff80000ee6:	48 8b 50 08          	mov    0x8(%rax),%rdx
+ffffffff80000eea:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+ffffffff80000eee:	48 8b 40 18          	mov    0x18(%rax),%rax
+ffffffff80000ef2:	48 01 d0             	add    %rdx,%rax
+ffffffff80000ef5:	48 3d ff ff 0f 00    	cmp    $0xfffff,%rax
+ffffffff80000efb:	76 54                	jbe    ffffffff80000f51 <_ZN3PMM4InitEv+0xac>
+ffffffff80000efd:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+ffffffff80000f01:	48 8b 50 08          	mov    0x8(%rax),%rdx
+ffffffff80000f05:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+ffffffff80000f09:	48 8b 40 18          	mov    0x18(%rax),%rax
+ffffffff80000f0d:	48 01 d0             	add    %rdx,%rax
+ffffffff80000f10:	48 89 45 d0          	mov    %rax,-0x30(%rbp)
+ffffffff80000f14:	48 8b 05 ed 1e 00 00 	mov    0x1eed(%rip),%rax        # ffffffff80002e08 <_ZN3PMM9PhysLimitE>
+ffffffff80000f1b:	48 39 45 d0          	cmp    %rax,-0x30(%rbp)
+ffffffff80000f1f:	76 0b                	jbe    ffffffff80000f2c <_ZN3PMM4InitEv+0x87>
+ffffffff80000f21:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+ffffffff80000f25:	48 89 05 dc 1e 00 00 	mov    %rax,0x1edc(%rip)        # ffffffff80002e08 <_ZN3PMM9PhysLimitE>
+ffffffff80000f2c:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+ffffffff80000f30:	8b 00                	mov    (%rax),%eax
+ffffffff80000f32:	85 c0                	test   %eax,%eax
+ffffffff80000f34:	75 1c                	jne    ffffffff80000f52 <_ZN3PMM4InitEv+0xad>
+ffffffff80000f36:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+ffffffff80000f3a:	48 8b 50 18          	mov    0x18(%rax),%rdx
+ffffffff80000f3e:	48 8b 05 cb 1e 00 00 	mov    0x1ecb(%rip),%rax        # ffffffff80002e10 <_ZN3PMM8TotalMemE>
+ffffffff80000f45:	48 01 d0             	add    %rdx,%rax
+ffffffff80000f48:	48 89 05 c1 1e 00 00 	mov    %rax,0x1ec1(%rip)        # ffffffff80002e10 <_ZN3PMM8TotalMemE>
+ffffffff80000f4f:	eb 01                	jmp    ffffffff80000f52 <_ZN3PMM4InitEv+0xad>
+ffffffff80000f51:	90                   	nop
+ffffffff80000f52:	48 83 45 f8 01       	addq   $0x1,-0x8(%rbp)
+ffffffff80000f57:	48 8b 05 ba 0c 00 00 	mov    0xcba(%rip),%rax        # ffffffff80001c18 <_ZN3PMML13MemmapRequestE+0x18>
+ffffffff80000f5e:	48 8b 00             	mov    (%rax),%rax
+ffffffff80000f61:	48 39 45 f8          	cmp    %rax,-0x8(%rbp)
+ffffffff80000f65:	0f 92 c0             	setb   %al
+ffffffff80000f68:	84 c0                	test   %al,%al
+ffffffff80000f6a:	0f 85 55 ff ff ff    	jne    ffffffff80000ec5 <_ZN3PMM4InitEv+0x20>
+ffffffff80000f70:	48 8b 05 99 1e 00 00 	mov    0x1e99(%rip),%rax        # ffffffff80002e10 <_ZN3PMM8TotalMemE>
+ffffffff80000f77:	48 89 05 9a 1e 00 00 	mov    %rax,0x1e9a(%rip)        # ffffffff80002e18 <_ZN3PMM7FreeMemE>
+ffffffff80000f7e:	48 8b 05 7b 1e 00 00 	mov    0x1e7b(%rip),%rax        # ffffffff80002e00 <_ZN3PMM13FreeListBeginE>
+ffffffff80000f85:	48 89 45 f0          	mov    %rax,-0x10(%rbp)
+ffffffff80000f89:	48 c7 45 e8 00 00 00 	movq   $0x0,-0x18(%rbp)
+ffffffff80000f90:	00 
+ffffffff80000f91:	eb 76                	jmp    ffffffff80001009 <_ZN3PMM4InitEv+0x164>
+ffffffff80000f93:	48 8b 05 7e 0c 00 00 	mov    0xc7e(%rip),%rax        # ffffffff80001c18 <_ZN3PMML13MemmapRequestE+0x18>
+ffffffff80000f9a:	48 8b 50 08          	mov    0x8(%rax),%rdx
+ffffffff80000f9e:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ffffffff80000fa2:	48 c1 e0 03          	shl    $0x3,%rax
+ffffffff80000fa6:	48 01 d0             	add    %rdx,%rax
+ffffffff80000fa9:	48 8b 00             	mov    (%rax),%rax
+ffffffff80000fac:	48 89 45 e0          	mov    %rax,-0x20(%rbp)
+ffffffff80000fb0:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+ffffffff80000fb4:	48 8b 50 08          	mov    0x8(%rax),%rdx
+ffffffff80000fb8:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+ffffffff80000fbc:	48 8b 40 18          	mov    0x18(%rax),%rax
+ffffffff80000fc0:	48 01 d0             	add    %rdx,%rax
+ffffffff80000fc3:	48 3d ff ff 0f 00    	cmp    $0xfffff,%rax
+ffffffff80000fc9:	76 38                	jbe    ffffffff80001003 <_ZN3PMM4InitEv+0x15e>
+ffffffff80000fcb:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+ffffffff80000fcf:	8b 00                	mov    (%rax),%eax
+ffffffff80000fd1:	85 c0                	test   %eax,%eax
+ffffffff80000fd3:	75 2f                	jne    ffffffff80001004 <_ZN3PMM4InitEv+0x15f>
+ffffffff80000fd5:	48 8b 05 24 1e 00 00 	mov    0x1e24(%rip),%rax        # ffffffff80002e00 <_ZN3PMM13FreeListBeginE>
+ffffffff80000fdc:	48 85 c0             	test   %rax,%rax
+ffffffff80000fdf:	75 15                	jne    ffffffff80000ff6 <_ZN3PMM4InitEv+0x151>
+ffffffff80000fe1:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+ffffffff80000fe5:	48 89 45 f0          	mov    %rax,-0x10(%rbp)
+ffffffff80000fe9:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+ffffffff80000fed:	48 89 05 0c 1e 00 00 	mov    %rax,0x1e0c(%rip)        # ffffffff80002e00 <_ZN3PMM13FreeListBeginE>
+ffffffff80000ff4:	eb 0e                	jmp    ffffffff80001004 <_ZN3PMM4InitEv+0x15f>
+ffffffff80000ff6:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+ffffffff80000ffa:	48 8b 55 e0          	mov    -0x20(%rbp),%rdx
+ffffffff80000ffe:	48 89 10             	mov    %rdx,(%rax)
+ffffffff80001001:	eb 01                	jmp    ffffffff80001004 <_ZN3PMM4InitEv+0x15f>
+ffffffff80001003:	90                   	nop
+ffffffff80001004:	48 83 45 e8 01       	addq   $0x1,-0x18(%rbp)
+ffffffff80001009:	48 8b 05 08 0c 00 00 	mov    0xc08(%rip),%rax        # ffffffff80001c18 <_ZN3PMML13MemmapRequestE+0x18>
+ffffffff80001010:	48 8b 00             	mov    (%rax),%rax
+ffffffff80001013:	48 39 45 e8          	cmp    %rax,-0x18(%rbp)
+ffffffff80001017:	0f 92 c0             	setb   %al
+ffffffff8000101a:	84 c0                	test   %al,%al
+ffffffff8000101c:	0f 85 71 ff ff ff    	jne    ffffffff80000f93 <_ZN3PMM4InitEv+0xee>
+ffffffff80001022:	90                   	nop
+ffffffff80001023:	90                   	nop
+ffffffff80001024:	c9                   	leave
+ffffffff80001025:	c3                   	ret
+
+ffffffff80001026 <_ZN3PMM7GetPageEv>:
+ffffffff80001026:	55                   	push   %rbp
+ffffffff80001027:	48 89 e5             	mov    %rsp,%rbp
+ffffffff8000102a:	bf 01 00 00 00       	mov    $0x1,%edi
+ffffffff8000102f:	e8 1d 00 00 00       	call   ffffffff80001051 <_ZN3PMM8GetPagesEj>
+ffffffff80001034:	5d                   	pop    %rbp
+ffffffff80001035:	c3                   	ret
+
+ffffffff80001036 <_ZN3PMM8FreePageEPv>:
+ffffffff80001036:	55                   	push   %rbp
+ffffffff80001037:	48 89 e5             	mov    %rsp,%rbp
+ffffffff8000103a:	48 83 ec 10          	sub    $0x10,%rsp
+ffffffff8000103e:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+ffffffff80001042:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80001046:	48 89 c7             	mov    %rax,%rdi
+ffffffff80001049:	e8 01 01 00 00       	call   ffffffff8000114f <_ZN3PMM9FreePagesEPv>
+ffffffff8000104e:	90                   	nop
+ffffffff8000104f:	c9                   	leave
+ffffffff80001050:	c3                   	ret
+
+ffffffff80001051 <_ZN3PMM8GetPagesEj>:
+ffffffff80001051:	55                   	push   %rbp
+ffffffff80001052:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80001055:	48 83 ec 40          	sub    $0x40,%rsp
+ffffffff80001059:	89 7d cc             	mov    %edi,-0x34(%rbp)
+ffffffff8000105c:	83 7d cc 00          	cmpl   $0x0,-0x34(%rbp)
+ffffffff80001060:	75 0a                	jne    ffffffff8000106c <_ZN3PMM8GetPagesEj+0x1b>
+ffffffff80001062:	b8 00 00 00 00       	mov    $0x0,%eax
+ffffffff80001067:	e9 e1 00 00 00       	jmp    ffffffff8000114d <_ZN3PMM8GetPagesEj+0xfc>
+ffffffff8000106c:	48 8b 05 8d 1d 00 00 	mov    0x1d8d(%rip),%rax        # ffffffff80002e00 <_ZN3PMM13FreeListBeginE>
+ffffffff80001073:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+ffffffff80001077:	48 8b 05 82 1d 00 00 	mov    0x1d82(%rip),%rax        # ffffffff80002e00 <_ZN3PMM13FreeListBeginE>
+ffffffff8000107e:	48 89 45 f0          	mov    %rax,-0x10(%rbp)
+ffffffff80001082:	8b 45 cc             	mov    -0x34(%rbp),%eax
+ffffffff80001085:	c1 e0 0c             	shl    $0xc,%eax
+ffffffff80001088:	89 c0                	mov    %eax,%eax
+ffffffff8000108a:	48 83 c0 10          	add    $0x10,%rax
+ffffffff8000108e:	48 89 45 e8          	mov    %rax,-0x18(%rbp)
+ffffffff80001092:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80001096:	48 8b 40 08          	mov    0x8(%rax),%rax
+ffffffff8000109a:	48 39 45 e8          	cmp    %rax,-0x18(%rbp)
+ffffffff8000109e:	0f 87 91 00 00 00    	ja     ffffffff80001135 <_ZN3PMM8GetPagesEj+0xe4>
+ffffffff800010a4:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff800010a8:	48 8b 40 08          	mov    0x8(%rax),%rax
+ffffffff800010ac:	48 39 45 e8          	cmp    %rax,-0x18(%rbp)
+ffffffff800010b0:	75 10                	jne    ffffffff800010c2 <_ZN3PMM8GetPagesEj+0x71>
+ffffffff800010b2:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff800010b6:	48 8b 10             	mov    (%rax),%rdx
+ffffffff800010b9:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+ffffffff800010bd:	48 89 10             	mov    %rdx,(%rax)
+ffffffff800010c0:	eb 57                	jmp    ffffffff80001119 <_ZN3PMM8GetPagesEj+0xc8>
+ffffffff800010c2:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff800010c6:	48 8b 40 08          	mov    0x8(%rax),%rax
+ffffffff800010ca:	48 2b 45 e8          	sub    -0x18(%rbp),%rax
+ffffffff800010ce:	48 89 c2             	mov    %rax,%rdx
+ffffffff800010d1:	48 8d 45 d8          	lea    -0x28(%rbp),%rax
+ffffffff800010d5:	48 89 d6             	mov    %rdx,%rsi
+ffffffff800010d8:	48 89 c7             	mov    %rax,%rdi
+ffffffff800010db:	e8 02 02 00 00       	call   ffffffff800012e2 <_ZN3PMM6HeaderC1Em>
+ffffffff800010e0:	48 8b 55 f8          	mov    -0x8(%rbp),%rdx
+ffffffff800010e4:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ffffffff800010e8:	48 8d 0c 02          	lea    (%rdx,%rax,1),%rcx
+ffffffff800010ec:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+ffffffff800010f0:	48 8b 55 e0          	mov    -0x20(%rbp),%rdx
+ffffffff800010f4:	48 89 01             	mov    %rax,(%rcx)
+ffffffff800010f7:	48 89 51 08          	mov    %rdx,0x8(%rcx)
+ffffffff800010fb:	48 8b 55 f8          	mov    -0x8(%rbp),%rdx
+ffffffff800010ff:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ffffffff80001103:	48 01 d0             	add    %rdx,%rax
+ffffffff80001106:	48 89 05 f3 1c 00 00 	mov    %rax,0x1cf3(%rip)        # ffffffff80002e00 <_ZN3PMM13FreeListBeginE>
+ffffffff8000110d:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80001111:	48 8b 55 e8          	mov    -0x18(%rbp),%rdx
+ffffffff80001115:	48 89 50 08          	mov    %rdx,0x8(%rax)
+ffffffff80001119:	48 8b 05 f8 1c 00 00 	mov    0x1cf8(%rip),%rax        # ffffffff80002e18 <_ZN3PMM7FreeMemE>
+ffffffff80001120:	48 2b 45 e8          	sub    -0x18(%rbp),%rax
+ffffffff80001124:	48 89 05 ed 1c 00 00 	mov    %rax,0x1ced(%rip)        # ffffffff80002e18 <_ZN3PMM7FreeMemE>
+ffffffff8000112b:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff8000112f:	48 83 c0 10          	add    $0x10,%rax
+ffffffff80001133:	eb 18                	jmp    ffffffff8000114d <_ZN3PMM8GetPagesEj+0xfc>
+ffffffff80001135:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80001139:	48 89 45 f0          	mov    %rax,-0x10(%rbp)
+ffffffff8000113d:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80001141:	48 8b 00             	mov    (%rax),%rax
+ffffffff80001144:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+ffffffff80001148:	e9 45 ff ff ff       	jmp    ffffffff80001092 <_ZN3PMM8GetPagesEj+0x41>
+ffffffff8000114d:	c9                   	leave
+ffffffff8000114e:	c3                   	ret
+
+ffffffff8000114f <_ZN3PMM9FreePagesEPv>:
+ffffffff8000114f:	55                   	push   %rbp
+ffffffff80001150:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80001153:	48 83 ec 18          	sub    $0x18,%rsp
+ffffffff80001157:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
+ffffffff8000115b:	48 83 7d e8 00       	cmpq   $0x0,-0x18(%rbp)
+ffffffff80001160:	74 40                	je     ffffffff800011a2 <_ZN3PMM9FreePagesEPv+0x53>
+ffffffff80001162:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ffffffff80001166:	48 83 e8 10          	sub    $0x10,%rax
+ffffffff8000116a:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+ffffffff8000116e:	48 8b 15 8b 1c 00 00 	mov    0x1c8b(%rip),%rdx        # ffffffff80002e00 <_ZN3PMM13FreeListBeginE>
+ffffffff80001175:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80001179:	48 89 10             	mov    %rdx,(%rax)
+ffffffff8000117c:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80001180:	48 8b 50 08          	mov    0x8(%rax),%rdx
+ffffffff80001184:	48 8b 05 8d 1c 00 00 	mov    0x1c8d(%rip),%rax        # ffffffff80002e18 <_ZN3PMM7FreeMemE>
+ffffffff8000118b:	48 01 d0             	add    %rdx,%rax
+ffffffff8000118e:	48 89 05 83 1c 00 00 	mov    %rax,0x1c83(%rip)        # ffffffff80002e18 <_ZN3PMM7FreeMemE>
+ffffffff80001195:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff80001199:	48 89 05 60 1c 00 00 	mov    %rax,0x1c60(%rip)        # ffffffff80002e00 <_ZN3PMM13FreeListBeginE>
+ffffffff800011a0:	eb 01                	jmp    ffffffff800011a3 <_ZN3PMM9FreePagesEPv+0x54>
+ffffffff800011a2:	90                   	nop
+ffffffff800011a3:	c9                   	leave
+ffffffff800011a4:	c3                   	ret
+
+ffffffff800011a5 <_ZN3PMM9DumpStatsEv>:
+ffffffff800011a5:	55                   	push   %rbp
+ffffffff800011a6:	48 89 e5             	mov    %rsp,%rbp
+ffffffff800011a9:	41 54                	push   %r12
+ffffffff800011ab:	53                   	push   %rbx
+ffffffff800011ac:	48 83 ec 20          	sub    $0x20,%rsp
+ffffffff800011b0:	48 8b 05 59 1c 00 00 	mov    0x1c59(%rip),%rax        # ffffffff80002e10 <_ZN3PMM8TotalMemE>
+ffffffff800011b7:	48 8b 15 5a 1c 00 00 	mov    0x1c5a(%rip),%rdx        # ffffffff80002e18 <_ZN3PMM7FreeMemE>
+ffffffff800011be:	48 29 d0             	sub    %rdx,%rax
+ffffffff800011c1:	48 89 45 e8          	mov    %rax,-0x18(%rbp)
+ffffffff800011c5:	48 8b 05 44 1c 00 00 	mov    0x1c44(%rip),%rax        # ffffffff80002e10 <_ZN3PMM8TotalMemE>
+ffffffff800011cc:	48 c1 e8 14          	shr    $0x14,%rax
+ffffffff800011d0:	49 89 c4             	mov    %rax,%r12
+ffffffff800011d3:	48 8b 05 36 1c 00 00 	mov    0x1c36(%rip),%rax        # ffffffff80002e10 <_ZN3PMM8TotalMemE>
+ffffffff800011da:	48 c1 e8 0a          	shr    $0xa,%rax
+ffffffff800011de:	48 89 c3             	mov    %rax,%rbx
+ffffffff800011e1:	48 8d 45 df          	lea    -0x21(%rbp),%rax
+ffffffff800011e5:	be ff ff 00 00       	mov    $0xffff,%esi
+ffffffff800011ea:	48 89 c7             	mov    %rax,%rdi
+ffffffff800011ed:	e8 16 fb ff ff       	call   ffffffff80000d08 <_ZN8Graphics5ColorC1Ej>
+ffffffff800011f2:	4c 89 e1             	mov    %r12,%rcx
+ffffffff800011f5:	48 89 da             	mov    %rbx,%rdx
+ffffffff800011f8:	48 c7 c6 2c 1b 00 80 	mov    $0xffffffff80001b2c,%rsi
+ffffffff800011ff:	0f b6 7d df          	movzbl -0x21(%rbp),%edi
+ffffffff80001203:	0f b6 45 e0          	movzbl -0x20(%rbp),%eax
+ffffffff80001207:	48 c1 e0 08          	shl    $0x8,%rax
+ffffffff8000120b:	48 09 c7             	or     %rax,%rdi
+ffffffff8000120e:	0f b6 45 e1          	movzbl -0x1f(%rbp),%eax
+ffffffff80001212:	48 c1 e0 10          	shl    $0x10,%rax
+ffffffff80001216:	48 09 f8             	or     %rdi,%rax
+ffffffff80001219:	48 89 c7             	mov    %rax,%rdi
+ffffffff8000121c:	b8 00 00 00 00       	mov    $0x0,%eax
+ffffffff80001221:	e8 3e fa ff ff       	call   ffffffff80000c64 <_ZN8Terminal6PrintfEN8Graphics5ColorEPKcz>
+ffffffff80001226:	48 8b 05 eb 1b 00 00 	mov    0x1beb(%rip),%rax        # ffffffff80002e18 <_ZN3PMM7FreeMemE>
+ffffffff8000122d:	48 c1 e8 14          	shr    $0x14,%rax
+ffffffff80001231:	49 89 c4             	mov    %rax,%r12
+ffffffff80001234:	48 8b 05 dd 1b 00 00 	mov    0x1bdd(%rip),%rax        # ffffffff80002e18 <_ZN3PMM7FreeMemE>
+ffffffff8000123b:	48 c1 e8 0a          	shr    $0xa,%rax
+ffffffff8000123f:	48 89 c3             	mov    %rax,%rbx
+ffffffff80001242:	48 8d 45 e2          	lea    -0x1e(%rbp),%rax
+ffffffff80001246:	be ff ff 00 00       	mov    $0xffff,%esi
+ffffffff8000124b:	48 89 c7             	mov    %rax,%rdi
+ffffffff8000124e:	e8 b5 fa ff ff       	call   ffffffff80000d08 <_ZN8Graphics5ColorC1Ej>
+ffffffff80001253:	4c 89 e1             	mov    %r12,%rcx
+ffffffff80001256:	48 89 da             	mov    %rbx,%rdx
+ffffffff80001259:	48 c7 c6 4a 1b 00 80 	mov    $0xffffffff80001b4a,%rsi
+ffffffff80001260:	0f b7 7d e2          	movzwl -0x1e(%rbp),%edi
+ffffffff80001264:	0f b6 45 e4          	movzbl -0x1c(%rbp),%eax
+ffffffff80001268:	48 c1 e0 10          	shl    $0x10,%rax
+ffffffff8000126c:	48 09 f8             	or     %rdi,%rax
+ffffffff8000126f:	48 89 c7             	mov    %rax,%rdi
+ffffffff80001272:	b8 00 00 00 00       	mov    $0x0,%eax
+ffffffff80001277:	e8 e8 f9 ff ff       	call   ffffffff80000c64 <_ZN8Terminal6PrintfEN8Graphics5ColorEPKcz>
+ffffffff8000127c:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ffffffff80001280:	48 c1 e8 14          	shr    $0x14,%rax
+ffffffff80001284:	49 89 c4             	mov    %rax,%r12
+ffffffff80001287:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ffffffff8000128b:	48 c1 e8 0a          	shr    $0xa,%rax
+ffffffff8000128f:	48 89 c3             	mov    %rax,%rbx
+ffffffff80001292:	48 8d 45 e5          	lea    -0x1b(%rbp),%rax
+ffffffff80001296:	be ff ff 00 00       	mov    $0xffff,%esi
+ffffffff8000129b:	48 89 c7             	mov    %rax,%rdi
+ffffffff8000129e:	e8 65 fa ff ff       	call   ffffffff80000d08 <_ZN8Graphics5ColorC1Ej>
+ffffffff800012a3:	4c 89 e1             	mov    %r12,%rcx
+ffffffff800012a6:	48 89 da             	mov    %rbx,%rdx
+ffffffff800012a9:	48 c7 c6 68 1b 00 80 	mov    $0xffffffff80001b68,%rsi
+ffffffff800012b0:	0f b6 7d e5          	movzbl -0x1b(%rbp),%edi
+ffffffff800012b4:	0f b6 45 e6          	movzbl -0x1a(%rbp),%eax
+ffffffff800012b8:	48 c1 e0 08          	shl    $0x8,%rax
+ffffffff800012bc:	48 09 c7             	or     %rax,%rdi
+ffffffff800012bf:	0f b6 45 e7          	movzbl -0x19(%rbp),%eax
+ffffffff800012c3:	48 c1 e0 10          	shl    $0x10,%rax
+ffffffff800012c7:	48 09 f8             	or     %rdi,%rax
+ffffffff800012ca:	48 89 c7             	mov    %rax,%rdi
+ffffffff800012cd:	b8 00 00 00 00       	mov    $0x0,%eax
+ffffffff800012d2:	e8 8d f9 ff ff       	call   ffffffff80000c64 <_ZN8Terminal6PrintfEN8Graphics5ColorEPKcz>
+ffffffff800012d7:	90                   	nop
+ffffffff800012d8:	48 83 c4 20          	add    $0x20,%rsp
+ffffffff800012dc:	5b                   	pop    %rbx
+ffffffff800012dd:	41 5c                	pop    %r12
+ffffffff800012df:	5d                   	pop    %rbp
+ffffffff800012e0:	c3                   	ret
+ffffffff800012e1:	90                   	nop
+
+ffffffff800012e2 <_ZN3PMM6HeaderC1Em>:
+ffffffff800012e2:	55                   	push   %rbp
+ffffffff800012e3:	48 89 e5             	mov    %rsp,%rbp
+ffffffff800012e6:	48 83 ec 10          	sub    $0x10,%rsp
+ffffffff800012ea:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+ffffffff800012ee:	48 89 75 f0          	mov    %rsi,-0x10(%rbp)
+ffffffff800012f2:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ffffffff800012f6:	48 8b 55 f0          	mov    -0x10(%rbp),%rdx
+ffffffff800012fa:	48 89 50 08          	mov    %rdx,0x8(%rax)
+ffffffff800012fe:	90                   	nop
+ffffffff800012ff:	c9                   	leave
+ffffffff80001300:	c3                   	ret
+
+ffffffff80001301 <_start>:
+ffffffff80001301:	55                   	push   %rbp
+ffffffff80001302:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80001305:	48 83 ec 10          	sub    $0x10,%rsp
+ffffffff80001309:	e8 a7 ef ff ff       	call   ffffffff800002b5 <_Z7InitGDTv>
+ffffffff8000130e:	e8 b5 ed ff ff       	call   ffffffff800000c8 <_Z7InitIDTv>
+ffffffff80001313:	e8 a8 fa ff ff       	call   ffffffff80000dc0 <_ZN8Graphics4InitEv>
+ffffffff80001318:	e8 93 f2 ff ff       	call   ffffffff800005b0 <_ZN8Terminal4InitEv>
+ffffffff8000131d:	48 8d 45 fd          	lea    -0x3(%rbp),%rax
+ffffffff80001321:	be ff 00 ff 00       	mov    $0xff00ff,%esi
+ffffffff80001326:	48 89 c7             	mov    %rax,%rdi
+ffffffff80001329:	e8 da f9 ff ff       	call   ffffffff80000d08 <_ZN8Graphics5ColorC1Ej>
+ffffffff8000132e:	48 c7 c1 86 1b 00 80 	mov    $0xffffffff80001b86,%rcx
+ffffffff80001335:	ba 00 ff ff 00       	mov    $0xffff00,%edx
+ffffffff8000133a:	48 c7 c6 8e 1b 00 80 	mov    $0xffffffff80001b8e,%rsi
+ffffffff80001341:	0f b6 7d fd          	movzbl -0x3(%rbp),%edi
+ffffffff80001345:	0f b6 45 fe          	movzbl -0x2(%rbp),%eax
+ffffffff80001349:	48 c1 e0 08          	shl    $0x8,%rax
+ffffffff8000134d:	48 09 c7             	or     %rax,%rdi
+ffffffff80001350:	0f b6 45 ff          	movzbl -0x1(%rbp),%eax
+ffffffff80001354:	48 c1 e0 10          	shl    $0x10,%rax
+ffffffff80001358:	48 09 f8             	or     %rdi,%rax
+ffffffff8000135b:	48 89 c7             	mov    %rax,%rdi
+ffffffff8000135e:	b8 00 00 00 00       	mov    $0x0,%eax
+ffffffff80001363:	e8 fc f8 ff ff       	call   ffffffff80000c64 <_ZN8Terminal6PrintfEN8Graphics5ColorEPKcz>
+ffffffff80001368:	e8 38 fb ff ff       	call   ffffffff80000ea5 <_ZN3PMM4InitEv>
+ffffffff8000136d:	e8 33 fe ff ff       	call   ffffffff800011a5 <_ZN3PMM9DumpStatsEv>
+ffffffff80001372:	eb fe                	jmp    ffffffff80001372 <_start+0x71>
+
+ffffffff80001374 <_ZN6Kernel5PanicEv>:
+ffffffff80001374:	55                   	push   %rbp
+ffffffff80001375:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80001378:	fa                   	cli
+ffffffff80001379:	f4                   	hlt
+ffffffff8000137a:	eb fc                	jmp    ffffffff80001378 <_ZN6Kernel5PanicEv+0x4>
+
+ffffffff8000137c <_ZN6Kernel5PanicEPKc>:
+ffffffff8000137c:	55                   	push   %rbp
+ffffffff8000137d:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80001380:	48 83 ec 20          	sub    $0x20,%rsp
+ffffffff80001384:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
+ffffffff80001388:	48 8d 45 fd          	lea    -0x3(%rbp),%rax
+ffffffff8000138c:	be 00 00 ff 00       	mov    $0xff0000,%esi
+ffffffff80001391:	48 89 c7             	mov    %rax,%rdi
+ffffffff80001394:	e8 6f f9 ff ff       	call   ffffffff80000d08 <_ZN8Graphics5ColorC1Ej>
+ffffffff80001399:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ffffffff8000139d:	48 89 c2             	mov    %rax,%rdx
+ffffffff800013a0:	48 c7 c6 ab 1b 00 80 	mov    $0xffffffff80001bab,%rsi
+ffffffff800013a7:	0f b6 4d fd          	movzbl -0x3(%rbp),%ecx
+ffffffff800013ab:	0f b6 45 fe          	movzbl -0x2(%rbp),%eax
+ffffffff800013af:	48 c1 e0 08          	shl    $0x8,%rax
+ffffffff800013b3:	48 09 c1             	or     %rax,%rcx
+ffffffff800013b6:	0f b6 45 ff          	movzbl -0x1(%rbp),%eax
+ffffffff800013ba:	48 c1 e0 10          	shl    $0x10,%rax
+ffffffff800013be:	48 09 c8             	or     %rcx,%rax
+ffffffff800013c1:	48 89 c7             	mov    %rax,%rdi
+ffffffff800013c4:	b8 00 00 00 00       	mov    $0x0,%eax
+ffffffff800013c9:	e8 96 f8 ff ff       	call   ffffffff80000c64 <_ZN8Terminal6PrintfEN8Graphics5ColorEPKcz>
+ffffffff800013ce:	fa                   	cli
+ffffffff800013cf:	f4                   	hlt
+ffffffff800013d0:	eb fc                	jmp    ffffffff800013ce <_ZN6Kernel5PanicEPKc+0x52>
+
+ffffffff800013d2 <_ZN6Kernel5PanicEPKcz>:
+ffffffff800013d2:	55                   	push   %rbp
+ffffffff800013d3:	48 89 e5             	mov    %rsp,%rbp
+ffffffff800013d6:	48 83 ec 60          	sub    $0x60,%rsp
+ffffffff800013da:	48 89 7d a8          	mov    %rdi,-0x58(%rbp)
+ffffffff800013de:	48 89 75 d8          	mov    %rsi,-0x28(%rbp)
+ffffffff800013e2:	48 89 55 e0          	mov    %rdx,-0x20(%rbp)
+ffffffff800013e6:	48 89 4d e8          	mov    %rcx,-0x18(%rbp)
+ffffffff800013ea:	4c 89 45 f0          	mov    %r8,-0x10(%rbp)
+ffffffff800013ee:	4c 89 4d f8          	mov    %r9,-0x8(%rbp)
+ffffffff800013f2:	48 8d 45 ca          	lea    -0x36(%rbp),%rax
+ffffffff800013f6:	be 00 00 ff 00       	mov    $0xff0000,%esi
+ffffffff800013fb:	48 89 c7             	mov    %rax,%rdi
+ffffffff800013fe:	e8 05 f9 ff ff       	call   ffffffff80000d08 <_ZN8Graphics5ColorC1Ej>
+ffffffff80001403:	48 c7 c6 bc 1b 00 80 	mov    $0xffffffff80001bbc,%rsi
+ffffffff8000140a:	0f b7 55 ca          	movzwl -0x36(%rbp),%edx
+ffffffff8000140e:	0f b6 45 cc          	movzbl -0x34(%rbp),%eax
+ffffffff80001412:	48 c1 e0 10          	shl    $0x10,%rax
+ffffffff80001416:	48 09 d0             	or     %rdx,%rax
+ffffffff80001419:	48 89 c7             	mov    %rax,%rdi
+ffffffff8000141c:	b8 00 00 00 00       	mov    $0x0,%eax
+ffffffff80001421:	e8 3e f8 ff ff       	call   ffffffff80000c64 <_ZN8Terminal6PrintfEN8Graphics5ColorEPKcz>
+ffffffff80001426:	c7 45 b0 08 00 00 00 	movl   $0x8,-0x50(%rbp)
+ffffffff8000142d:	48 8d 45 10          	lea    0x10(%rbp),%rax
+ffffffff80001431:	48 89 45 b8          	mov    %rax,-0x48(%rbp)
+ffffffff80001435:	48 8d 45 d0          	lea    -0x30(%rbp),%rax
+ffffffff80001439:	48 89 45 c0          	mov    %rax,-0x40(%rbp)
+ffffffff8000143d:	48 8d 45 cd          	lea    -0x33(%rbp),%rax
+ffffffff80001441:	be 00 00 ff 00       	mov    $0xff0000,%esi
+ffffffff80001446:	48 89 c7             	mov    %rax,%rdi
+ffffffff80001449:	e8 ba f8 ff ff       	call   ffffffff80000d08 <_ZN8Graphics5ColorC1Ej>
+ffffffff8000144e:	48 8d 55 b0          	lea    -0x50(%rbp),%rdx
+ffffffff80001452:	48 8b 45 a8          	mov    -0x58(%rbp),%rax
+ffffffff80001456:	48 89 c6             	mov    %rax,%rsi
+ffffffff80001459:	0f b6 4d cd          	movzbl -0x33(%rbp),%ecx
+ffffffff8000145d:	0f b6 45 ce          	movzbl -0x32(%rbp),%eax
+ffffffff80001461:	48 c1 e0 08          	shl    $0x8,%rax
+ffffffff80001465:	48 09 c1             	or     %rax,%rcx
+ffffffff80001468:	0f b6 45 cf          	movzbl -0x31(%rbp),%eax
+ffffffff8000146c:	48 c1 e0 10          	shl    $0x10,%rax
+ffffffff80001470:	48 09 c8             	or     %rcx,%rax
+ffffffff80001473:	48 89 c7             	mov    %rax,%rdi
+ffffffff80001476:	e8 b7 f3 ff ff       	call   ffffffff80000832 <_ZN8Terminal7VPrintfEN8Graphics5ColorEPKcP13__va_list_tag>
+ffffffff8000147b:	fa                   	cli
+ffffffff8000147c:	f4                   	hlt
+ffffffff8000147d:	eb fc                	jmp    ffffffff8000147b <_ZN6Kernel5PanicEPKcz+0xa9>
+
+ffffffff8000147f <_Z9GetModulei>:
+ffffffff8000147f:	55                   	push   %rbp
+ffffffff80001480:	48 89 e5             	mov    %rsp,%rbp
+ffffffff80001483:	48 83 ec 08          	sub    $0x8,%rsp
+ffffffff80001487:	89 7d fc             	mov    %edi,-0x4(%rbp)
+ffffffff8000148a:	48 8b 05 a7 07 00 00 	mov    0x7a7(%rip),%rax        # ffffffff80001c38 <_ZL7modules+0x18>
+ffffffff80001491:	0f b6 00             	movzbl (%rax),%eax
+ffffffff80001494:	0f b6 c0             	movzbl %al,%eax
+ffffffff80001497:	39 45 fc             	cmp    %eax,-0x4(%rbp)
+ffffffff8000149a:	0f 9d c0             	setge  %al
+ffffffff8000149d:	84 c0                	test   %al,%al
+ffffffff8000149f:	74 07                	je     ffffffff800014a8 <_Z9GetModulei+0x29>
+ffffffff800014a1:	b8 00 00 00 00       	mov    $0x0,%eax
+ffffffff800014a6:	eb 21                	jmp    ffffffff800014c9 <_Z9GetModulei+0x4a>
+ffffffff800014a8:	48 8b 05 89 07 00 00 	mov    0x789(%rip),%rax        # ffffffff80001c38 <_ZL7modules+0x18>
+ffffffff800014af:	48 8b 48 08          	mov    0x8(%rax),%rcx
+ffffffff800014b3:	8b 45 fc             	mov    -0x4(%rbp),%eax
+ffffffff800014b6:	48 63 d0             	movslq %eax,%rdx
+ffffffff800014b9:	48 89 d0             	mov    %rdx,%rax
+ffffffff800014bc:	48 01 c0             	add    %rax,%rax
+ffffffff800014bf:	48 01 d0             	add    %rdx,%rax
+ffffffff800014c2:	48 c1 e0 03          	shl    $0x3,%rax
+ffffffff800014c6:	48 01 c8             	add    %rcx,%rax
+ffffffff800014c9:	c9                   	leave
+ffffffff800014ca:	c3                   	ret
+ffffffff800014cb:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+
+ffffffff800014d0 <ExceptionXFrameAssembler>:
+ffffffff800014d0:	55                   	push   %rbp
+ffffffff800014d1:	48 89 e5             	mov    %rsp,%rbp
+ffffffff800014d4:	50                   	push   %rax
+ffffffff800014d5:	53                   	push   %rbx
+ffffffff800014d6:	51                   	push   %rcx
+ffffffff800014d7:	52                   	push   %rdx
+ffffffff800014d8:	56                   	push   %rsi
+ffffffff800014d9:	57                   	push   %rdi
+ffffffff800014da:	41 57                	push   %r15
+ffffffff800014dc:	41 56                	push   %r14
+ffffffff800014de:	41 55                	push   %r13
+ffffffff800014e0:	41 54                	push   %r12
+ffffffff800014e2:	41 53                	push   %r11
+ffffffff800014e4:	41 52                	push   %r10
+ffffffff800014e6:	41 51                	push   %r9
+ffffffff800014e8:	41 50                	push   %r8
+ffffffff800014ea:	0f 20 c0             	mov    %cr0,%rax
+ffffffff800014ed:	50                   	push   %rax
+ffffffff800014ee:	0f 20 d0             	mov    %cr2,%rax
+ffffffff800014f1:	50                   	push   %rax
+ffffffff800014f2:	0f 20 d8             	mov    %cr3,%rax
+ffffffff800014f5:	50                   	push   %rax
+ffffffff800014f6:	0f 20 e0             	mov    %cr4,%rax
+ffffffff800014f9:	50                   	push   %rax
+ffffffff800014fa:	66 8c d8             	mov    %ds,%ax
+ffffffff800014fd:	50                   	push   %rax
+ffffffff800014fe:	6a 00                	push   $0x0
+ffffffff80001500:	66 b8 10 00          	mov    $0x10,%ax
+ffffffff80001504:	8e d8                	mov    %eax,%ds
+ffffffff80001506:	8e c0                	mov    %eax,%es
+ffffffff80001508:	8e d0                	mov    %eax,%ss
+ffffffff8000150a:	48 8d 7c 24 10       	lea    0x10(%rsp),%rdi
+ffffffff8000150f:	e8 a7 ec ff ff       	call   ffffffff800001bb <ISRExceptionHandler>
+ffffffff80001514:	58                   	pop    %rax
+ffffffff80001515:	58                   	pop    %rax
+ffffffff80001516:	8e d8                	mov    %eax,%ds
+ffffffff80001518:	8e c0                	mov    %eax,%es
+ffffffff8000151a:	58                   	pop    %rax
+ffffffff8000151b:	0f 22 e0             	mov    %rax,%cr4
+ffffffff8000151e:	58                   	pop    %rax
+ffffffff8000151f:	0f 22 d8             	mov    %rax,%cr3
+ffffffff80001522:	58                   	pop    %rax
+ffffffff80001523:	0f 22 d0             	mov    %rax,%cr2
+ffffffff80001526:	58                   	pop    %rax
+ffffffff80001527:	0f 22 c0             	mov    %rax,%cr0
+ffffffff8000152a:	41 58                	pop    %r8
+ffffffff8000152c:	41 59                	pop    %r9
+ffffffff8000152e:	41 5a                	pop    %r10
+ffffffff80001530:	41 5b                	pop    %r11
+ffffffff80001532:	41 5c                	pop    %r12
+ffffffff80001534:	41 5d                	pop    %r13
+ffffffff80001536:	41 5e                	pop    %r14
+ffffffff80001538:	41 5f                	pop    %r15
+ffffffff8000153a:	5f                   	pop    %rdi
+ffffffff8000153b:	5e                   	pop    %rsi
+ffffffff8000153c:	5a                   	pop    %rdx
+ffffffff8000153d:	59                   	pop    %rcx
+ffffffff8000153e:	5b                   	pop    %rbx
+ffffffff8000153f:	58                   	pop    %rax
+ffffffff80001540:	5d                   	pop    %rbp
+ffffffff80001541:	48 83 c4 10          	add    $0x10,%rsp
+ffffffff80001545:	fb                   	sti
+ffffffff80001546:	48 cf                	iretq
+
+ffffffff80001548 <ExceptionStub0>:
+ffffffff80001548:	6a 00                	push   $0x0
+ffffffff8000154a:	eb 84                	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff8000154c <ExceptionStub1>:
+ffffffff8000154c:	6a 00                	push   $0x0
+ffffffff8000154e:	6a 01                	push   $0x1
+ffffffff80001550:	e9 7b ff ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff80001555 <ExceptionStub2>:
+ffffffff80001555:	6a 00                	push   $0x0
+ffffffff80001557:	6a 02                	push   $0x2
+ffffffff80001559:	e9 72 ff ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff8000155e <ExceptionStub3>:
+ffffffff8000155e:	6a 00                	push   $0x0
+ffffffff80001560:	6a 03                	push   $0x3
+ffffffff80001562:	e9 69 ff ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff80001567 <ExceptionStub4>:
+ffffffff80001567:	6a 00                	push   $0x0
+ffffffff80001569:	6a 04                	push   $0x4
+ffffffff8000156b:	e9 60 ff ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff80001570 <ExceptionStub5>:
+ffffffff80001570:	6a 00                	push   $0x0
+ffffffff80001572:	6a 05                	push   $0x5
+ffffffff80001574:	e9 57 ff ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff80001579 <ExceptionStub6>:
+ffffffff80001579:	6a 00                	push   $0x0
+ffffffff8000157b:	6a 06                	push   $0x6
+ffffffff8000157d:	e9 4e ff ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff80001582 <ExceptionStub7>:
+ffffffff80001582:	6a 00                	push   $0x0
+ffffffff80001584:	6a 07                	push   $0x7
+ffffffff80001586:	e9 45 ff ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff8000158b <ExceptionStub8>:
+ffffffff8000158b:	6a 08                	push   $0x8
+ffffffff8000158d:	e9 3e ff ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff80001592 <ExceptionStub9>:
+ffffffff80001592:	6a 00                	push   $0x0
+ffffffff80001594:	6a 09                	push   $0x9
+ffffffff80001596:	e9 35 ff ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff8000159b <ExceptionStub10>:
+ffffffff8000159b:	6a 0a                	push   $0xa
+ffffffff8000159d:	e9 2e ff ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff800015a2 <ExceptionStub11>:
+ffffffff800015a2:	6a 0b                	push   $0xb
+ffffffff800015a4:	e9 27 ff ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff800015a9 <ExceptionStub12>:
+ffffffff800015a9:	6a 0c                	push   $0xc
+ffffffff800015ab:	e9 20 ff ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff800015b0 <ExceptionStub13>:
+ffffffff800015b0:	6a 0d                	push   $0xd
+ffffffff800015b2:	e9 19 ff ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff800015b7 <ExceptionStub14>:
+ffffffff800015b7:	6a 0e                	push   $0xe
+ffffffff800015b9:	e9 12 ff ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff800015be <ExceptionStub15>:
+ffffffff800015be:	6a 00                	push   $0x0
+ffffffff800015c0:	6a 0f                	push   $0xf
+ffffffff800015c2:	e9 09 ff ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff800015c7 <ExceptionStub16>:
+ffffffff800015c7:	6a 00                	push   $0x0
+ffffffff800015c9:	6a 10                	push   $0x10
+ffffffff800015cb:	e9 00 ff ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff800015d0 <ExceptionStub17>:
+ffffffff800015d0:	6a 11                	push   $0x11
+ffffffff800015d2:	e9 f9 fe ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff800015d7 <ExceptionStub18>:
+ffffffff800015d7:	6a 00                	push   $0x0
+ffffffff800015d9:	6a 12                	push   $0x12
+ffffffff800015db:	e9 f0 fe ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff800015e0 <ExceptionStub19>:
+ffffffff800015e0:	6a 00                	push   $0x0
+ffffffff800015e2:	6a 13                	push   $0x13
+ffffffff800015e4:	e9 e7 fe ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff800015e9 <ExceptionStub20>:
+ffffffff800015e9:	6a 00                	push   $0x0
+ffffffff800015eb:	6a 14                	push   $0x14
+ffffffff800015ed:	e9 de fe ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff800015f2 <ExceptionStub21>:
+ffffffff800015f2:	6a 00                	push   $0x0
+ffffffff800015f4:	6a 15                	push   $0x15
+ffffffff800015f6:	e9 d5 fe ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff800015fb <ExceptionStub22>:
+ffffffff800015fb:	6a 00                	push   $0x0
+ffffffff800015fd:	6a 16                	push   $0x16
+ffffffff800015ff:	e9 cc fe ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff80001604 <ExceptionStub23>:
+ffffffff80001604:	6a 00                	push   $0x0
+ffffffff80001606:	6a 17                	push   $0x17
+ffffffff80001608:	e9 c3 fe ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff8000160d <ExceptionStub24>:
+ffffffff8000160d:	6a 00                	push   $0x0
+ffffffff8000160f:	6a 18                	push   $0x18
+ffffffff80001611:	e9 ba fe ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff80001616 <ExceptionStub25>:
+ffffffff80001616:	6a 00                	push   $0x0
+ffffffff80001618:	6a 19                	push   $0x19
+ffffffff8000161a:	e9 b1 fe ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff8000161f <ExceptionStub26>:
+ffffffff8000161f:	6a 00                	push   $0x0
+ffffffff80001621:	6a 1a                	push   $0x1a
+ffffffff80001623:	e9 a8 fe ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff80001628 <ExceptionStub27>:
+ffffffff80001628:	6a 00                	push   $0x0
+ffffffff8000162a:	6a 1b                	push   $0x1b
+ffffffff8000162c:	e9 9f fe ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff80001631 <ExceptionStub28>:
+ffffffff80001631:	6a 00                	push   $0x0
+ffffffff80001633:	6a 1c                	push   $0x1c
+ffffffff80001635:	e9 96 fe ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff8000163a <ExceptionStub29>:
+ffffffff8000163a:	6a 00                	push   $0x0
+ffffffff8000163c:	6a 1d                	push   $0x1d
+ffffffff8000163e:	e9 8d fe ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff80001643 <ExceptionStub30>:
+ffffffff80001643:	6a 1e                	push   $0x1e
+ffffffff80001645:	e9 86 fe ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff8000164a <ExceptionStub31>:
+ffffffff8000164a:	6a 00                	push   $0x0
+ffffffff8000164c:	6a 1f                	push   $0x1f
+ffffffff8000164e:	e9 7d fe ff ff       	jmp    ffffffff800014d0 <ExceptionXFrameAssembler>
+
+ffffffff80001653 <ExceptionStubTable>:
+ffffffff80001653:	48 15 00 80 ff ff    	adc    $0xffffffffffff8000,%rax
+ffffffff80001659:	ff                   	(bad)
+ffffffff8000165a:	ff 4c 15 00          	decl   0x0(%rbp,%rdx,1)
+ffffffff8000165e:	80 ff ff             	cmp    $0xff,%bh
+ffffffff80001661:	ff                   	(bad)
+ffffffff80001662:	ff 55 15             	call   *0x15(%rbp)
+ffffffff80001665:	00 80 ff ff ff ff    	add    %al,-0x1(%rax)
+ffffffff8000166b:	5e                   	pop    %rsi
+ffffffff8000166c:	15 00 80 ff ff       	adc    $0xffff8000,%eax
+ffffffff80001671:	ff                   	(bad)
+ffffffff80001672:	ff 67 15             	jmp    *0x15(%rdi)
+ffffffff80001675:	00 80 ff ff ff ff    	add    %al,-0x1(%rax)
+ffffffff8000167b:	70 15                	jo     ffffffff80001692 <ExceptionStubTable+0x3f>
+ffffffff8000167d:	00 80 ff ff ff ff    	add    %al,-0x1(%rax)
+ffffffff80001683:	79 15                	jns    ffffffff8000169a <ExceptionStubTable+0x47>
+ffffffff80001685:	00 80 ff ff ff ff    	add    %al,-0x1(%rax)
+ffffffff8000168b:	82                   	(bad)
+ffffffff8000168c:	15 00 80 ff ff       	adc    $0xffff8000,%eax
+ffffffff80001691:	ff                   	(bad)
+ffffffff80001692:	ff 8b 15 00 80 ff    	decl   -0x7fffeb(%rbx)
+ffffffff80001698:	ff                   	(bad)
+ffffffff80001699:	ff                   	(bad)
+ffffffff8000169a:	ff 92 15 00 80 ff    	call   *-0x7fffeb(%rdx)
+ffffffff800016a0:	ff                   	(bad)
+ffffffff800016a1:	ff                   	(bad)
+ffffffff800016a2:	ff 9b 15 00 80 ff    	lcall  *-0x7fffeb(%rbx)
+ffffffff800016a8:	ff                   	(bad)
+ffffffff800016a9:	ff                   	(bad)
+ffffffff800016aa:	ff a2 15 00 80 ff    	jmp    *-0x7fffeb(%rdx)
+ffffffff800016b0:	ff                   	(bad)
+ffffffff800016b1:	ff                   	(bad)
+ffffffff800016b2:	ff a9 15 00 80 ff    	ljmp   *-0x7fffeb(%rcx)
+ffffffff800016b8:	ff                   	(bad)
+ffffffff800016b9:	ff                   	(bad)
+ffffffff800016ba:	ff b0 15 00 80 ff    	push   -0x7fffeb(%rax)
+ffffffff800016c0:	ff                   	(bad)
+ffffffff800016c1:	ff                   	(bad)
+ffffffff800016c2:	ff b7 15 00 80 ff    	push   -0x7fffeb(%rdi)
+ffffffff800016c8:	ff                   	(bad)
+ffffffff800016c9:	ff                   	(bad)
+ffffffff800016ca:	ff                   	(bad)
+ffffffff800016cb:	be 15 00 80 ff       	mov    $0xff800015,%esi
+ffffffff800016d0:	ff                   	(bad)
+ffffffff800016d1:	ff                   	(bad)
+ffffffff800016d2:	ff c7                	inc    %edi
+ffffffff800016d4:	15 00 80 ff ff       	adc    $0xffff8000,%eax
+ffffffff800016d9:	ff                   	(bad)
+ffffffff800016da:	ff d0                	call   *%rax
+ffffffff800016dc:	15 00 80 ff ff       	adc    $0xffff8000,%eax
+ffffffff800016e1:	ff                   	(bad)
+ffffffff800016e2:	ff d7                	call   *%rdi
+ffffffff800016e4:	15 00 80 ff ff       	adc    $0xffff8000,%eax
+ffffffff800016e9:	ff                   	(bad)
+ffffffff800016ea:	ff e0                	jmp    *%rax
+ffffffff800016ec:	15 00 80 ff ff       	adc    $0xffff8000,%eax
+ffffffff800016f1:	ff                   	(bad)
+ffffffff800016f2:	ff                   	(bad)
+ffffffff800016f3:	e9 15 00 80 ff       	jmp    ffffffff7f80170d <DATA_SEL+0xffffffff7f8016fd>
+ffffffff800016f8:	ff                   	(bad)
+ffffffff800016f9:	ff                   	(bad)
+ffffffff800016fa:	ff f2                	push   %rdx
+ffffffff800016fc:	15 00 80 ff ff       	adc    $0xffff8000,%eax
+ffffffff80001701:	ff                   	(bad)
+ffffffff80001702:	ff                   	(bad)
+ffffffff80001703:	fb                   	sti
+ffffffff80001704:	15 00 80 ff ff       	adc    $0xffff8000,%eax
+ffffffff80001709:	ff                   	(bad)
+ffffffff8000170a:	ff 04 16             	incl   (%rsi,%rdx,1)
+ffffffff8000170d:	00 80 ff ff ff ff    	add    %al,-0x1(%rax)
+ffffffff80001713:	0d 16 00 80 ff       	or     $0xff800016,%eax
+ffffffff80001718:	ff                   	(bad)
+ffffffff80001719:	ff                   	(bad)
+ffffffff8000171a:	ff 16                	call   *(%rsi)
+ffffffff8000171c:	16                   	(bad)
+ffffffff8000171d:	00 80 ff ff ff ff    	add    %al,-0x1(%rax)
+ffffffff80001723:	1f                   	(bad)
+ffffffff80001724:	16                   	(bad)
+ffffffff80001725:	00 80 ff ff ff ff    	add    %al,-0x1(%rax)
+ffffffff8000172b:	28 16                	sub    %dl,(%rsi)
+ffffffff8000172d:	00 80 ff ff ff ff    	add    %al,-0x1(%rax)
+ffffffff80001733:	31 16                	xor    %edx,(%rsi)
+ffffffff80001735:	00 80 ff ff ff ff    	add    %al,-0x1(%rax)
+ffffffff8000173b:	3a 16                	cmp    (%rsi),%dl
+ffffffff8000173d:	00 80 ff ff ff ff    	add    %al,-0x1(%rax)
+ffffffff80001743:	43 16                	rex.XB (bad)
+ffffffff80001745:	00 80 ff ff ff ff    	add    %al,-0x1(%rax)
+ffffffff8000174b:	4a 16                	rex.WX (bad)
+ffffffff8000174d:	00 80 ff ff ff ff    	add    %al,-0x1(%rax)
+ffffffff80001753:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+ffffffff8000175a:	00 00 00 
+ffffffff8000175d:	0f 1f 00             	nopl   (%rax)
+
+ffffffff80001760 <install_gdt>:
+ffffffff80001760:	fa                   	cli
+ffffffff80001761:	0f 01 17             	lgdt   (%rdi)
+ffffffff80001764:	6a 08                	push   $0x8
+ffffffff80001766:	48 8d 05 03 00 00 00 	lea    0x3(%rip),%rax        # ffffffff80001770 <install_gdt.reload_segments>
+ffffffff8000176d:	50                   	push   %rax
+ffffffff8000176e:	48 cb                	lretq
+
+ffffffff80001770 <install_gdt.reload_segments>:
+ffffffff80001770:	66 b8 10 00          	mov    $0x10,%ax
+ffffffff80001774:	8e d8                	mov    %eax,%ds
+ffffffff80001776:	8e c0                	mov    %eax,%es
+ffffffff80001778:	8e e0                	mov    %eax,%fs
+ffffffff8000177a:	8e e8                	mov    %eax,%gs
+ffffffff8000177c:	8e d0                	mov    %eax,%ss
+ffffffff8000177e:	c3                   	ret
