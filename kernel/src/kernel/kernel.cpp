@@ -2,10 +2,12 @@
 #include <drivers/graphics.hpp>
 #include <drivers/terminal.hpp>
 #include <cpu/gdt/gdt.hpp>
+#include <cpu/interrupt/idt.hpp>
 
 extern "C" void _start()
 {
     InitGDT();
+    InitIDT();
     Graphics::Init();
     Terminal::Init();
     Terminal::Printf(0xFF00FF, "Hello world! Welcome to %#%s", 0xFFFF00, "viperOS");

@@ -87,6 +87,7 @@ namespace Terminal
         case '\n':
             col = 0;
             row += 8;
+            break;
         default:
             PutChar(c, col, row, color);
             col += 8;
@@ -95,6 +96,7 @@ namespace Terminal
                 col = 0;
                 row += 8;
             }
+            break;
         }
     }
 
