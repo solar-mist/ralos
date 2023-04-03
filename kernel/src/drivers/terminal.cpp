@@ -1,6 +1,5 @@
 #include <drivers/terminal.hpp>
 #include <kernel/modules.hpp>
-#include <stdarg.h>
 
 unsigned int StrLen(char* str)
 {   
@@ -116,12 +115,9 @@ namespace Terminal
     }
 
 
-    void Printf(const char* format, ...)
+    void VPrintf(Graphics::Color color, const char* format, va_list arg)
     {
-        va_list arg;
-        va_start(arg, format);
         int i = 0;
-        Graphics::Color color = 0xFFFFFF;
         while(format[i])
         {
             if (format[i] == '%')
@@ -167,6 +163,13 @@ namespace Terminal
             else
                 PutChar(format[i++], color);
         }
+    }
+
+    void Printf(Graphics::Color color, const char* format, ...)
+    {
+        va_list arg;
+        va_start(arg, format);
+        VPrintf(color, format, arg);
         va_end(arg);
     }
 }
