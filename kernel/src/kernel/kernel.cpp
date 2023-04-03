@@ -13,6 +13,11 @@ extern "C" void _start()
     Terminal::Init();
     Terminal::Printf(0xFF00FF, "Hello world! Welcome to %#%s", 0xFFFF00, "viperOS");
     PMM::Init();
+    PMM::DumpStats();
+    void* addr = PMM::GetPages(50);
+    PMM::DumpStats();
+    PMM::FreePages(addr);
+    PMM::DumpStats();
     for(;;);
 }
 

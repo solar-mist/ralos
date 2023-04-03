@@ -25,7 +25,7 @@ $(TARGET): kernel viper-boot
 	rm -rf boot
 
 run: $(TARGET) ovmf
-	qemu-system-x86_64 -bios ovmf/OVMF.fd -net none -M q35 -M smm=off -d int -drive file=$<,format=raw,if=ide,index=0,media=disk
+	qemu-system-x86_64 -bios ovmf/OVMF.fd -net none -M q35 -M smm=off -d int -drive file=$<,format=raw,if=ide,index=0,media=disk -m 2G
 
 clean:
 	$(MAKE) -C kernel clean

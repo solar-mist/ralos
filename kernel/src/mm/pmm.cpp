@@ -36,7 +36,7 @@ namespace PMM
         FreeListBegin = nullptr;
         for(size_t i = 0; i < MemmapRequest.response->count; i++)
         {
-            ViperMemmapEntry* entry = MemmapRequest.response->entries[i];
+            ViperMemmapEntry* entry = MemmapRequest.response->entries + i;
 
             if(entry->base + entry->size < 0x100000)
                 continue;
@@ -53,7 +53,7 @@ namespace PMM
         Header* current = FreeListBegin;
         for(size_t i = 0; i < MemmapRequest.response->count; i++)
         {
-            ViperMemmapEntry* entry = MemmapRequest.response->entries[i];
+            ViperMemmapEntry* entry = MemmapRequest.response->entries + i;
 
             if(entry->base + entry->size < 0x100000)
                 continue;
