@@ -33,17 +33,18 @@ namespace Graphics
         return m_B;
     }
 
-    static volatile struct ViperFramebufferRequest fbReq = {
+    static volatile ViperFramebufferRequest fbReq = {
         .id = VIPER_FRAMEBUFFER
     };
 
-    struct FB framebuffer;
+    FB framebuffer;
 
     void Init()
     {
         framebuffer = {
             fbReq.response->base, fbReq.response->pitch,
-            fbReq.response->width, fbReq.response->height
+            fbReq.response->width, fbReq.response->height,
+            fbReq.response->size
         };
     }
     

@@ -11,6 +11,8 @@ SECTIONS
     /* Place the kernel at address 0xffffffff80000000*/
     . = 0xffffffff80000000;
 
+    _kernel_start = .;
+
     .text : {
         *(.text .text.*)
     }
@@ -28,6 +30,8 @@ SECTIONS
         *(COMMON)
         *(.bss .bss.*)
     }
+
+    _kernel_end = .;
 
     /DISCARD/ : {
         *(.eh_frame)

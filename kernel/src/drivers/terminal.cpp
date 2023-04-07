@@ -139,7 +139,7 @@ namespace Terminal
                     char buf[32] = "0x";
                     int64_t n = va_arg(arg, int64_t);
                     int count = IToA(n, buf + 2, 16);
-                    PutString(buf, count, color);
+                    PutString(buf, count + 2, color);
                     i++;
                 }
                 else if (format[i] == 'c')

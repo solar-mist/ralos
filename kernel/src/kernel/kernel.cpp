@@ -3,7 +3,8 @@
 #include <drivers/terminal.hpp>
 #include <cpu/gdt/gdt.hpp>
 #include <cpu/interrupt/idt.hpp>
-#include <mm/pmm.h>
+#include <mm/pmm.hpp>
+#include <mm/paging.hpp>
 
 extern "C" void _start()
 {
@@ -13,11 +14,9 @@ extern "C" void _start()
     Terminal::Init();
     Terminal::Printf(0xFF00FF, "Hello world! Welcome to %#%s", 0xFFFF00, "viperOS");
     PMM::Init();
-    PMM::DumpStats();
-    void* addr = PMM::GetPages(50);
-    PMM::DumpStats();
-    PMM::FreePages(addr);
-    PMM::DumpStats();
+    Paging::Init();
+    Terminal::Printf(0xFF00FF, "\nHello world! Welcome to %#%s", 0xFFFF00, "viperOS");
+    asm volatile("mov $0x6969, %rax");
     for(;;);
 }
 

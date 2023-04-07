@@ -10,6 +10,7 @@ namespace Graphics
         uint64_t pitch;
         uint64_t horiz;
         uint64_t vert;
+        uint64_t size;
     };
 
     class Color

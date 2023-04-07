@@ -1,13 +1,7 @@
-#include <mm/pmm.h>
+#include <mm/pmm.hpp>
 #include <drivers/terminal.hpp>
 #include <viper.h>
 #include <stddef.h>
-
-constexpr uint32_t PAGE_SIZE = 0x1000;
-[[gnu::always_inline]] constexpr inline uint32_t NPAGES(uint64_t n)
-{
-    return (n + PAGE_SIZE - 1) / PAGE_SIZE;
-}
 
 namespace PMM
 {
@@ -30,6 +24,8 @@ namespace PMM
     static volatile ViperMemmapRequest MemmapRequest = {
         .id = VIPER_MEMMAP
     };
+
+    ViperMemmapResponse* MemMap;
 
     void Init()
     {
@@ -69,6 +65,7 @@ namespace PMM
                     current->next = (Header*)entry;
             }
         }
+        MemMap = MemmapRequest.response;
     }
 
     void* GetPage()
