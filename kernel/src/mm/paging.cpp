@@ -25,15 +25,6 @@ static volatile ViperKernelLocationRequest kernelLocation = {
     .id = VIPER_KERNEL_LOCATION
 };
 
-[[gnu::always_inline]] constexpr inline uint64_t VirtToPhys(uint64_t addr)
-{
-    return addr - 0xFFFF800000000000;
-}
-[[gnu::always_inline]] constexpr inline uint64_t PhysToVirt(uint64_t addr)
-{
-    return addr + 0xFFFF800000000000;
-}
-
 extern char _kernel_start[];
 extern char _kernel_end[];
 
@@ -43,18 +34,18 @@ namespace Paging
 
     #define PRESENT_WRITABLE 0x3
 
-    static inline uint64_t* Entry(uint64_t pt)
+    static inline uint64_t Entry(uint64_t pt)
     {
-        return (uint64_t*)(pt & ~0xFFFF000000000FFF);
+        return (pt & ~0xFFFF000000000FFF);
     }
 
     void Init()
     {
         pml4 = (uint64_t*)PMM::GetPage();
         memset((uint8_t*)pml4, 0, PAGE_SIZE);
-        pml4 = Entry((uint64_t)pml4);
+        pml4 = (uint64_t*)Entry((uint64_t)pml4);
 
-        MapPages((uint64_t)kernelLocation.response->physicalBase, (uint64_t)kernelLocation.response->virtualBase, 3, NPAGES(_kernel_end - _kernel_start));
+        MapPages((uint64_t)kernelLocation.response->physicalBase, (uint64_t)kernelLocation.response->virtualBase, 7, NPAGES(_kernel_end - _kernel_start));
         MapPages(4096, 0xFFFF800000000000, 3, NPAGES(0x40000000));
         
         for(size_t i = 0; i < PMM::MemMap->count; i++)
@@ -85,7 +76,7 @@ namespace Paging
         }
 
         uint64_t shift = 48;
-        uint64_t* pt = Entry((uint64_t)pml4);
+        uint64_t* pt = (uint64_t*)PhysToVirt(Entry((uint64_t)pml4));
         uint64_t idx;
         for(char i = 0; i < 4; i++)
         {
@@ -97,10 +88,10 @@ namespace Paging
             if(!(pt[idx] & 0x1))
             {
                 pt[idx] = (uint64_t)PMM::GetPage();
-                memset((uint8_t*)Entry(pt[idx]), 0, PAGE_SIZE);
+                memset((uint8_t*)PhysToVirt(Entry(pt[idx])), 0, PAGE_SIZE);
                 pt[idx] |= Flags;
             }
-            pt = Entry(pt[idx]);
+            pt = (uint64_t*)PhysToVirt(Entry(pt[idx]));
         }
         pt[idx] = PhysAddr | Flags;
     }
@@ -109,27 +100,5 @@ namespace Paging
     {
         for(uint64_t i = 0; i < Npages * PAGE_SIZE; i += PAGE_SIZE)
             MapPage(PhysAddr + i, VirtAddr + i, Flags);
-    }
-
-    uint64_t GetPhysAddr(uint64_t VirtAddr)
-    {
-        VirtAddr &= ~0xFFF;
-
-        uint64_t shift = 48;
-        uint64_t* pt = Entry((uint64_t)pml4);
-        uint64_t idx;
-        for(char i = 0; i < 4; i++)
-        {
-            shift -= 9;
-            idx = (VirtAddr >> shift) & 0x1FF;
-            if(i == 3)
-                break;
-            
-            if(!(pt[idx] & 0x1))
-                return 0xF;
-            pt = Entry(pt[idx]);
-        }
-
-        return pt[idx] & ~0xFFFF000000000FFF;
     }
 }

@@ -9,6 +9,15 @@ constexpr int PAGE_SIZE = 0x1000;
     return (n + PAGE_SIZE - 1) / PAGE_SIZE;
 }
 
+[[gnu::always_inline]] constexpr inline uint64_t VirtToPhys(uint64_t addr)
+{
+    return addr - 0xFFFF800000000000;
+}
+[[gnu::always_inline]] constexpr inline uint64_t PhysToVirt(uint64_t addr)
+{
+    return addr + 0xFFFF800000000000;
+}
+
 namespace PMM
 {
     void Init();

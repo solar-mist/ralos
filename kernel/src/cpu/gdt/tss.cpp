@@ -1,6 +1,13 @@
 #include <cpu/gdt/tss.hpp>
 #include <cpu/gdt/gdt.hpp>
 #include <mm/pmm.hpp>
+#include <stddef.h>
+
+void memcpy(void* dest, void* src, size_t count)
+{
+    for(size_t i = 0; i < count; i++)
+        ((char*)dest)[i] = ((char*)src)[i];
+}
 
 TSSDescriptor tss;
 
@@ -9,10 +16,13 @@ extern "C" void install_tss();
 
 void InitTSS()
 {
-    tss.rsp0 = (uint64_t)PMM::GetPage();
+    tss.rsp0 = PhysToVirt((uint64_t)PMM::GetPage()) + 0xFFF;
 
-    gdt[5] = GDTDescriptor(((unsigned long long)&tss) & 0xFFFFFFFF, sizeof(tss), 0x89, 0);
-    gdt[6] = GDTDescriptor(((((unsigned long long)&tss) >> 32) & 0xFFFFFFFF), 0, 0, 0);
+    uint32_t tssLow  = ((uint64_t)&tss) & 0x00000000000000000000000000FFFFFFFF;
+    uint32_t tssHigh = (((uint64_t)&tss) >> 32) & 0xFFFFFFFF;
+
+    gdt[5] = GDTDescriptor(tssLow,  sizeof(tss), 0x89, 0);
+    memcpy(&gdt[6], &tssHigh, sizeof(tssHigh));
 
     install_tss();
 }

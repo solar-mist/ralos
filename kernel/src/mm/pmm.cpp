@@ -74,10 +74,10 @@ namespace PMM
 
             if(entry->type == ViperMemmapUsable)
             {
-                MemoryRegion* region = new((char*)entry->base) MemoryRegion(entry->size);
+                MemoryRegion* region = new((char*)PhysToVirt(entry->base)) MemoryRegion(entry->size);
                 uint64_t bitmapSize = region->totalSize / (PAGE_SIZE * 8);
 
-                region->bitmap = new((char*)entry->base + sizeof(MemoryRegion)) uint8_t[bitmapSize];
+                region->bitmap = new((char*)PhysToVirt(entry->base + sizeof(MemoryRegion))) uint8_t[bitmapSize];
 
                 region->base = (uint8_t*)(((entry->base + (bitmapSize) + sizeof(MemoryRegion)) & ~0xFFF) + 0x1000);
                 region->totalSize -= NPAGES(entry->base + (bitmapSize) + sizeof(MemoryRegion));
