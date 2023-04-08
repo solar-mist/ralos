@@ -6,6 +6,7 @@ ovmf/
 *.hdd
 *.o
 *.EFI
+*.EXE
 *.json
 
 build

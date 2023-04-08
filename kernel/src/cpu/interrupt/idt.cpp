@@ -24,6 +24,7 @@ IDTEntry::IDTEntry()
 {}
 
 constexpr uint8_t DEFUALT_FLAGS = 0x8E;
+constexpr uint8_t USER_MOD      = 0x60;
 
 void InitIDT()
 {

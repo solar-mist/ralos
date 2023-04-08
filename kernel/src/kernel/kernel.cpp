@@ -31,7 +31,7 @@ extern "C" void _start()
     Paging::MapPage((uint64_t)PMM::GetPage(), 0x400000, 7); // Stack
     Paging::MapPage((uint64_t)PMM::GetPage(), 0x4001000, 7); // Process code
     *(uint16_t*)0x4001000 = 0xfeeb; // Loop forever - eb fe
-    
+
     enter_usermode((void(*)())0x4001000, (void*)0x400FFF);
 
     for(;;);
