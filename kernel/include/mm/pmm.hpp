@@ -17,7 +17,7 @@ namespace PMM
     void  FreePage(void* address);
 
     void* GetPages(uint32_t npages);
-    void  FreePages(void* address);
+    void  FreePages(void* address, uint32_t npages);
 
     void DumpStats();
 }

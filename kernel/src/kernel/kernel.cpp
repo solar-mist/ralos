@@ -14,8 +14,6 @@ extern "C" void _start()
     Terminal::Init();
     Terminal::Printf(0xFF00FF, "Hello world! Welcome to %#%s", 0xFFFF00, "viperOS");
     PMM::Init();
-    Paging::Init();
-    Terminal::Printf(0xFF00FF, "\nHello world! Welcome to %#%s", 0xFFFF00, "viperOS");
     asm volatile("mov $0x6969, %rax");
     for(;;);
 }
