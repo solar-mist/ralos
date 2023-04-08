@@ -12,9 +12,9 @@ extern "C" void _start()
     InitIDT();
     Graphics::Init();
     Terminal::Init();
-    Terminal::Printf(0xFF00FF, "Hello world! Welcome to %#%s", 0xFFFF00, "viperOS");
     PMM::Init();
-    asm volatile("mov $0x6969, %rax");
+    Paging::Init();
+    Terminal::Printf(0xFF00FF, "Hello world! Welcome to %#%s\n", 0xFFFF00, "viperOS");
     for(;;);
 }
 

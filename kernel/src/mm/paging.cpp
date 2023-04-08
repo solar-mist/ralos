@@ -55,10 +55,8 @@ namespace Paging
         pml4 = Entry((uint64_t)pml4);
 
         MapPages((uint64_t)kernelLocation.response->physicalBase, (uint64_t)kernelLocation.response->virtualBase, 3, NPAGES(_kernel_end - _kernel_start));
-        MapPages(4096, 0xFFFF800000000000, 3, 2);
-        //MapPages(0x69000, 0xDEADBEEF, 3, 1);
-        //MapPages(0x1000, 0x1000, 3, 2);
-        /*
+        MapPages(4096, 0xFFFF800000000000, 3, NPAGES(0x40000000));
+        
         for(size_t i = 0; i < PMM::MemMap->count; i++)
         {
             ViperMemmapEntry* entry = PMM::MemMap->entries + i;
@@ -67,12 +65,11 @@ namespace Paging
                 continue;
 
             MapPages(entry->base, entry->base + 0xFFFF800000000000, 3, NPAGES(entry->size));
-        }*/
+        }
 
         MapPages((uint64_t)Graphics::framebuffer.base - 0xFFFF800000000000, (uint64_t)Graphics::framebuffer.base, 3, NPAGES(Graphics::framebuffer.size));
  
         asm volatile("mov %0, %%rax; mov %%rax, %%cr3" : : "m"(pml4));
-        for(;;);
     }
 
     void MapPage(uint64_t PhysAddr, uint64_t VirtAddr, uint16_t Flags)
