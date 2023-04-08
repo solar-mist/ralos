@@ -17,7 +17,6 @@ ovmf:
 	cd ovmf && curl -Lo OVMF-X64.zip https://efi.akeo.ie/OVMF/OVMF-X64.zip && unzip OVMF-X64.zip
 
 $(TARGET): kernel viper-boot
-	$(MAKE) -C viper-boot
 	cp viper-boot/BOOTX64.EFI viper-boot/build ./
 	mkdir -p boot
 	cp viper.cfg $(KERNEL) $(MODULES) boot/

@@ -4,6 +4,7 @@
 #include <drivers/pic.hpp>
 #include <drivers/pit.hpp>
 #include <cpu/gdt/gdt.hpp>
+#include <cpu/gdt/tss.hpp>
 #include <cpu/interrupt/idt.hpp>
 #include <mm/pmm.hpp>
 #include <mm/paging.hpp>
@@ -11,6 +12,7 @@
 extern "C" void _start()
 {
     InitGDT();
+    InitTSS();
     InitIDT();
     Graphics::Init();
     Terminal::Init();
