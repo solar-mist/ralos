@@ -28,8 +28,6 @@ extern "C" void _start()
     PIC::Init();
     PIT::Init(1197);
 
-    Terminal::Printf(0xFF00, "Welcome to viperOS\n");
-
     Paging::MapPage((uint64_t)PMM::GetPage(), 0x300000, 7); // Stack
     ELF::Executable testProc = ELF::ParseELF(GetModule(1)->address);
 

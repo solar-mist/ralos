@@ -8,6 +8,7 @@ static bool vectors[256];
 
 extern "C" uint64_t ExceptionStubTable[];
 extern "C" uint64_t IRQStubTable[];
+extern "C" uint64_t SyscallHandler;
 
 IDTEntry::IDTEntry(uint64_t isr, uint8_t flags, uint8_t ist)
 {
@@ -24,7 +25,7 @@ IDTEntry::IDTEntry()
 {}
 
 constexpr uint8_t DEFUALT_FLAGS = 0x8E;
-constexpr uint8_t USER_MOD      = 0x60;
+constexpr uint8_t USER_MODE     = 0x60;
 
 void InitIDT()
 {
@@ -41,6 +42,8 @@ void InitIDT()
         idt[vector] = IDTEntry(IRQStubTable[vector - 32], DEFUALT_FLAGS, 0);
         vectors[vector] = true;
     }
+    idt[0x69] = IDTEntry((uint64_t)&SyscallHandler, DEFUALT_FLAGS | USER_MODE, 0);
+    vectors[0x69] = true;
 
     asm volatile("lidt %0" : : "m"(idtr));
     asm volatile("sti");
