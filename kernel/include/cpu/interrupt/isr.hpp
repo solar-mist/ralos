@@ -2,7 +2,7 @@
 #define CPU_INTERRUPT_ISR_HPP
 #include <stdint.h>
 
-struct ISRXFrame
+struct InterruptFrame
 {
     struct {
         uint64_t    cr4;
@@ -39,5 +39,7 @@ struct ISRXFrame
         uint64_t    dss;
     } BaseFrame;
 };
+
+using InterruptHandler = void(*)(InterruptFrame* frame);
 
 #endif

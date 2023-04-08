@@ -7,6 +7,7 @@ static IDTPointer idtr;
 static bool vectors[256];
 
 extern "C" uint64_t ExceptionStubTable[];
+extern "C" uint64_t IRQStubTable[];
 
 IDTEntry::IDTEntry(uint64_t isr, uint8_t flags, uint8_t ist)
 {
@@ -23,7 +24,6 @@ IDTEntry::IDTEntry()
 {}
 
 constexpr uint8_t DEFUALT_FLAGS = 0x8E;
-constexpr uint8_t TRAP_GATE     = 0x01;
 
 void InitIDT()
 {
@@ -32,7 +32,12 @@ void InitIDT()
 
     for(uint8_t vector = 0; vector < 32; vector++)
     {
-        idt[vector] = IDTEntry(ExceptionStubTable[vector], DEFUALT_FLAGS | TRAP_GATE, 0);
+        idt[vector] = IDTEntry(ExceptionStubTable[vector], DEFUALT_FLAGS, 0);
+        vectors[vector] = true;
+    }
+    for(uint8_t vector = 32; vector < 32 + 16; vector++)
+    {
+        idt[vector] = IDTEntry(IRQStubTable[vector - 32], DEFUALT_FLAGS, 0);
         vectors[vector] = true;
     }
 

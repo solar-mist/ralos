@@ -1,3 +1,4 @@
+#include <cpu/interrupt/exception.hpp>
 #include <cpu/interrupt/isr.hpp>
 #include <drivers/terminal.hpp>
 
@@ -36,7 +37,9 @@ constexpr const char* exceptions[] = {
     "Reserved"
 };
 
-extern "C" void ISRExceptionHandler(ISRXFrame* frame)
+static InterruptHandler handlers[32];
+
+extern "C" void ISRExceptionHandler(InterruptFrame* frame)
 {
     Terminal::Printf(0xFF0000, "\nAn exception occurred: %d - %s", frame->BaseFrame.vector, exceptions[frame->BaseFrame.vector]);
     for(;;)

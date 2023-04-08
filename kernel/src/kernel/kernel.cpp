@@ -1,6 +1,8 @@
 #include <kernel/kernel.hpp>
 #include <drivers/graphics.hpp>
 #include <drivers/terminal.hpp>
+#include <drivers/pic.hpp>
+#include <drivers/pit.hpp>
 #include <cpu/gdt/gdt.hpp>
 #include <cpu/interrupt/idt.hpp>
 #include <mm/pmm.hpp>
@@ -14,7 +16,9 @@ extern "C" void _start()
     Terminal::Init();
     PMM::Init();
     Paging::Init();
-    Terminal::Printf(0xFF00FF, "Hello world! Welcome to %#%s\n", 0xFFFF00, "viperOS");
+    PIC::Init();
+    Terminal::Printf(0xFF00, "Welcome to viperOS\n");
+    PIT::Init(1197);
     for(;;);
 }
 
