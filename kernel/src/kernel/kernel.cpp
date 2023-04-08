@@ -11,11 +11,6 @@
 
 extern "C" void enter_usermode(void (*func)(), void* stack);
 
-void test()
-{
-    for(;;);
-}
-
 extern "C" void _start()
 {
     InitGDT();
@@ -33,10 +28,12 @@ extern "C" void _start()
 
     Terminal::Printf(0xFF00, "Welcome to viperOS\n");
 
-    void* stack = PMM::GetPage();
-    Paging::MapPage((uint64_t)stack, 0x400000, 7);
+    Paging::MapPage((uint64_t)PMM::GetPage(), 0x400000, 7); // Stack
+    Paging::MapPage((uint64_t)PMM::GetPage(), 0x4001000, 7); // Process code
+    *(uint16_t*)0x4001000 = 0xfeeb; // Loop forever - eb fe
+    
+    enter_usermode((void(*)())0x4001000, (void*)0x400FFF);
 
-    enter_usermode(test, (void*)0x400FFF);
     for(;;);
 }
 

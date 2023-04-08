@@ -45,7 +45,7 @@ namespace Paging
         memset((uint8_t*)pml4, 0, PAGE_SIZE);
         pml4 = (uint64_t*)Entry((uint64_t)pml4);
 
-        MapPages((uint64_t)kernelLocation.response->physicalBase, (uint64_t)kernelLocation.response->virtualBase, 7, NPAGES(_kernel_end - _kernel_start));
+        MapPages((uint64_t)kernelLocation.response->physicalBase, (uint64_t)kernelLocation.response->virtualBase, 3, NPAGES(_kernel_end - _kernel_start));
         MapPages(4096, 0xFFFF800000000000, 3, NPAGES(0x40000000));
         
         for(size_t i = 0; i < PMM::MemMap->count; i++)
