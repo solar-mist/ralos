@@ -1,4 +1,5 @@
 #include <kernel/kernel.hpp>
+#include <kernel/modules.hpp>
 #include <drivers/graphics.hpp>
 #include <drivers/terminal.hpp>
 #include <drivers/pic.hpp>
@@ -8,6 +9,7 @@
 #include <cpu/interrupt/idt.hpp>
 #include <mm/pmm.hpp>
 #include <mm/paging.hpp>
+#include <proc/elf.hpp>
 
 extern "C" void enter_usermode(void (*func)(), void* stack);
 
@@ -28,11 +30,10 @@ extern "C" void _start()
 
     Terminal::Printf(0xFF00, "Welcome to viperOS\n");
 
-    Paging::MapPage((uint64_t)PMM::GetPage(), 0x400000, 7); // Stack
-    Paging::MapPage((uint64_t)PMM::GetPage(), 0x4001000, 7); // Process code
-    *(uint16_t*)0x4001000 = 0xfeeb; // Loop forever - eb fe
+    Paging::MapPage((uint64_t)PMM::GetPage(), 0x300000, 7); // Stack
+    ELF::Executable testProc = ELF::ParseELF(GetModule(1)->address);
 
-    enter_usermode((void(*)())0x4001000, (void*)0x400FFF);
+    enter_usermode(testProc.entry, (void*)0x300FFF);
 
     for(;;);
 }
