@@ -41,7 +41,7 @@ namespace Paging
         kernelAddrSpace.pml4 = (uint64_t*)Entry((uint64_t)kernelAddrSpace.pml4);
 
         MapPages(kernelAddrSpace, (uint64_t)kernelLocation.response->physicalBase, (uint64_t)kernelLocation.response->virtualBase, 3, NPAGES(_kernel_end - _kernel_start));
-        MapPages(kernelAddrSpace, 4096, 0xFFFF800000000000, 3, NPAGES(0x40000000));
+        MapPages(kernelAddrSpace, 0, 0xFFFF800000000000, 3, NPAGES(0x40000000));
         
         for(size_t i = 0; i < PMM::MemMap->count; i++)
         {
