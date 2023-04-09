@@ -1,3 +1,4 @@
+#include "mm/paging.hpp"
 #include <kernel/sched/scheduler.hpp>
 #include <mm/pmm.hpp>
 #include <mm/vmm.hpp>
@@ -66,7 +67,17 @@ namespace Scheduler
     {
         void (*start)() = (void(*)())queue.Front()->state.BaseFrame.rip;
         locked = false;
+        Paging::SwitchAddrSpace(&queue.Front()->addrspace);
         enter_usermode(start, (void*)queue.Front()->state.BaseFrame.rsp);
+    }
+
+    void SwitchCtx(InterruptFrame* frame, Process* newProc)
+    {
+        memcpy(&frame->GeneralRegisters, &newProc->state.GeneralRegisters, sizeof(InterruptFrame::GeneralRegisters));
+        frame->BaseFrame.rip = newProc->state.BaseFrame.rip;
+        frame->BaseFrame.rsp = newProc->state.BaseFrame.rsp;
+        frame->BaseFrame.rbp = newProc->state.BaseFrame.rbp;
+        frame->ControlRegisters.cr3 = newProc->state.ControlRegisters.cr3;
     }
 
     void IncrementTimer(InterruptFrame* frame)
@@ -85,24 +96,34 @@ namespace Scheduler
                 current.state.ControlRegisters.cr3 = frame->ControlRegisters.cr3;
                 queue.Enqueue(current);
 
-                Process* newProc = queue.Front();
-                memcpy(&frame->GeneralRegisters, &newProc->state.GeneralRegisters, sizeof(InterruptFrame::GeneralRegisters));
-                frame->BaseFrame.rip = newProc->state.BaseFrame.rip;
-                frame->BaseFrame.rsp = newProc->state.BaseFrame.rsp;
-                frame->BaseFrame.rbp = newProc->state.BaseFrame.rbp;
-                frame->ControlRegisters.cr3 = newProc->state.ControlRegisters.cr3;
+                SwitchCtx(frame, queue.Front());
             }
             timer = 0;
         }
     }
 
-    void AddTask(Process t)
+    void AddProcess(Process t)
     {
         queue.Enqueue(t);
     }
 
-    Process* CurrentTask()
+    void EndCurrentProcess(InterruptFrame* state)
+    {
+        Process current = queue.Dequeue();
+        VMM::FreePages(&current.addrspace, (void*)current.stack, current.stackSize);
+
+        Paging::SwitchAddrSpace(&queue.Front()->addrspace);
+        SwitchCtx(state, queue.Front());
+        timer = 0;
+    }
+
+    Process* CurrentProcess()
     {
         return queue.Front();
+    }
+
+    uint32_t RunningProcesses()
+    {
+        return queue.Size();
     }
 }

@@ -1,8 +1,8 @@
-#include "mm/paging.hpp"
 #include <mm/vmm.hpp>
 #include <mm/pmm.hpp>
 #include <drivers/terminal.hpp>
 #include <cpu/interrupt/exception.hpp>
+#include <kernel/sched/scheduler.hpp>
 #include <libk/new.hpp>
 
 namespace VMM
@@ -15,6 +15,11 @@ namespace VMM
             Paging::MapPage(&addrspace, (uint64_t)PMM::GetPage(), frame->ControlRegisters.cr2, flags & ~(1 << 10));
         else
         {
+            if((frame->BaseFrame.cs & 3) == 3)
+            {
+                Terminal::Printf(0xFF0000, "\nPage fault in process %d", Scheduler::CurrentProcess()->pid);
+                for(;;);
+            }
             Terminal::Printf(0xFF0000, "\nPage fault - Flags: %d", flags & 0xFFE);
             for(;;);
         }

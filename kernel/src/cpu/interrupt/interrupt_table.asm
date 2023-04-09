@@ -168,6 +168,8 @@ IRQFrameAssembler:
 
 [global SyscallHandler]
 SyscallHandler:
+    push 0
+    push 0x69
     push rbp
     mov rbp, rsp
 
@@ -236,6 +238,7 @@ SyscallHandler:
     pop rax
 
     pop rbp
+    add rsp, 0x10
 
     iretq
 

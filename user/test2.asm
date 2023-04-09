@@ -5,9 +5,9 @@ _start:
     mov rdi, msg
     mov rsi, 21
     int 0x69
-    mov rax, 1
+    mov rax, 2
     int 0x69
     jmp $
 
 [section .data]
-msg: db "Hello Syscall World!", 10
+msg: db "Hello World Syscall!", 10

@@ -167,7 +167,6 @@ namespace Paging
 
         ret.pml4 = (uint64_t*)PMM::GetPage();
         memset((uint8_t*)PhysToVirt((uint64_t)ret.pml4), 0, PAGE_SIZE);
-        ret.pml4 = (uint64_t*)Entry((uint64_t)ret.pml4);
 
         ret.freeListBegin = (Node*)PhysToVirt((uint64_t)PMM::GetPage());
         ret.freeListBegin->npages = NPAGES(0x0000FFFFFFFFFFFF - 0x1000); // Full lower half address space except nullptr page
@@ -188,6 +187,6 @@ namespace Paging
         if(addrspace == nullptr)
             addrspace = &kernelAddrSpace;
         
-        asm volatile("mov %0, %%rax; mov %%rax, %%cr3" : : "m"(addrspace->pml4));
+        asm volatile("mov %0, %%rax; mov %%rax, %%cr3" : : "p"(addrspace->pml4));
     }
 }

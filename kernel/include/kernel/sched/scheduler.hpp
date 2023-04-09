@@ -28,9 +28,11 @@ namespace Scheduler
 
     void IncrementTimer(InterruptFrame* frame);
 
-    void AddTask(Process t);
+    void AddProcess(Process t);
+    void EndCurrentProcess(InterruptFrame* frame);
 
-    Process* CurrentTask();
+    Process* CurrentProcess();
+    uint32_t RunningProcesses();
 }
 
 #endif

@@ -10,7 +10,7 @@ kernel:
 
 user:
 	$(MAKE) -C user
-	cp user/TEST.EXE modules/
+	cp user/TEST.EXE user/TEST2.EXE modules/
 
 viper-boot:
 	git clone https://github.com/viper-org/viper-boot

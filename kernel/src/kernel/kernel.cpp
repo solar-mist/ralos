@@ -33,12 +33,17 @@ extern "C" void _start()
     Paging::SwitchAddrSpace(&addrspace);
     ELF::Executable code = ELF::ParseELF(GetModule(1)->address, addrspace);
     Process proc = Process((uint64_t)code.entry, addrspace);
+    
+    Paging::AddressSpace addrspace2 = Paging::CreateAddressSpace();
+    Paging::SwitchAddrSpace(&addrspace2);
+    ELF::Executable code2 = ELF::ParseELF(GetModule(2)->address, addrspace2);
+    Process proc2 = Process((uint64_t)code2.entry, addrspace2);
 
     PIC::Init();
     PIT::Init(1197);
 
-    Scheduler::AddTask(proc);
-    Scheduler::AddTask(proc);
+    Scheduler::AddProcess(proc);
+    Scheduler::AddProcess(proc2);
 
     Scheduler::Start();
 
