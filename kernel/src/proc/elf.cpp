@@ -49,7 +49,6 @@ namespace ELF
             char* vaddr = (char*)phdr->p_vaddr;
             uint64_t paddr = (uint64_t)PMM::GetPages(NPAGES(phdr->p_memsz));
             Paging::MapPages(&addrspace, paddr, (uint64_t)vaddr, 7, NPAGES(phdr->p_memsz));
-            Paging::SwitchAddrSpace(&addrspace);
             char* fileOff = buf + phdr->p_offset;
             for(uint64_t j = 0; j < phdr->p_filesz; j++)
                 *(vaddr + j) = *(fileOff + j);

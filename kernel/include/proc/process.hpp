@@ -5,7 +5,9 @@
 
 struct Process
 {
-    Process(uint64_t entry);
+    Process(uint64_t entry, Paging::AddressSpace addrspace);
+
+    void Launch();
 
     InterruptFrame frame;
     Paging::AddressSpace addrspace;
