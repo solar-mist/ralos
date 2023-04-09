@@ -27,6 +27,7 @@ namespace Paging
     uint64_t GetEntry(AddressSpace* addrspace, uint64_t VirtAddr);
 
     AddressSpace CreateAddressSpace();
+    AddressSpace* KernelAddrSpace();
 
     void SwitchAddrSpace(AddressSpace* addrspace);
 }

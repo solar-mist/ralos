@@ -60,6 +60,8 @@ namespace Paging
 
     void MapPage(AddressSpace* addrspace, uint64_t PhysAddr, uint64_t VirtAddr, uint16_t Flags)
     {
+        if(addrspace == nullptr)
+            addrspace = &kernelAddrSpace;
         PhysAddr &= ~0xFFF;
         VirtAddr &= ~0xFFF;
         Flags    &=  0xFFF;
@@ -174,6 +176,11 @@ namespace Paging
         memcpy((void*)PhysToVirt((uint64_t)(ret.pml4 + 256)), (void*)PhysToVirt((uint64_t)(kernelAddrSpace.pml4 + 256)), 256 * sizeof(uint64_t));
 
         return ret;
+    }
+
+    AddressSpace* KernelAddrSpace()
+    {
+        return &kernelAddrSpace;
     }
 
     void SwitchAddrSpace(AddressSpace* addrspace)

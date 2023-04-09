@@ -7,9 +7,7 @@ struct Process
 {
     Process(uint64_t entry, Paging::AddressSpace addrspace);
 
-    void Launch();
-
-    InterruptFrame frame;
+    InterruptFrame state;
     Paging::AddressSpace addrspace;
 };
 

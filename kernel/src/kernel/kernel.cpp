@@ -1,5 +1,6 @@
 #include <kernel/kernel.hpp>
 #include <kernel/modules.hpp>
+#include <kernel/sched/scheduler.hpp>
 #include <drivers/graphics.hpp>
 #include <drivers/terminal.hpp>
 #include <drivers/pic.hpp>
@@ -26,14 +27,20 @@ extern "C" void _start()
     Paging::Init();
     VMM::Init();
 
+    Scheduler::Init();
+
     Paging::AddressSpace addrspace = Paging::CreateAddressSpace();
     Paging::SwitchAddrSpace(&addrspace);
     ELF::Executable code = ELF::ParseELF(GetModule(1)->address, addrspace);
     Process proc = Process((uint64_t)code.entry, addrspace);
-    proc.Launch();
 
     PIC::Init();
     PIT::Init(1197);
+
+    Scheduler::AddTask(proc);
+    Scheduler::AddTask(proc);
+
+    Scheduler::Start();
 
     for(;;);
 }

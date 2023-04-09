@@ -1,16 +1,16 @@
-override CXX=x86_64-elf-g++
-override CXXFLAGS+=-std=c++20 -ffreestanding -fno-stack-protector -fno-stack-check -fno-lto -fno-pic -fno-pie -m64 -march=x86-64 -mabi=sysv -mno-80387 -mno-mmx -mno-sse -mno-sse2 -mno-red-zone -mcmodel=kernel -Iinclude
+CXX=x86_64-elf-g++
+CXXFLAGS+=-std=c++20 -ffreestanding -fno-stack-protector -fno-stack-check -fno-lto -fno-pic -fno-pie -m64 -march=x86-64 -mabi=sysv -mno-80387 -mno-mmx -mno-sse -mno-sse2 -mno-red-zone -mcmodel=kernel -Iinclude
 
-override LD=x86_64-elf-ld
-override LDFLAGS=-nostdlib -static -melf_x86_64 -zmax-page-size=0x1000 -Tlink.ld -no-pie
+LD=x86_64-elf-ld
+LDFLAGS=-nostdlib -static -melf_x86_64 -zmax-page-size=0x1000 -Tlink.ld -no-pie
 
-override AS=nasm
-override ASFLAGS=-felf64
+AS=nasm
+ASFLAGS=-felf64
 
-override CXXSRCS=$(shell find src -name '*.cpp')
-override ASSRCS=$(shell find src -name '*.asm')
+CXXSRCS=$(shell find src -name '*.cpp')
+ASSRCS=$(shell find src -name '*.asm')
 
-override OBJS=${CXXSRCS:.cpp=.o} ${ASSRCS:.asm=.o}
+OBJS=${CXXSRCS:.cpp=.o} ${ASSRCS:.asm=.o}
 
 TARGET=kernel.elf
 
@@ -28,7 +28,7 @@ viper.h:
 	$(AS) $(ASFLAGS) $< -o $@
 
 $(TARGET): $(OBJS)
-	$(LD) $(LDFLAGS) $(OBJS) -o $@
+	$(LD) $(LDFLAGS) $^ -o $@
 
 clean:
 	rm -rf $(OBJS) $(TARGET)

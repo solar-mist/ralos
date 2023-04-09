@@ -6,9 +6,14 @@
 
 constexpr int PIT_IRQ = 0;
 
+namespace Scheduler
+{
+    extern void IncrementTimer(InterruptFrame* frame);
+}
+
 void PITHandler(InterruptFrame* frame)
 {
-    
+    Scheduler::IncrementTimer(frame);
 }
 
 namespace PIT

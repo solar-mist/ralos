@@ -1,3 +1,4 @@
+#include "mm/paging.hpp"
 #include <mm/vmm.hpp>
 #include <mm/pmm.hpp>
 #include <drivers/terminal.hpp>
@@ -12,7 +13,11 @@ namespace VMM
         uint64_t flags = Paging::GetEntry(&addrspace, frame->ControlRegisters.cr2) | 0x1;
         if(flags & (1 << 10))
             Paging::MapPage(&addrspace, (uint64_t)PMM::GetPage(), frame->ControlRegisters.cr2, flags & ~(1 << 10));
-        // TODO: Handle properly
+        else
+        {
+            Terminal::Printf(0xFF0000, "\nPage fault - Flags: %d", flags & 0xFFE);
+            for(;;);
+        }
     }
 
     void Init()
@@ -23,7 +28,10 @@ namespace VMM
     void* GetPages(Paging::AddressSpace* addrspace, uint32_t npages, uint16_t flags)
     {
         if(npages == 0)
-            return nullptr;
+            return (void*)-1;
+        
+        if(addrspace == nullptr)
+            addrspace = Paging::KernelAddrSpace();
         
         flags &= 0xFFE;
         flags |= (1 << 10);
@@ -72,7 +80,7 @@ namespace VMM
             previous = current;
             current = current->next;
         }
-        return nullptr;
+        return (void*)-1;
     }
 
     void FreePages(Paging::AddressSpace* addrspace, void* addr, uint32_t npages)
