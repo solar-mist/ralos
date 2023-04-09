@@ -1,17 +1,8 @@
 #include <mm/pmm.hpp>
 #include <drivers/terminal.hpp>
+#include <libk/new.hpp>
 #include <viper.h>
 #include <stddef.h>
-
-void* operator new(size_t s, char* buf)
-{
-    return buf;
-}
-
-void* operator new[](size_t s, char* buf)
-{
-    return buf;
-}
 
 extern void memset(uint8_t*, uint8_t, uint32_t);
 

@@ -9,6 +9,7 @@
 #include <cpu/interrupt/idt.hpp>
 #include <mm/pmm.hpp>
 #include <mm/paging.hpp>
+#include <mm/vmm.hpp>
 #include <proc/elf.hpp>
 
 extern "C" void enter_usermode(void (*func)(), void* stack);
@@ -24,15 +25,25 @@ extern "C" void _start()
 
     PMM::Init();
     Paging::Init();
+    VMM::Init();
+
+    Paging::AddressSpace addrspace = Paging::CreateAddressSpace();
+    Paging::SwitchAddrSpace(&addrspace);
+    void* memory = VMM::GetPages(&addrspace, 2, 7);
+    Terminal::Printf(0x00FF00, "%x\n", memory);
+    *(char*)memory = 0x69;
+    Terminal::Printf(0x00FF00, "%x\n", *(char*)memory);
+    VMM::FreePages(&addrspace, memory, 2);
+    for(;;);
 
     PIC::Init();
     PIT::Init(1197);
 
-    Paging::AddressSpace addrspace = Paging::CreateAddressSpace();
-    Paging::MapPage(addrspace, (uint64_t)PMM::GetPage(), 0x300000, 7); // Stack
-    ELF::Executable testProc = ELF::ParseELF(GetModule(1)->address, addrspace);
+    //Paging::AddressSpace addrspace = Paging::CreateAddressSpace();
+    //Paging::MapPage(addrspace, (uint64_t)PMM::GetPage(), 0x300000, 7); // Stack
+    //ELF::Executable testProc = ELF::ParseELF(GetModule(1)->address, addrspace);
 
-    enter_usermode(testProc.entry, (void*)0x300FFF);
+    //enter_usermode(testProc.entry, (void*)0x300FFF);
 
     for(;;);
 }

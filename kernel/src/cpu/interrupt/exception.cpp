@@ -41,7 +41,17 @@ static InterruptHandler handlers[32];
 
 extern "C" void ISRExceptionHandler(InterruptFrame* frame)
 {
-    Terminal::Printf(0xFF0000, "\nAn exception occurred: %d - %s", frame->BaseFrame.vector, exceptions[frame->BaseFrame.vector]);
-    for(;;)
-        asm volatile("cli; hlt");
+    if(handlers[frame->BaseFrame.vector])
+        handlers[frame->BaseFrame.vector](frame);
+    else
+    {
+        Terminal::Printf(0xFF0000, "\nAn exception occurred: %d - %s", frame->BaseFrame.vector, exceptions[frame->BaseFrame.vector]);
+        for(;;)
+            asm volatile("cli; hlt");
+    }
+}
+
+void RegisterExceptionHandler(uint8_t vector, InterruptHandler handler)
+{
+    handlers[vector] = handler;
 }

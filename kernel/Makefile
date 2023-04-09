@@ -14,7 +14,7 @@ override OBJS=${CXXSRCS:.cpp=.o} ${ASSRCS:.asm=.o}
 
 TARGET=kernel.elf
 
-.PHONY: all
+.PHONY: all viper.h
 
 all: $(TARGET)
 
