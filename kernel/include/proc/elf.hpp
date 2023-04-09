@@ -1,5 +1,6 @@
 #ifndef PROC_ELF_HPP
 #define PROC_ELF_HPP
+#include <mm/paging.hpp>
 
 namespace ELF
 {
@@ -8,7 +9,7 @@ namespace ELF
         void(*entry)();
     };
 
-    Executable ParseELF(void* buffer);
+    Executable ParseELF(void* buffer, Paging::AddressSpace addrspace);
 }
 
 #endif

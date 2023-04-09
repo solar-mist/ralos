@@ -28,8 +28,9 @@ extern "C" void _start()
     PIC::Init();
     PIT::Init(1197);
 
-    Paging::MapPage((uint64_t)PMM::GetPage(), 0x300000, 7); // Stack
-    ELF::Executable testProc = ELF::ParseELF(GetModule(1)->address);
+    Paging::AddressSpace addrspace = Paging::CreateAddressSpace();
+    Paging::MapPage(addrspace, (uint64_t)PMM::GetPage(), 0x300000, 7); // Stack
+    ELF::Executable testProc = ELF::ParseELF(GetModule(1)->address, addrspace);
 
     enter_usermode(testProc.entry, (void*)0x300FFF);
 
