@@ -88,6 +88,13 @@ namespace TmpFS
 
     int Write(VFS::Node* node, const void* buffer, size_t count)
     {
+        if(!strcmp(node->path, "/stdout"))
+        {
+            char* data = (char*)buffer;
+            Terminal::PutString(data, count, 0x00FF00);
+            return 0;
+        }
+
         for(uint32_t i = 0; i < idx; i++)
         {
             if(!strcmp(table[i].path, node->path))
@@ -142,6 +149,7 @@ namespace TmpFS
     {
         table = (Node*)PhysToVirt((uint64_t)PMM::GetPages(4));
         table[idx++] = Node{ "", DIRECTORY, true, 0, nullptr, VFS::Node{ "", &fs } };
+        table[idx++] = Node{ "/stdout", FILE, false, 0, nullptr, VFS::Node{ "/stdout", &fs } };
         fs = VFS::Filesystem{ "tmpfs", &table[0].vnode, Create, Open, Read, Write, ReadDir };
         VFS::RegisterFileSystem(&fs);
     }

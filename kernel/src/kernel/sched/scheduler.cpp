@@ -1,7 +1,8 @@
-#include "mm/paging.hpp"
 #include <kernel/sched/scheduler.hpp>
 #include <mm/pmm.hpp>
 #include <mm/vmm.hpp>
+#include <mm/kheap.hpp>
+#include <fs/vfs.hpp>
 #include <drivers/terminal.hpp>
 #include <libk/mem.hpp>
 
@@ -104,6 +105,9 @@ namespace Scheduler
 
     void AddProcess(Process t)
     {
+        VFS::Node* stdout = (VFS::Node*)malloc(sizeof(VFS::Node));
+        VFS::GetFileSystem("tmpfs")->open("/stdout", stdout);
+        t.fdTable[1] = ProcFile{ stdout, 0, 0 };
         queue.Enqueue(t);
     }
 
