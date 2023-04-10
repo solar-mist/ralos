@@ -11,8 +11,11 @@
 #include <mm/pmm.hpp>
 #include <mm/paging.hpp>
 #include <mm/vmm.hpp>
+#include <mm/kheap.hpp>
 #include <proc/elf.hpp>
 #include <proc/process.hpp>
+#include <fs/vfs.hpp>
+#include <fs/tmpfs.hpp>
 
 extern "C" void _start()
 {
@@ -26,10 +29,11 @@ extern "C" void _start()
     PMM::Init();
     Paging::Init();
     VMM::Init();
+    InitKHeap();
 
     Scheduler::Init();
 
-    Paging::AddressSpace addrspace = Paging::CreateAddressSpace();
+    /*Paging::AddressSpace addrspace = Paging::CreateAddressSpace();
     Paging::SwitchAddrSpace(&addrspace);
     ELF::Executable code = ELF::ParseELF(GetModule(1)->address, addrspace);
     Process proc = Process((uint64_t)code.entry, addrspace);
@@ -45,7 +49,17 @@ extern "C" void _start()
     Scheduler::AddProcess(proc);
     Scheduler::AddProcess(proc2);
 
-    Scheduler::Start();
+    Scheduler::Start();*/
+    TmpFS::Init();
+    VFS::Filesystem* tmpfs = VFS::GetFileSystem("tmpfs");
+    tmpfs->create("/test");
+    VFS::Node node;
+    tmpfs->open("/test", &node);
+    tmpfs->write(&node, "hello", 5);
+    char* buffer = (char*)malloc(6);
+    tmpfs->read(&node, buffer, 5);
+    buffer[5] = 0;
+    Terminal::Print(buffer);
 
     for(;;);
 }
