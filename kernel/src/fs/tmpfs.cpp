@@ -66,7 +66,7 @@ namespace TmpFS
         return 1;
     }
 
-    int Read(VFS::Node* node, void* buffer, size_t count)
+    int Read(VFS::Node* node, void* buffer, size_t* count)
     {
         for(uint32_t i = 0; i < idx; i++)
         {
@@ -74,9 +74,9 @@ namespace TmpFS
             {
                 if(table[i].open && table[i].type == FILE)
                 {
-                    if(count > table[i].size)
-                        count = table[i].size;
-                    memcpy(buffer, table[i].data, count);
+                    if(*count > table[i].size)
+                        *count = table[i].size;
+                    memcpy(buffer, table[i].data, *count);
                     return 0;
                 }
                 else

@@ -1,3 +1,4 @@
+#include "mm/kheap.hpp"
 #include <proc/process.hpp>
 #include <mm/vmm.hpp>
 #include <mm/pmm.hpp>
@@ -5,7 +6,7 @@
 static uint64_t pidCount = 1;
 
 Process::Process(uint64_t entry, Paging::AddressSpace addrspace)
-    :addrspace(addrspace), pid(pidCount++)
+    :addrspace(addrspace), pid(pidCount++), fdTable((ProcFile*)malloc(sizeof(ProcFile) * FD_MAX)), fdNum(3)
 {
     state.BaseFrame.rip = entry;
     state.BaseFrame.rsp = (uint64_t)VMM::GetPages(&addrspace, 4, 7) + (4 * PAGE_SIZE) - 1;

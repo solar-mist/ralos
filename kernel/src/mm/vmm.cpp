@@ -12,12 +12,15 @@ namespace VMM
         Paging::AddressSpace addrspace = Paging::AddressSpace{ (uint64_t*)frame->ControlRegisters.cr3, nullptr };
         uint64_t flags = Paging::GetEntry(&addrspace, frame->ControlRegisters.cr2) | 0x1;
         if(flags & (1 << 10))
+        {
             Paging::MapPage(&addrspace, (uint64_t)PMM::GetPage(), frame->ControlRegisters.cr2, flags & ~(1 << 10));
+            frame->ControlRegisters.cr2 = 0;
+        }
         else
         {
             if((frame->BaseFrame.cs & 3) == 3)
             {
-                Terminal::Printf(0xFF0000, "\nPage fault in process %d", Scheduler::CurrentProcess()->pid);
+                Terminal::Printf(0xFF0000, "\nPage fault in process %d: CR2=%x", Scheduler::CurrentProcess()->pid, frame->ControlRegisters.cr2);
                 for(;;);
             }
             Terminal::Printf(0xFF0000, "\nPage fault - Flags: %d", flags & 0xFFE);

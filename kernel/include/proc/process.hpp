@@ -1,5 +1,6 @@
 #ifndef PROC_PROCESS_HPP
 #define PROC_PROCESS_HPP
+#include <proc/fd.hpp>
 #include <cpu/interrupt/isr.hpp>
 #include <mm/paging.hpp>
 
@@ -12,6 +13,8 @@ struct Process
     uint64_t pid;
     InterruptFrame state;
     Paging::AddressSpace addrspace;
+    ProcFile* fdTable;
+    uint32_t fdNum;
 };
 
 #endif

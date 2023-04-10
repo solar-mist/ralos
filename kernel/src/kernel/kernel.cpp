@@ -31,35 +31,27 @@ extern "C" void _start()
     VMM::Init();
     InitKHeap();
 
+    TmpFS::Init();
+    VFS::Filesystem* tmpfs = VFS::GetFileSystem("tmpfs");
+    tmpfs->create("/test");
+    VFS::Node out;
+    tmpfs->open("/test", &out);
+    tmpfs->write(&out, "helo", 4);
+
     Scheduler::Init();
 
-    /*Paging::AddressSpace addrspace = Paging::CreateAddressSpace();
+
+    Paging::AddressSpace addrspace = Paging::CreateAddressSpace();
     Paging::SwitchAddrSpace(&addrspace);
     ELF::Executable code = ELF::ParseELF(GetModule(1)->address, addrspace);
     Process proc = Process((uint64_t)code.entry, addrspace);
-    
-    Paging::AddressSpace addrspace2 = Paging::CreateAddressSpace();
-    Paging::SwitchAddrSpace(&addrspace2);
-    ELF::Executable code2 = ELF::ParseELF(GetModule(2)->address, addrspace2);
-    Process proc2 = Process((uint64_t)code2.entry, addrspace2);
 
     PIC::Init();
     PIT::Init(1197);
 
     Scheduler::AddProcess(proc);
-    Scheduler::AddProcess(proc2);
 
-    Scheduler::Start();*/
-    TmpFS::Init();
-    VFS::Filesystem* tmpfs = VFS::GetFileSystem("tmpfs");
-    tmpfs->create("/test");
-    VFS::Node node;
-    tmpfs->open("/test", &node);
-    tmpfs->write(&node, "hello", 5);
-    char* buffer = (char*)malloc(6);
-    tmpfs->read(&node, buffer, 5);
-    buffer[5] = 0;
-    Terminal::Print(buffer);
+    Scheduler::Start();
 
     for(;;);
 }
