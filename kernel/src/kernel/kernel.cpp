@@ -36,7 +36,7 @@ extern "C" void _start()
     VFS::Filesystem* tmpfs = VFS::GetFileSystem("tmpfs");
     tmpfs->create("/test");
     VFS::Node out;
-    tmpfs->open("/test", &out);
+    tmpfs->lookup("/test", &out);
     tmpfs->write(&out, "helo", 4);
 
     Scheduler::Init();

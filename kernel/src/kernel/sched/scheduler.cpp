@@ -106,7 +106,7 @@ namespace Scheduler
     void AddProcess(Process t)
     {
         VFS::Node* stdout = (VFS::Node*)malloc(sizeof(VFS::Node));
-        VFS::GetFileSystem("tmpfs")->open("/stdout", stdout);
+        VFS::GetFileSystem("tmpfs")->lookup("/stdout", stdout);
         t.fdTable[1] = ProcFile{ stdout, 0, 0 };
         queue.Enqueue(t);
     }

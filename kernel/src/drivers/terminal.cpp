@@ -91,7 +91,15 @@ namespace Terminal
             row += 8;
             break;
         case '\b':
-            col -= 8;
+            if(col == 0)
+            {
+                if(row == 0)
+                    break;
+                row -= 8;
+                col = maxCol - 8;
+            }
+            else
+                col -= 8;
             break;
         default:
             PutChar(c, col, row, color);

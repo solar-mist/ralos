@@ -7,9 +7,10 @@ namespace VFS
     struct Filesystem;
     struct Node;
 
+    using Lookup = int(*)(const char* path, Node* out);
+
     // File operations
     using Create = int(*)(const char* path);
-    using Open = int(*)(const char* path, Node* out);
     using Read = int(*)(Node* node, void* buffer, size_t* count);
     using Write = int(*)(Node* node, const void* buffer, size_t count);
     using Append = int(*)(Node* node, const void* buffer, size_t count);
@@ -29,7 +30,7 @@ namespace VFS
         Node* root;
 
         Create create;
-        Open open;
+        Lookup lookup;
         Read read;
         Write write;
         Append append;

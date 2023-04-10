@@ -13,8 +13,7 @@ namespace TmpFS
     {
         const char* path;
         bool type : 1;
-        bool open : 1;
-        uint64_t size : 62;
+        uint64_t size : 63;
         void* data;
         VFS::Node vnode;
     };
@@ -27,7 +26,7 @@ namespace TmpFS
 
     int Create(const char* path)
     {
-        table[idx++] = Node{ path, FILE, false, 0, nullptr, VFS::Node{ path, &fs } };
+        table[idx++] = Node{ path, FILE, 0, nullptr, VFS::Node{ path, &fs } };
 
         char* ptr = (char*)PhysToVirt((uint64_t)PMM::GetPage());
         memcpy(ptr, (void*)path, strlen(path));
@@ -52,13 +51,12 @@ namespace TmpFS
         return 0;
     }
 
-    int Open(const char* path, VFS::Node* out)
+    int Lookup(const char* path, VFS::Node* out)
     {
         for(uint32_t i = 0; i < idx; i++)
         {
             if(!strcmp(table[i].path, path))
             {
-                table[i].open = true;
                 *out = table[i].vnode;
                 return 0;
             }
@@ -72,7 +70,7 @@ namespace TmpFS
         {
             if(!strcmp(table[i].path, node->path))
             {
-                if(table[i].open && table[i].type == FILE)
+                if(table[i].type == FILE)
                 {
                     if(*count > table[i].size)
                         *count = table[i].size;
@@ -99,7 +97,7 @@ namespace TmpFS
         {
             if(!strcmp(table[i].path, node->path))
             {
-                if(table[i].open && table[i].type == FILE)
+                if(table[i].type == FILE)
                 {
                     free(table[i].data);
                     table[i].data = malloc(count);
@@ -120,7 +118,7 @@ namespace TmpFS
         {
             if(!strcmp(table[i].path, node->path))
             {
-                if(table[i].open && table[i].type == FILE)
+                if(table[i].type == FILE)
                 {
                     void* old = table[i].data;
                     size_t oldSize = table[i].size;
@@ -172,9 +170,9 @@ namespace TmpFS
     void Init()
     {
         table = (Node*)PhysToVirt((uint64_t)PMM::GetPages(4));
-        table[idx++] = Node{ "", DIRECTORY, true, 0, nullptr, VFS::Node{ "", &fs } };
-        table[idx++] = Node{ "/stdout", FILE, false, 0, nullptr, VFS::Node{ "/stdout", &fs } };
-        fs = VFS::Filesystem{ "tmpfs", &table[0].vnode, Create, Open, Read, Write, Append, ReadDir };
+        table[idx++] = Node{ "", DIRECTORY, 0, nullptr, VFS::Node{ "", &fs } };
+        table[idx++] = Node{ "/stdout", FILE, 0, nullptr, VFS::Node{ "/stdout", &fs } };
+        fs = VFS::Filesystem{ "tmpfs", &table[0].vnode, Create, Lookup, Read, Write, Append, ReadDir };
         VFS::RegisterFileSystem(&fs);
     }
 }
