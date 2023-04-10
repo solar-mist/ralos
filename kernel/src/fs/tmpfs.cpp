@@ -114,6 +114,30 @@ namespace TmpFS
         return 1;
     }
 
+    int Append(VFS::Node* node, const void* buffer, size_t count)
+    {
+        for(uint32_t i = 0; i < idx; i++)
+        {
+            if(!strcmp(table[i].path, node->path))
+            {
+                if(table[i].open && table[i].type == FILE)
+                {
+                    void* old = table[i].data;
+                    size_t oldSize = table[i].size;
+                    table[i].data = malloc(oldSize + count);
+                    memcpy(table[i].data, old, oldSize);
+                    free(old);
+
+                    memcpy((char*)table[i].data + oldSize, buffer, count);
+                    return 0;
+                }
+                else
+                    return 1;
+            }
+        }
+        return 1;
+    }
+
     int ReadDir(VFS::Node* node, char** files, size_t* count)
     {
         for(uint32_t i = 0; i < idx; i++)
@@ -150,7 +174,7 @@ namespace TmpFS
         table = (Node*)PhysToVirt((uint64_t)PMM::GetPages(4));
         table[idx++] = Node{ "", DIRECTORY, true, 0, nullptr, VFS::Node{ "", &fs } };
         table[idx++] = Node{ "/stdout", FILE, false, 0, nullptr, VFS::Node{ "/stdout", &fs } };
-        fs = VFS::Filesystem{ "tmpfs", &table[0].vnode, Create, Open, Read, Write, ReadDir };
+        fs = VFS::Filesystem{ "tmpfs", &table[0].vnode, Create, Open, Read, Write, Append, ReadDir };
         VFS::RegisterFileSystem(&fs);
     }
 }

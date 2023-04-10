@@ -18,7 +18,7 @@ ExceptionStub%+%1:
 %macro InterruptRequest 1
 IRQStub%+%1:
     push 0
-    push %1
+    push %1+32
     jmp IRQFrameAssembler
 %endmacro
 

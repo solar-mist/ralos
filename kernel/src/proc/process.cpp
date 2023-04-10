@@ -4,6 +4,7 @@
 #include <mm/pmm.hpp>
 
 static uint64_t pidCount = 1;
+static Process* activeProcess;
 
 Process::Process(uint64_t entry, Paging::AddressSpace addrspace)
     :addrspace(addrspace), pid(pidCount++), fdTable((ProcFile*)malloc(sizeof(ProcFile) * FD_MAX)), fdNum(3)
@@ -15,4 +16,14 @@ Process::Process(uint64_t entry, Paging::AddressSpace addrspace)
 
     stack = state.BaseFrame.rsp;
     stackSize = 4;
+}
+
+Process* ActiveProcess()
+{
+    return activeProcess;
+}
+
+void SetActiveProcess(Process* proc)
+{
+    activeProcess = proc;
 }

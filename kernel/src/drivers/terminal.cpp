@@ -75,6 +75,8 @@ namespace Terminal
             {
                 if(data >> (8 - b) & 0x1)
                     PutPixel(b+x, a+y, color);
+                else
+                    Graphics::PutPixel(b+x, a+y, 0);
             }
         }
     }
@@ -87,6 +89,9 @@ namespace Terminal
         case '\n':
             col = 0;
             row += 8;
+            break;
+        case '\b':
+            col -= 8;
             break;
         default:
             PutChar(c, col, row, color);

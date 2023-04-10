@@ -12,6 +12,7 @@ namespace VFS
     using Open = int(*)(const char* path, Node* out);
     using Read = int(*)(Node* node, void* buffer, size_t* count);
     using Write = int(*)(Node* node, const void* buffer, size_t count);
+    using Append = int(*)(Node* node, const void* buffer, size_t count);
 
     // Directory operations
     using ReadDir = int(*)(Node* node, char** files, size_t* count);
@@ -31,6 +32,7 @@ namespace VFS
         Open open;
         Read read;
         Write write;
+        Append append;
         ReadDir readDir;
 
         Filesystem* next;

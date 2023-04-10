@@ -5,6 +5,7 @@
 #include <drivers/terminal.hpp>
 #include <drivers/pic.hpp>
 #include <drivers/pit.hpp>
+#include <drivers/ps2keyboard.hpp>
 #include <cpu/gdt/gdt.hpp>
 #include <cpu/gdt/tss.hpp>
 #include <cpu/interrupt/idt.hpp>
@@ -47,9 +48,12 @@ extern "C" void _start()
     Process proc = Process((uint64_t)code.entry, addrspace);
 
     PIC::Init();
+    PS2Keyboard::Init();
     PIT::Init(1197);
 
     Scheduler::AddProcess(proc);
+
+    SetActiveProcess(&proc);
 
     Scheduler::Start();
 

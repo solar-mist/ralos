@@ -17,4 +17,7 @@ struct Process
     uint32_t fdNum;
 };
 
+Process* ActiveProcess();
+void SetActiveProcess(Process* proc);
+
 #endif
