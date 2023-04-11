@@ -64,7 +64,7 @@ namespace TmpFS
         return 1;
     }
 
-    int Read(VFS::Node* node, void* buffer, size_t* count)
+    int Read(VFS::Node* node, void* buffer, size_t* count, int position)
     {
         for(uint32_t i = 0; i < idx; i++)
         {
@@ -74,7 +74,7 @@ namespace TmpFS
                 {
                     if(*count > table[i].size)
                         *count = table[i].size;
-                    memcpy(buffer, table[i].data, *count);
+                    memcpy(buffer, (char*)table[i].data+position, *count);
                     return 0;
                 }
                 else

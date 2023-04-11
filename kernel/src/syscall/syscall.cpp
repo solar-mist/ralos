@@ -29,6 +29,12 @@ extern "C" void SystemCallHandler(InterruptFrame* frame)
             frame->GeneralRegisters.rax = SysWrite(fd, buf, count);
             break;
         }
+        case 3: // close
+        {
+            int fd = frame->GeneralRegisters.rdi;
+            frame->GeneralRegisters.rax = SysClose(fd);
+            break;
+        }
         default:
             break;
     }

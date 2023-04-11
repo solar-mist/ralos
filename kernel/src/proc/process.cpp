@@ -16,6 +16,9 @@ Process::Process(uint64_t entry, Paging::AddressSpace addrspace)
 
     stack = state.BaseFrame.rsp;
     stackSize = 4;
+
+    for(uint32_t i = 3; i < FD_MAX; i++)
+        fdTable[i].node = nullptr;
 }
 
 Process* ActiveProcess()

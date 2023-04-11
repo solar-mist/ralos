@@ -6,6 +6,13 @@
 
 constexpr uint32_t FD_MAX = 64;
 
+enum OpenMode : uint8_t
+{
+    R=1,
+    W=2,
+    A=3,
+};
+
 struct ProcFile
 {
     VFS::Node* node;

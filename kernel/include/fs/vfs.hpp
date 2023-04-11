@@ -11,7 +11,7 @@ namespace VFS
 
     // File operations
     using Create = int(*)(const char* path);
-    using Read = int(*)(Node* node, void* buffer, size_t* count);
+    using Read = int(*)(Node* node, void* buffer, size_t* count, int position);
     using Write = int(*)(Node* node, const void* buffer, size_t count);
     using Append = int(*)(Node* node, const void* buffer, size_t count);
 

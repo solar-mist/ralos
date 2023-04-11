@@ -107,7 +107,7 @@ namespace Scheduler
     {
         VFS::Node* stdout = (VFS::Node*)malloc(sizeof(VFS::Node));
         VFS::GetFileSystem("tmpfs")->lookup("/stdout", stdout);
-        t.fdTable[1] = ProcFile{ stdout, 0, 0 };
+        t.fdTable[1] = ProcFile{ stdout, 0, 2 };
         queue.Enqueue(t);
     }
 
