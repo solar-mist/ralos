@@ -1,4 +1,3 @@
-#include "drivers/terminal.hpp"
 #include <syscall/file.hpp>
 #include <fs/vfs.hpp>
 #include <proc/process.hpp>
@@ -8,9 +7,6 @@ int SysRead(int fd, char* buf, size_t count)
 {
     Process* proc = Scheduler::CurrentProcess();
     ProcFile* file = &proc->fdTable[fd];
-
-    if(!file->node)
-        return -1;
 
     if(!(file->flags & OpenMode::R))
         return -1;

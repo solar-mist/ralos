@@ -10,7 +10,7 @@ enum OpenMode : uint8_t
 {
     R=1,
     W=2,
-    A=3,
+    A=4,
 };
 
 struct ProcFile

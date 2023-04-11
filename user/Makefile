@@ -1,2 +1,2 @@
 all:
-	gcc -nostdlib test.c -o TEST.EXE -Wl,-Ttext 0x400000
+	x86_64-elf-gcc -nostdlib -fPIC -fPIE test.c -o TEST.EXE

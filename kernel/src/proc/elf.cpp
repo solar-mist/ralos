@@ -1,7 +1,9 @@
+#include "kernel/kernel.hpp"
 #include <proc/elf.hpp>
 #include <kernel/modules.hpp>
 #include <mm/pmm.hpp>
 #include <mm/paging.hpp>
+#include <mm/vmm.hpp>
 
 namespace ELF
 {
@@ -49,6 +51,8 @@ namespace ELF
             char* vaddr = (char*)phdr->p_vaddr;
             uint64_t paddr = (uint64_t)PMM::GetPages(NPAGES(phdr->p_memsz));
             Paging::MapPages(&addrspace, paddr, (uint64_t)vaddr, 7, NPAGES(phdr->p_memsz));
+            if(VMM::MarkUsed(&addrspace, vaddr, NPAGES(phdr->p_memsz)))
+                Kernel::Panic("Kernel panic: %s", "Could not reserve space for program"); // TODO: Exit safely
             char* fileOff = buf + phdr->p_offset;
             for(uint64_t j = 0; j < phdr->p_filesz; j++)
                 *(vaddr + j) = *(fileOff + j);

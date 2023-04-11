@@ -1,3 +1,4 @@
+#include "mm/kheap.hpp"
 #include <mm/vmm.hpp>
 #include <mm/pmm.hpp>
 #include <drivers/terminal.hpp>
@@ -109,5 +110,39 @@ namespace VMM
         newNode->npages = npages;
         newNode->next = addrspace->freeListBegin;
         addrspace->freeListBegin = newNode;
+    }
+
+    bool MarkUsed(Paging::AddressSpace* addrspace, void* addr, uint32_t npages)
+    {
+        Paging::Node* current = addrspace->freeListBegin;
+        Paging::Node* previous = nullptr;
+        while(current != nullptr)
+        {
+            if(addr >= current->base && (char*)addr + npages * PAGE_SIZE <= (char*)current->base + current->npages * PAGE_SIZE)
+            {
+                if(addr == current->base && (char*)addr + npages * PAGE_SIZE == (char*)current->base + current->npages * PAGE_SIZE)
+                {
+                    if(previous)
+                        previous->next = current->next;
+                    else
+                        addrspace->freeListBegin = current->next;
+                    return false;
+                }
+                
+                current->npages = NPAGES((char*)addr - (char*)current->base);
+
+                Paging::Node* newNode = (Paging::Node*)malloc(sizeof(Paging::Node));
+
+                newNode->base = (char*)addr + npages * PAGE_SIZE;
+                newNode->npages = (char*)current->base + current->npages * PAGE_SIZE - (char*)addr + npages * PAGE_SIZE;
+                newNode->next = addrspace->freeListBegin;
+
+                addrspace->freeListBegin = newNode;
+                return false;
+            } // TODO: Check if across multiple nodes
+            previous = current;
+            current = current->next;
+        }
+        return true;
     }
 }

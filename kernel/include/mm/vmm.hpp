@@ -9,6 +9,8 @@ namespace VMM
 
     void* GetPages(Paging::AddressSpace* addrspace, uint32_t npages, uint16_t flags);
     void FreePages(Paging::AddressSpace* addrspace, void* addr, uint32_t npages);
+
+    bool MarkUsed(Paging::AddressSpace* addrspace, void* addr, uint32_t npages);
 }
 
 #endif
