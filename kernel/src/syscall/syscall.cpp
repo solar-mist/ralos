@@ -1,6 +1,6 @@
 #include <cpu/interrupt/isr.hpp>
 #include <syscall/file.hpp>
-#include <drivers/terminal.hpp>
+#include <syscall/mem.hpp>
 
 extern "C" void SystemCallHandler(InterruptFrame* frame)
 {
@@ -33,6 +33,13 @@ extern "C" void SystemCallHandler(InterruptFrame* frame)
         {
             int fd = frame->GeneralRegisters.rdi;
             frame->GeneralRegisters.rax = SysClose(fd);
+            break;
+        }
+        case 4: // mmap
+        {
+            void* addr = (void*)frame->GeneralRegisters.rdi;
+            size_t count = frame->GeneralRegisters.rsi;
+            frame->GeneralRegisters.rax = SysMmap(addr, count);
             break;
         }
         default:

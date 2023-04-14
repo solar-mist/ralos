@@ -94,8 +94,6 @@ namespace ELF
             for(uint64_t j = 0; j < phdr->p_memsz - phdr->p_filesz; j++)
                 *(vaddr + j) = 0;
         }
-
-        Paging::MapPages(&addrspace, (uint64_t)PMM::GetPages(NPAGES(5416)), 0x600000, 7, NPAGES(5416));
         
         if(isInterp)
         {

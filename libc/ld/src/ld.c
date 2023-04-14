@@ -60,6 +60,13 @@ int close(int fd)
     return ret;
 }
 
+int mmap(void* addr, size_t count)
+{
+    int ret;
+    asm volatile("mov $4, %%rax; mov %1, %%rdi; mov %2, %%rsi; int $0x69" : "=a"(ret) : "m"(addr), "m"(count));
+    return ret;
+}
+
 void _start(void* addr)
 {
     int libcFd = open("/LIBC.SO", 1);
@@ -74,6 +81,8 @@ void _start(void* addr)
             continue;
         
         char* vaddr = (char*)phdr->p_vaddr;
+
+        (void)mmap(vaddr, phdr->p_memsz);
 
         char* fileOff = buffer + phdr->p_offset;
         for(uint64_t j = 0; j < phdr->p_filesz; j++)
