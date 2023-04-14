@@ -4,45 +4,71 @@
 #include <mm/pmm.hpp>
 #include <mm/paging.hpp>
 #include <mm/vmm.hpp>
+#include <libk/mem.hpp>
+#include <linux/elf.h>
+#include <drivers/terminal.hpp>
 
 namespace ELF
 {
-    constexpr int PT_LOAD = 1;
-    struct Elf64_Ehdr
+    inline Elf64_Shdr* ELFShdr(Elf64_Ehdr* ehdr)
     {
-        uint8_t	e_ident[16];
-        uint16_t e_type;
-        uint16_t e_machine;
-        uint32_t e_version;
-        uint64_t e_entry;
-        uint64_t e_phoff;
-        uint64_t e_shoff;
-        uint32_t e_flags;
-        uint16_t e_ehsize;
-        uint16_t e_phentsize;
-        uint16_t e_phnum;
-        uint16_t e_shentsize;
-        uint16_t e_shnum;
-        uint16_t e_shstrndx;
-    };
+        return (Elf64_Shdr*)((char*)ehdr + ehdr->e_shoff);
+    }
 
-    struct Elf64_Phdr {
-        uint32_t p_type;
-        uint32_t p_flags;
-        uint64_t p_offset;
-        uint64_t p_vaddr;
-        uint64_t p_paddr;
-        uint64_t p_filesz;
-        uint64_t p_memsz;
-        uint64_t p_align;
-    };
+    inline Elf64_Shdr* ElfSection(Elf64_Ehdr* ehdr, int idx)
+    {
+        return ELFShdr(ehdr)+idx;
+    }
 
-    Executable ParseELF(void* buffer, Paging::AddressSpace addrspace)
+    inline char* ELFShStrTab(Elf64_Ehdr* ehdr)
+    {
+        if(ehdr->e_shstrndx == SHN_UNDEF)
+            return nullptr;
+        
+        return (char*)ehdr + ElfSection(ehdr, ehdr->e_shstrndx)->sh_offset;
+    }
+
+    inline char* LookupShString(char* tab, int off)
+    {
+        if(!tab)
+            return nullptr;
+        
+        return tab + off;
+    }
+
+    inline Elf64_Shdr* GetSection(Elf64_Ehdr* ehdr, const char* name)
+    {
+        for(int i = 0; i < ehdr->e_shnum; i++)
+        {
+            if(!strcmp(LookupShString(ELFShStrTab(ehdr), ElfSection(ehdr, i)->sh_name), name))
+                return ElfSection(ehdr, i);
+        }
+        return nullptr;
+    }
+
+    Executable ParseELFExec(void* buffer, Paging::AddressSpace addrspace)
     {
         char* buf = (char*)buffer;
-        Elf64_Ehdr* ehdr = (Elf64_Ehdr*)buffer;
-        Elf64_Phdr* phdr = (Elf64_Phdr*)(buf + ehdr->e_phoff);
+        Elf64_Ehdr* ehdr = (Elf64_Ehdr*)buf;
+        if(ehdr->e_ident[EI_MAG0] != 0x7F)
+            return Executable { 0, E_MAG };
+        else if(ehdr->e_ident[EI_MAG1] != 'E')
+            return Executable { 0, E_MAG };
+        else if(ehdr->e_ident[EI_MAG2] != 'L')
+            return Executable { 0, E_MAG };
+        else if(ehdr->e_ident[EI_MAG3] != 'F')
+            return Executable { 0, E_MAG };
+        else if(ehdr->e_ident[EI_CLASS] == ELFCLASS32)
+            return Executable { 0, E_32 };
+        else if(ehdr->e_ident[EI_DATA] != 1)
+            return Executable { 0, E_BE };
+        else if(ehdr->e_type != ET_EXEC)
+            return Executable { 0, E_EXEC };
+        else if(ehdr->e_machine != 0x3E)
+            return Executable { 0, E_MACHINE };
+        // ELF header is valid
 
+        Elf64_Phdr* phdr = (Elf64_Phdr*)(buf + ehdr->e_phoff);
         for(uint32_t i = 0; i < ehdr->e_phnum; i++, phdr++)
         {
             if(phdr->p_type != PT_LOAD)

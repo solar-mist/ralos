@@ -1,7 +1,7 @@
-CXX=x86_64-elf-g++
+CXX=g++
 CXXFLAGS+=-std=c++20 -ffreestanding -fno-stack-protector -fno-stack-check -fno-lto -fno-pic -fno-pie -m64 -march=x86-64 -mabi=sysv -mno-80387 -mno-mmx -mno-sse -mno-sse2 -mno-red-zone -mcmodel=kernel -Iinclude
 
-LD=x86_64-elf-ld
+LD=ld
 LDFLAGS=-nostdlib -static -melf_x86_64 -zmax-page-size=0x1000 -Tlink.ld -no-pie
 
 AS=nasm

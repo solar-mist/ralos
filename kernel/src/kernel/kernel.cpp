@@ -44,7 +44,7 @@ extern "C" void _start()
 
     Paging::AddressSpace addrspace = Paging::CreateAddressSpace();
     Paging::SwitchAddrSpace(&addrspace);
-    ELF::Executable code = ELF::ParseELF(GetModule(1)->address, addrspace);
+    ELF::Executable code = ELF::ParseELFExec(GetModule(1)->address, addrspace);
     Process proc = Process((uint64_t)code.entry, addrspace);
 
     PIC::Init();
