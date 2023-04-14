@@ -6,8 +6,8 @@
 static uint64_t pidCount = 1;
 static Process* activeProcess;
 
-Process::Process(uint64_t entry, Paging::AddressSpace addrspace)
-    :addrspace(addrspace), pid(pidCount++), fdTable((ProcFile*)malloc(sizeof(ProcFile) * FD_MAX)), fdNum(3)
+Process::Process(uint64_t entry, Paging::AddressSpace addrspace, void* interpAddr)
+    :addrspace(addrspace), pid(pidCount++), fdTable((ProcFile*)malloc(sizeof(ProcFile) * FD_MAX)), interpAddr(interpAddr)
 {
     state.BaseFrame.rip = entry;
     state.BaseFrame.rsp = (uint64_t)VMM::GetPages(&addrspace, 4, 7) + (4 * PAGE_SIZE) - 1;

@@ -5,19 +5,15 @@ ENTRY(_start)
 
 SECTIONS
 {
-    . = 0x8000000;
+    . = 0x600000;
 
     .text : {
         *(.text .text.*)
     }
 
-    . += CONSTANT(MAXPAGESIZE);
-
     .rodata : {
         *(.rodata .rodata.*)
     }
-
-    . += CONSTANT(MAXPAGESIZE);
 
     .data : {
         *(.data .data.*)

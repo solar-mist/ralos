@@ -11,4 +11,5 @@ enter_usermode:
     push 0x202
     push (3 * 8) | 3
     push rdi
+    mov rdi, rdx
     iretq

@@ -7,6 +7,7 @@ ovmf/
 *.o
 *.EFI
 *.EXE
+*.SO
 *.json
 
 build

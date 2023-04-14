@@ -38,14 +38,17 @@ extern "C" void _start()
     VFS::Node out;
     tmpfs->lookup("/test", &out);
     tmpfs->write(&out, "helo", 4);
+    tmpfs->create("/LIBC.SO");
+    tmpfs->lookup("/LIBC.SO", &out);
+    tmpfs->write(&out, GetModule(3)->address, GetModule(3)->size);
 
     Scheduler::Init();
 
 
     Paging::AddressSpace addrspace = Paging::CreateAddressSpace();
     Paging::SwitchAddrSpace(&addrspace);
-    ELF::Executable code = ELF::ParseELFExec(GetModule(1)->address, addrspace);
-    Process proc = Process((uint64_t)code.entry, addrspace);
+    ELF::Executable exec = ELF::ParseELFExec(GetModule(1)->address, addrspace);
+    Process proc = Process((uint64_t)exec.entry, addrspace, exec.interpAddr);
 
     PIC::Init();
     PS2Keyboard::Init();

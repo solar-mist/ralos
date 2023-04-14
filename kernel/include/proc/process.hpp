@@ -6,7 +6,7 @@
 
 struct Process
 {
-    Process(uint64_t entry, Paging::AddressSpace addrspace);
+    Process(uint64_t entry, Paging::AddressSpace addrspace, void* interpAddr);
 
     uint64_t stack;
     uint64_t stackSize;
@@ -14,7 +14,7 @@ struct Process
     InterruptFrame state;
     Paging::AddressSpace addrspace;
     ProcFile* fdTable;
-    uint32_t fdNum;
+    void* interpAddr;
 };
 
 Process* ActiveProcess();

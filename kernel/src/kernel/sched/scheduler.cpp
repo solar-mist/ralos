@@ -6,7 +6,7 @@
 #include <drivers/terminal.hpp>
 #include <libk/mem.hpp>
 
-extern "C" void enter_usermode(void (*func)(), void* stack);
+extern "C" void enter_usermode(void (*func)(), void* stack, void* auxval);
 
 namespace Scheduler
 {
@@ -69,7 +69,7 @@ namespace Scheduler
         void (*start)() = (void(*)())queue.Front()->state.BaseFrame.rip;
         locked = false;
         Paging::SwitchAddrSpace(&queue.Front()->addrspace);
-        enter_usermode(start, (void*)queue.Front()->state.BaseFrame.rsp);
+        enter_usermode(start, (void*)queue.Front()->state.BaseFrame.rsp, queue.Front()->interpAddr);
     }
 
     void SwitchCtx(InterruptFrame* frame, Process* newProc)

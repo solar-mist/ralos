@@ -46,7 +46,7 @@ namespace ELF
         return nullptr;
     }
 
-    Executable ParseELFExec(void* buffer, Paging::AddressSpace addrspace)
+    Executable ParseELFExec(void* buffer, Paging::AddressSpace addrspace, void* interpAddr)
     {
         char* buf = (char*)buffer;
         Elf64_Ehdr* ehdr = (Elf64_Ehdr*)buf;
@@ -69,8 +69,11 @@ namespace ELF
         // ELF header is valid
 
         Elf64_Phdr* phdr = (Elf64_Phdr*)(buf + ehdr->e_phoff);
+        bool isInterp = false;
         for(uint32_t i = 0; i < ehdr->e_phnum; i++, phdr++)
         {
+            if(phdr->p_type == PT_INTERP)
+                isInterp = true;
             if(phdr->p_type != PT_LOAD)
                 continue;
             
@@ -88,8 +91,13 @@ namespace ELF
                 *(vaddr + j) = 0;
         }
 
+        Paging::MapPages(&addrspace, (uint64_t)PMM::GetPages(NPAGES(5416)), 0x600000, 7, NPAGES(5416));
+        
+        if(isInterp)
+            return ParseELFExec(GetModule(2)->address, addrspace, (void*)ehdr->e_entry);
+
         return Executable {
-            (void(*)())ehdr->e_entry
+            (void(*)())ehdr->e_entry, 0, interpAddr
         };
     }
 }

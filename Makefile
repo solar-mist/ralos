@@ -4,13 +4,17 @@ TARGET=viperOS.hdd
 
 all: $(TARGET)
 
-.PHONY: kernel user
+.PHONY: kernel user libc
 kernel:
 	$(MAKE) -C kernel
 
 user:
 	$(MAKE) -C user
 	cp user/TEST.EXE modules/
+
+libc:
+	$(MAKE) -C libc
+	cp libc/LIBC.SO libc/ld/LD.SO modules/
 
 viper-boot:
 	git clone https://github.com/viper-org/viper-boot
@@ -20,7 +24,7 @@ ovmf:
 	mkdir -p $@
 	cd ovmf && curl -Lo OVMF-X64.zip https://efi.akeo.ie/OVMF/OVMF-X64.zip && unzip OVMF-X64.zip
 
-$(TARGET): kernel user viper-boot
+$(TARGET): kernel libc user viper-boot
 	cp viper-boot/BOOTX64.EFI viper-boot/build ./
 	mkdir -p boot
 	cp viper.cfg $(KERNEL) $(MODULES) boot/
@@ -32,6 +36,8 @@ run: $(TARGET) ovmf
 
 clean:
 	$(MAKE) -C kernel clean
+	$(MAKE) -C user clean
+	$(MAKE) -C libc clean
 
 distclean: clean
 	rm -rf viper-boot boot build BOOTX64.EFI

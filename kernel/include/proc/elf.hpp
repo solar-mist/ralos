@@ -14,9 +14,10 @@ namespace ELF
     {
         void(*entry)();
         uint32_t error;
+        void* interpAddr;
     };
 
-    Executable ParseELFExec(void* buffer, Paging::AddressSpace addrspace);
+    Executable ParseELFExec(void* buffer, Paging::AddressSpace addrspace, void* interpAddr = nullptr);
 }
 
 #endif
