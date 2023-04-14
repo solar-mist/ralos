@@ -4,17 +4,13 @@ TARGET=viperOS.hdd
 
 all: $(TARGET)
 
-.PHONY: kernel user libc
+.PHONY: kernel initrd
 kernel:
 	$(MAKE) -C kernel
 
-user:
-	$(MAKE) -C user
-	cp user/TEST.EXE modules/
-
-libc:
-	$(MAKE) -C libc
-	cp libc/LIBC.SO libc/ld/LD.SO modules/
+initrd:
+	$(MAKE) -C initrd
+	cp initrd/INITRD.TAR modules/
 
 viper-boot:
 	git clone https://github.com/viper-org/viper-boot
@@ -24,7 +20,7 @@ ovmf:
 	mkdir -p $@
 	cd ovmf && curl -Lo OVMF-X64.zip https://efi.akeo.ie/OVMF/OVMF-X64.zip && unzip OVMF-X64.zip
 
-$(TARGET): kernel libc user viper-boot
+$(TARGET): kernel initrd viper-boot
 	cp viper-boot/BOOTX64.EFI viper-boot/build ./
 	mkdir -p boot
 	cp viper.cfg $(KERNEL) $(MODULES) boot/

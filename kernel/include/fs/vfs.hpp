@@ -14,6 +14,7 @@ namespace VFS
     using Read = int(*)(Node* node, void* buffer, size_t* count, int position);
     using Write = int(*)(Node* node, const void* buffer, size_t count);
     using Append = int(*)(Node* node, const void* buffer, size_t count);
+    using Size = int(*)(Node* node, size_t* size);
 
     // Directory operations
     using ReadDir = int(*)(Node* node, char** files, size_t* count);
@@ -34,6 +35,7 @@ namespace VFS
         Read read;
         Write write;
         Append append;
+        Size size;
         ReadDir readDir;
 
         Filesystem* next;

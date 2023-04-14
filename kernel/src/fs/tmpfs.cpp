@@ -26,7 +26,10 @@ namespace TmpFS
 
     int Create(const char* path)
     {
-        table[idx++] = Node{ path, FILE, 0, nullptr, VFS::Node{ path, &fs } };
+        char* actualPath = (char*)malloc(strlen(path));
+        strcpy(actualPath, path);
+        actualPath[strlen(path)] = 0;
+        table[idx++] = Node{ actualPath, FILE, 0, nullptr, VFS::Node{ actualPath, &fs } };
 
         char* ptr = (char*)PhysToVirt((uint64_t)PMM::GetPage());
         memcpy(ptr, (void*)path, strlen(path));
@@ -136,6 +139,19 @@ namespace TmpFS
         return 1;
     }
 
+    int Size(VFS::Node* node, size_t* size)
+    {
+        for(uint32_t i = 0; i < idx; i++)
+        {
+            if(!strcmp(table[i].path, node->path))
+            {
+                *size = table[i].size;
+                return 0;
+            }
+        }
+        return 1;
+    }
+
     int ReadDir(VFS::Node* node, char** files, size_t* count)
     {
         for(uint32_t i = 0; i < idx; i++)
@@ -169,10 +185,10 @@ namespace TmpFS
 
     void Init()
     {
-        table = (Node*)PhysToVirt((uint64_t)PMM::GetPages(4));
+        table = (Node*)PhysToVirt((uint64_t)PMM::GetPages(NPAGES(sizeof(Node) * 64)));
         table[idx++] = Node{ "", DIRECTORY, 0, nullptr, VFS::Node{ "", &fs } };
-        table[idx++] = Node{ "/stdout", FILE, 0, nullptr, VFS::Node{ "/stdout", &fs } };
-        fs = VFS::Filesystem{ "tmpfs", &table[0].vnode, Create, Lookup, Read, Write, Append, ReadDir };
+        Create("/stdout");
+        fs = VFS::Filesystem{ "tmpfs", &table[0].vnode, Create, Lookup, Read, Write, Append, Size, ReadDir };
         VFS::RegisterFileSystem(&fs);
     }
 }

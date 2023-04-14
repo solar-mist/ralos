@@ -17,6 +17,7 @@
 #include <proc/process.hpp>
 #include <fs/vfs.hpp>
 #include <fs/tmpfs.hpp>
+#include <fs/initrd.hpp>
 
 extern "C" void _start()
 {
@@ -33,21 +34,26 @@ extern "C" void _start()
     InitKHeap();
 
     TmpFS::Init();
+    InitRd::Init();
     VFS::Filesystem* tmpfs = VFS::GetFileSystem("tmpfs");
-    tmpfs->create("/test");
-    VFS::Node out;
-    tmpfs->lookup("/test", &out);
-    tmpfs->write(&out, "helo", 4);
-    tmpfs->create("/LIBC.SO");
-    tmpfs->lookup("/LIBC.SO", &out);
-    tmpfs->write(&out, GetModule(3)->address, GetModule(3)->size);
 
     Scheduler::Init();
 
+    VFS::Node file;
+    tmpfs->create("/test");
+    tmpfs->lookup("/test", &file);
+    tmpfs->write(&file, "helo", 4);
+    
+
+    size_t size;
+    tmpfs->lookup("/TEST.EXE", &file);
+    tmpfs->size(&file, &size);
+    char* buffer = (char*)malloc(size);
+    tmpfs->read(&file, buffer, &size, 0);
 
     Paging::AddressSpace addrspace = Paging::CreateAddressSpace();
     Paging::SwitchAddrSpace(&addrspace);
-    ELF::Executable exec = ELF::ParseELFExec(GetModule(1)->address, addrspace);
+    ELF::Executable exec = ELF::ParseELFExec(buffer, addrspace);
     Process proc = Process((uint64_t)exec.entry, addrspace, exec.interpAddr);
 
     PIC::Init();

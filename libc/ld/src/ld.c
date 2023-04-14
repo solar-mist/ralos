@@ -83,7 +83,7 @@ void _start(void* addr)
         for(uint64_t j = 0; j < phdr->p_memsz - phdr->p_filesz; j++)
             *(vaddr + j) = 0;
     }
-    *(uint64_t*)(0x8002400) = 0x600000;
+    *(uint64_t*)(0x8000400) = 0x600000;
 
     void(*a)() = (void(*)())addr;
     a();

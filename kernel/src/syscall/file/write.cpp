@@ -2,6 +2,7 @@
 #include <fs/vfs.hpp>
 #include <proc/process.hpp>
 #include <kernel/sched/scheduler.hpp>
+#include <drivers/terminal.hpp>
 
 int SysWrite(int fd, const void* buf, size_t count)
 {

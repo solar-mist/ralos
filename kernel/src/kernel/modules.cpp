@@ -7,6 +7,6 @@ static volatile struct ViperModuleRequest modules = {
 ViperModule* GetModule(int moduleNumber)
 {
     if(moduleNumber >= modules.response->count)
-        return nullptr;
+        return (ViperModule*)-1;
     return &modules.response->modules[moduleNumber];
 }
