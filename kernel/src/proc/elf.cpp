@@ -47,13 +47,11 @@ namespace ELF
         return nullptr;
     }
 
-    Executable ParseELFExec(void* buffer, Paging::AddressSpace addrspace, void* interpAddr)
+    Executable ParseELFExec(void* buffer, Paging::AddressSpace addrspace, const char* path, bool interp)
     {
         char* buf = (char*)buffer;
-        //Elf64_Ehdr* volatile ehdr = (Elf64_Ehdr*)buf;
         Elf64_Ehdr ehdr;
         memcpy(&ehdr, buffer, sizeof(Elf64_Ehdr));
-        //Terminal::Printf(0xffffff, "%x\n", ehdr->e_ident[EI_MAG0] != 0x7F);
         if(ehdr.e_ident[EI_MAG0] != 0x7F)
             return Executable { 0, E_MAG };
         else if(ehdr.e_ident[EI_MAG1] != 'E')
@@ -105,11 +103,11 @@ namespace ELF
             void* buf = malloc(count);
             tmpfs->read(&out, buf, &count, 0);
 
-            return ParseELFExec(buf, addrspace, (void*)ehdr.e_entry);
+            return ParseELFExec(buf, addrspace, path, true);
         }
 
         return Executable {
-            (void(*)())ehdr.e_entry, 0, interpAddr
+            (void(*)())ehdr.e_entry, 0, interp?(char*)path:nullptr
         };
     }
 }

@@ -1,5 +1,5 @@
-#include "mm/kheap.hpp"
 #include <mm/vmm.hpp>
+#include <mm/kheap.hpp>
 #include <mm/pmm.hpp>
 #include <drivers/terminal.hpp>
 #include <cpu/interrupt/exception.hpp>
@@ -59,28 +59,26 @@ namespace VMM
                         addrspace->freeListBegin = current->next;
                     
                     void* addr = current->base;
-                    PMM::FreePage((void*)VirtToPhys((uint64_t)current));
+                    free((void*)current);
                     Paging::MapPages(addrspace, 0, (uint64_t)addr, flags, npages);
                     return addr;
                 }
                 else
                 {
-                    uint32_t newNpages = current->npages - npages;
-                    Paging::Node* newNode = (Paging::Node*)PhysToVirt((uint64_t)PMM::GetPage());
-
                     if(previous)
                         previous->next = current->next;
                     else
                         addrspace->freeListBegin = current->next;
 
-                    newNode->npages = newNpages;
-                    newNode->base = (char*)current->base + npages * PAGE_SIZE;
-                    newNode->next = addrspace->freeListBegin;
-
-                    addrspace->freeListBegin = newNode;
-                                        
                     void* addr = current->base;
-                    PMM::FreePage((void*)VirtToPhys((uint64_t)current));
+                    uint32_t newNpages = current->npages - npages;
+
+                    current->npages = newNpages;
+                    current->base = (char*)current->base + npages * PAGE_SIZE;
+                    current->next = addrspace->freeListBegin;
+
+                    addrspace->freeListBegin = current;
+
                     Paging::MapPages(addrspace, 0, (uint64_t)addr, flags, npages);
                     return addr;
                 }
@@ -105,7 +103,7 @@ namespace VMM
 
         Paging::UnmapPages(addrspace, (uint64_t)addr, npages);
 
-        Paging::Node* newNode = (Paging::Node*)PhysToVirt((uint64_t)PMM::GetPage());
+        Paging::Node* newNode = (Paging::Node*)malloc(sizeof(Paging::Node));
         newNode->base = addr;
         newNode->npages = npages;
         newNode->next = addrspace->freeListBegin;
@@ -126,6 +124,7 @@ namespace VMM
                         previous->next = current->next;
                     else
                         addrspace->freeListBegin = current->next;
+                    free((void*)current);
                     return false;
                 }
                 

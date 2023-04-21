@@ -32,7 +32,6 @@ run: $(TARGET) ovmf
 
 clean:
 	$(MAKE) -C kernel clean
-	$(MAKE) -C user clean
 	$(MAKE) -C libc clean
 
 distclean: clean

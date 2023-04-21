@@ -1,7 +1,8 @@
 #ifndef SYSCALL_MEM_HPP
 #define SYSCALL_MEM_HPP
 #include <stddef.h>
+#include <stdint.h>
 
-int SysMmap(void* addr, size_t bytes);
+uint64_t SysMmap(void* addr, size_t bytes);
 
 #endif

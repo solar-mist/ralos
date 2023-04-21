@@ -30,8 +30,8 @@ extern "C" void _start()
 
     PMM::Init();
     Paging::Init();
-    VMM::Init();
     InitKHeap();
+    VMM::Init();
 
     TmpFS::Init();
     InitRd::Init();
@@ -53,8 +53,8 @@ extern "C" void _start()
 
     Paging::AddressSpace addrspace = Paging::CreateAddressSpace();
     Paging::SwitchAddrSpace(&addrspace);
-    ELF::Executable exec = ELF::ParseELFExec(buffer, addrspace);
-    Process proc = Process((uint64_t)exec.entry, addrspace, exec.interpAddr);
+    ELF::Executable exec = ELF::ParseELFExec(buffer, addrspace, "/TEST.EXE");
+    Process proc = Process((uint64_t)exec.entry, addrspace, exec.interpPath);
 
     PIC::Init();
     PS2Keyboard::Init();

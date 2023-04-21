@@ -1,5 +1,6 @@
 #include <mm/paging.hpp>
 #include <mm/pmm.hpp>
+#include <mm/kheap.hpp>
 #include <drivers/terminal.hpp>
 #include <kernel/kernel.hpp>
 #include <libk/mem.hpp>
@@ -168,7 +169,7 @@ namespace Paging
         ret.pml4 = (uint64_t*)PMM::GetPage();
         memset((uint8_t*)PhysToVirt((uint64_t)ret.pml4), 0, PAGE_SIZE);
 
-        ret.freeListBegin = (Node*)PhysToVirt((uint64_t)PMM::GetPage());
+        ret.freeListBegin = (Node*)malloc(sizeof(Node));
         ret.freeListBegin->npages = NPAGES(0x0000FFFFFFFFFFFF - 0x1000); // Full lower half address space except nullptr page
         ret.freeListBegin->base = (void*)0x1000;
 

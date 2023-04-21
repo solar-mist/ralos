@@ -42,7 +42,7 @@ void InitIDT()
         idt[vector] = IDTEntry(IRQStubTable[vector - 32], DEFUALT_FLAGS, 0);
         vectors[vector] = true;
     }
-    idt[0x69] = IDTEntry((uint64_t)&SyscallHandler, DEFUALT_FLAGS | USER_MODE, 0);
+    idt[0x69] = IDTEntry((uint64_t)&SyscallHandler, DEFUALT_FLAGS | USER_MODE, 1);
     vectors[0x69] = true;
 
     asm volatile("lidt %0" : : "m"(idtr));

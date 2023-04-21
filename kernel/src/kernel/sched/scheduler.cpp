@@ -6,7 +6,7 @@
 #include <drivers/terminal.hpp>
 #include <libk/mem.hpp>
 
-extern "C" void enter_usermode(void (*func)(), void* stack, void* auxval);
+extern "C" void enter_usermode(void (*func)(), void* stack, int auxval);
 
 namespace Scheduler
 {
@@ -69,7 +69,15 @@ namespace Scheduler
         void (*start)() = (void(*)())queue.Front()->state.BaseFrame.rip;
         locked = false;
         Paging::SwitchAddrSpace(&queue.Front()->addrspace);
-        enter_usermode(start, (void*)queue.Front()->state.BaseFrame.rsp, queue.Front()->interpAddr);
+        int fd = 0;
+        if(queue.Front()->interpPath)
+        {
+            VFS::Node* node = (VFS::Node*)malloc(sizeof(VFS::Node));
+            VFS::GetFileSystem("tmpfs")->lookup(queue.Front()->interpPath, node);
+            queue.Front()->fdTable[3] = ProcFile{ node, 0, 1 };
+            fd = 3;
+        }
+        enter_usermode(start, (void*)queue.Front()->state.BaseFrame.rsp, fd);
     }
 
     void SwitchCtx(InterruptFrame* frame, Process* newProc)

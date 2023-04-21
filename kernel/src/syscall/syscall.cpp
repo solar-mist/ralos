@@ -42,6 +42,12 @@ extern "C" void SystemCallHandler(InterruptFrame* frame)
             frame->GeneralRegisters.rax = SysMmap(addr, count);
             break;
         }
+        case 5: // stat
+        {
+            int fd = frame->GeneralRegisters.rdi;
+            frame->GeneralRegisters.rax = SysStat(fd);
+            break;
+        }
         default:
             break;
     }

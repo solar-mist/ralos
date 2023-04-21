@@ -50,21 +50,9 @@ ExceptionFrameAssembler:
     mov rax, cr4
     push rax
 
-    mov ax, ds
-    push rax
-    push QWORD 0
-    mov ax, 0x10
-    mov ds, ax
-    mov es, ax
-    mov ss, ax
-
-    lea rdi, [rsp + 0x10]
+    mov rdi, rsp
     call ISRExceptionHandler
 
-    pop rax
-    pop rax
-    mov ds, ax
-    mov es, ax
     pop rax
     mov cr4, rax
     pop rax
@@ -197,21 +185,8 @@ SyscallHandler:
     mov rax, cr4
     push rax
 
-    mov ax, ds
-    push rax
-    push QWORD 0
-    mov ax, 0x10
-    mov ds, ax
-    mov es, ax
-    mov ss, ax
-
-    lea rdi, [rsp + 0x10]
+    mov rdi, rsp
     call SystemCallHandler
-
-    pop rax
-    pop rax
-    mov ds, ax
-    mov es, ax
 
     pop rax
     mov cr4, rax

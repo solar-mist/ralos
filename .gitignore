@@ -1,6 +1,7 @@
 viper-boot/
 boot/
 ovmf/
+.cache/
 
 *.elf
 *.hdd

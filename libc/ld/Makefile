@@ -1,5 +1,5 @@
 CC=x86_64-elf-gcc
-CFLAGS=-nostdlib -fPIC -fPIE -ffreestanding -Iinclude
+CFLAGS=-nostdlib -fPIC -fPIE -ffreestanding -Iinclude -I/usr/include
 
 LD=x86_64-elf-ld
 LDFLAGS=-nostdlib -Tlink.ld -zmax-page-size=0x1000
