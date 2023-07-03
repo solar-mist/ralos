@@ -2,8 +2,8 @@
 
 namespace haf
 {
-    Renderer* Framework::getRenderer()
+    LinearFramebuffer* Framework::getFramebuffer()
     {
-        return &mRenderer;
+        return &mFramebuffer;
     }
 }

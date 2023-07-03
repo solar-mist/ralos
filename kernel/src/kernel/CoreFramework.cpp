@@ -7,7 +7,7 @@
 namespace kernel
 {
     Framework::Framework()
-        : mTerminal(mHardwareFramework ,drivers::terminal::Font::FromSFF(haf::Module::Get(0)))
+        : mRenderer(mHardwareFramework), mTerminal(*this ,drivers::terminal::Font::FromSFF(haf::Module::Get(0)))
     {
     }
 
@@ -16,8 +16,13 @@ namespace kernel
         return mHardwareFramework;
     }
 
-    drivers::terminal::Terminal& Framework::getTerminal()
+    drivers::graphics::Renderer* Framework::getRenderer()
     {
-        return mTerminal;
+        return &mRenderer;
+    }
+
+    drivers::terminal::Terminal* Framework::getTerminal()
+    {
+        return &mTerminal;
     }
 }

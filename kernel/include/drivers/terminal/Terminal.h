@@ -7,7 +7,7 @@
 #include <stdint.h>
 #include <stddef.h>
 
-namespace haf
+namespace kernel
 {
     class Framework;
 }
@@ -19,7 +19,7 @@ namespace drivers
         class Terminal
         {
         public:
-            Terminal(haf::Framework& hardwareFramework, Font font);
+            Terminal(kernel::Framework& coreFramework, Font font);
 
             Font getFont() const;
 
@@ -37,7 +37,7 @@ namespace drivers
             void print(const char* data);
 
         private:
-            haf::Framework& mHardwareFramework;
+            kernel::Framework& mCoreFramework;
             
             Font mFont;
 

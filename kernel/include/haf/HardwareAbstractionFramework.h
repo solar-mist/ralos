@@ -3,7 +3,7 @@
 
 #include <haf/fs/Module.h>
 
-#include <haf/graphics/Renderer.h>
+#include <haf/graphics/Framebuffer.h>
 
 namespace haf
 {
@@ -12,10 +12,10 @@ namespace haf
     public:
         Framework();
 
-        Renderer* getRenderer();
+        LinearFramebuffer* getFramebuffer();
     
     private:
-        Renderer mRenderer;
+        LinearFramebuffer mFramebuffer;
     };
 }
 

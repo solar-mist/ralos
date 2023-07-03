@@ -3,6 +3,7 @@
 namespace haf
 {
     Framework::Framework()
+        :mFramebuffer(GetFramebuffer())
     {
     }
 }

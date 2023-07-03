@@ -8,7 +8,7 @@ namespace kernel
     {
         Framework coreFramework;
 
-        coreFramework.getTerminal().print("Hello");
+        coreFramework.getTerminal()->print("Hello");
 
         asm("jmp .");
     }
