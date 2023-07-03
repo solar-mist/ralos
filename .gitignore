@@ -1,0 +1,11 @@
+ovmf/
+viper-boot/
+.cache/
+
+*.o
+*.out
+*.hdd
+*.json
+*.EFI
+
+build
